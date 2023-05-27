@@ -7,7 +7,7 @@
                     <div class="col-lg-2 col-md-2 col-12">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/cic.png" alt="#" width="150"></a>
+                            <a href="/"><img src="assets/images/cic.png" alt="#" width="150"></a>
                         </div>
                         <!-- End Logo -->
                         <div class="mobile-nav"></div>

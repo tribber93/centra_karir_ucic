@@ -12,23 +12,37 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{{ asset('assets/images/ucic.jpg') }}" class="d-block w-100" alt="img\contact-bg.jpg">
-                    <div class="carousel-caption bg-secondary" style="--bs-bg-opacity: .7;">
-                        <h5 class="text-bold text-white">First slide label</h5>
-                        <p class="text-bold text-white">Some representative placeholder content for the first slide.</p>
+                    <div class="carousel-caption">
+                        <div class="carousel-caption-text">
+                            <h5 class="text-bold text-white">First slide label</h5>
+                            <p class="text-bold text-white">
+                                Some representative placeholder content for the first slide.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img\contact-bg.jpg" class="d-block w-100" alt="img\contact-bg.jpg">
-                    <div class="carousel-caption d-none d-md-block bg-danger">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
+                    <img src="{{ asset('assets/images/internship.jpg') }}" class="d-block w-100"
+                        alt="img\contact-bg.jpg">
+                    <div class="carousel-caption">
+                        <div class="carousel-caption-text">
+                            <h5 class="text-bold text-white">Second slide label</h5>
+                            <p class="text-bold text-white">
+                                Some representative placeholder content for the second slide.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img\contact-bg.jpg" class="d-block w-100" alt="img\contact-bg.jpg">
-                    <div class="carousel-caption d-none d-md-block bg-danger">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
+                    <img src="{{ asset('assets/images/graduates.jpg') }}" class="d-block w-100"
+                        alt="img\contact-bg.jpg">
+                    <div class="carousel-caption">
+                        <div class="carousel-caption-text">
+                            <h5 class="text-bold text-white">Third slide label</h5>
+                            <p class="text-bold text-white">
+                                Some representative placeholder content for the third slide.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

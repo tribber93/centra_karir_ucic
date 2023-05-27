@@ -40,6 +40,23 @@
     top: -70px;
     left: -70px;
 }
+/* carousel caption */
+.carousel-caption-text {
+    padding: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+    color: white;
+    /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); */
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+}
+/* .carousel-caption-text h5 {
+    font-weight: 700;
+}
+.carousel-caption-text p {
+    font-weight: 500;
+} */
+/* end carousel caption */
+
 /* Post card */
 .post-container {
     /* width: 100%;
@@ -380,8 +397,66 @@
     transform: translateY(0);
 }
 /* end button */
-.bg-login {
+.bg-login-left {
     background-image: url(../assets/images/ucic.jpg);
     background-size: cover;
     min-height: 100vh;
 }
+
+.bg-login-right .bottom-left {
+    z-index: -100;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: url(../assets/images/bottom-left.jpg);
+    background-size: cover;
+    filter: opacity(0.2);
+}
+.bg-login-right .top-right {
+    z-index: -100;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url(../assets/images/top-right.jpg);
+    background-size: cover;
+    filter: opacity(0.2);
+}
+
+.my-menu {
+    background: #f5f8ff;
+}
+/* my-menu card */
+.my-menu .card {
+    padding: 10px;
+    box-sizing: border-box;
+    /* max-width: 300px; */
+    min-height: 100px;
+    background: white;
+    border: 1px solid white;
+    box-shadow: 0px 0px 18px rgba(128, 128, 128, 0.097);
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    /* text-align: center; */
+    cursor: pointer;
+    transition: all 0.5s;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+}
+
+.my-menu .card:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+}
+
+.my-menu .card:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+}
+/* end my-menu card */
