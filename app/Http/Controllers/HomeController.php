@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Testimoni;
 use App\Models\Alumni;
+use App\Models\Questions;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class  HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -52,6 +53,48 @@ class HomeController extends Controller
 
         ]);
     }
+    public function tracer()
+    {
+        // $question = 'Apa warna favorit Anda?';
+        // $options = ['Merah', 'Biru', 'Kuning', 'Hijau'];
+
+        // $namaModel = new Questions();
+        // $namaModel->pertanyaan = $question;
+        // $namaModel->opsi = json_encode($options);
+        // $namaModel->save();
+        $data_q = Questions::all();
+
+        // dd($data_q);
+        return view('coba', compact('data_q'));
+        // return response()->json($data_q);
+    }
+    public function question(Request $request)
+    {
+        // $question = 'Apa warna favorit Anda?';
+        // $options = ['Merah', 'Biru', 'Kuning', 'Hijau'];
+
+        // $namaModel = new Questions();
+        // $namaModel->pertanyaan = $question;
+        // $namaModel->opsi = json_encode($options);
+        // $namaModel->save();
+
+        // $data_q = Questions::all();
+
+        // dd($data_q);
+        // return view('coba', compact('data_q'));
+        // return response()->json($data_q);
+
+        $index = $request->input('index');
+        $pertanyaan = Questions::find($index);
+
+        // Jika pertanyaan tidak ditemukan, kembalikan respon kosong
+        if (!$pertanyaan) {
+            return response()->json(null);
+        }
+
+        return response()->json($pertanyaan);
+    }
+
 
     /**
      * Store a newly created resource in storage.

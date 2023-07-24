@@ -20,7 +20,8 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
 Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
-
+Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
+Route::get('/load-questions', [HomeController::class, 'question'])->name('load.questions');
 Route::get('/login', function () {
     return view('login');
 });
