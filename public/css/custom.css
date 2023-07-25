@@ -460,3 +460,12 @@
     transform: scale(0.95) rotateZ(1.7deg);
 }
 /* end my-menu card */
+
+.judul2 {
+    width: 100%;
+    background-color: #edf2ff;
+}
+.judul2 h1 {
+    padding: 150px 0 100px 0;
+    overflow: hidden;
+}
