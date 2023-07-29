@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Testimoni;
 use App\Models\Alumni;
+use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,19 @@ class  HomeController extends Controller
 
         ]);
     }
+    public function quesionarTerisi()
+    {
+        $hasilTracers = HasilTracer::all();
+
+        foreach ($hasilTracers as $hasilTracer) {
+            $question = $hasilTracer->question;
+            $jawaban = $hasilTracer->jawaban;
+
+            echo "Pertanyaan: {$question->pertanyaan} ==> : { $jawaban} \n";
+            // ... and other properties of the Questions model
+        }
+
+    }
     public function tracer()
     {
         // $question = 'Apa warna favorit Anda?';
@@ -99,11 +113,25 @@ class  HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function simpanJawaban(Request $request)
     {
-        //
-    }
+        $selectedAnswers = json_decode($request->input('selectedAnswers'), true);
 
+
+        foreach ($selectedAnswers as $answer) {
+            $pertanyaan_id = $answer['pertanyaan_id'];
+            $jawaban = $answer['answer'];
+
+            HasilTracer::create([
+                'tracer_id' => $pertanyaan_id,
+                'jawaban' => $jawaban,
+            ]);
+        }
+
+  // Respon sukses jika data berhasil disimpan
+    return response()->json(['message' => 'Data jawaban berhasil disimpan'], 200);
+
+}
     /**
      * Display the specified resource.
      */

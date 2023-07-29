@@ -22,6 +22,9 @@ Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
 Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
 Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
 Route::get('/load-questions', [HomeController::class, 'question'])->name('load.questions');
+Route::post('/simpan-jawaban', [HomeController::class, 'simpanJawaban'])->name('simpan.jawaban');
+Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
+
 Route::get('/login', function () {
     return view('login');
 });

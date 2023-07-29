@@ -18,4 +18,8 @@ class Questions extends Model
         // Kolom yang bertipe data JSON
         'opsi' => 'array',
     ];
+    public function hasil()
+    {
+        return $this->belongsTo(HasilTracer::class, 'id');
+    }
 }
