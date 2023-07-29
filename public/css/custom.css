@@ -469,3 +469,8 @@
     padding: 150px 0 100px 0;
     overflow: hidden;
 }
+
+/* CSS tambahan untuk mengatur dropdown agar muncul ketika dihover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
