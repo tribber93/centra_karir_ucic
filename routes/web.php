@@ -31,7 +31,6 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function(){
     Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
 
 });
-
 Route::group(['middleware' => ['auth', 'isLogin:admin']], function(){
     Route::get('/dashboard-admin', [HomeController::class, 'admin'])->name('dashboard-admin');
 

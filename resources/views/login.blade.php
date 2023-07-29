@@ -33,7 +33,7 @@
                                 <input
                                     type="email"
                                     id="form3Example3"
-                                    class="form-co  ntrol form-control-lg"
+                                    class="form-control form-control-lg"
                                     placeholder="Masukan E-mail"
                                     name="email"
                                 />
