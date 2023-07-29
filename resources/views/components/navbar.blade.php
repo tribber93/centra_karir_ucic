@@ -21,10 +21,20 @@
                                     <li><a href="#info">News</a></li>
                                     <li><a href="#testimonials">Testimonials</a></li>
                                     <li><a href="#footer">Contact Us</a></li>
-                                    <li><a href="/login" class="button d-md-none">Login</a></li>
+
                                 </ul>
                             </nav>
+                            @if(Auth::check())
+                            <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @else
                             <a href="/login" class="button">Login</a>
+
+                            @endif
                         </div>
                         <!--/ End Main Menu -->
                     </div>

@@ -11,9 +11,16 @@ use Illuminate\Http\Request;
 
 class  HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+    public function admin()
+    {
+
+        return view('admin.index');
+
+    }
     public function index()
     {
         //data alumni
@@ -27,6 +34,7 @@ class  HomeController extends Controller
         return view('home', compact('berita', 'kata_alumni'));
 
     }
+
 
     /**
      * Show the form for creating a new resource.

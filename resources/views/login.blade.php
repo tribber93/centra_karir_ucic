@@ -22,18 +22,24 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-center mb-2">
-                            Welcome to Centra Karir UCIC
+                             Centra Karir UCIC
                         </h2>
                         <!-- <h3>Login</h3> -->
-                        <form>
+                        <form action="{{route('authenticate')}}" method="POST">
+                            @csrf
                             <!-- Email input -->
-                            <div class="form-outline my-4">
+                            <div class="form-outline mb-3">
+
                                 <input
                                     type="email"
                                     id="form3Example3"
-                                    class="form-control form-control-lg"
+                                    class="form-co  ntrol form-control-lg"
                                     placeholder="Masukan E-mail"
+                                    name="email"
                                 />
+                                @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
                                 <label
                                     class="form-label"
                                     for="form3Example3"
@@ -47,7 +53,11 @@
                                     id="form3Example4"
                                     class="form-control form-control-lg"
                                     placeholder="Masukan password"
+                                    name="password"
                                 />
+                                @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
                                 <label
                                     class="form-label"
                                     for="form3Example4"
@@ -66,7 +76,7 @@
 
                             <div class="text-center text-lg-start mt-4 pt-2">
                                 <button
-                                    type="button"
+                                    type="submit"
                                     class="btn btn-primary btn-lg"
                                     style="
                                         padding-left: 2.5rem;
