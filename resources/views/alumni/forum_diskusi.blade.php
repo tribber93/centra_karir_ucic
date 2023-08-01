@@ -2,6 +2,6 @@
 @section('judul', 'Forum Diskusi')
 @section('konten')
 
-    @include('alumni.sidebar')
+    {{-- @include('alumni.sidebar') --}}
     @include('diskusi.diskusi')
 @endsection

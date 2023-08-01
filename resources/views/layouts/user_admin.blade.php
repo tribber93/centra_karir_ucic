@@ -33,8 +33,11 @@
 
 <body>
     <div class="app" id="app">
-        @include('admin.sidebar')
-
+        @if (Auth::user()->role == 'admin')
+            @include('admin.sidebar');
+        @else
+            @include('alumni.sidebar');
+        @endif
         <!-- content -->
         <div id="content" class="app-content box-shadow-z0" role="main">
             <div class="app-header white box-shadow">
@@ -83,6 +86,15 @@
                                 </span>
                             </a>
                             <div ui-include="'../views/blocks/dropdown.user.html'"></div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="button">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                         <li class="nav-item hidden-md-up">
                             <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">

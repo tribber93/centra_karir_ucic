@@ -1,7 +1,7 @@
 @extends('layouts.user_admin')
 @section('judul', 'Tracer Study')
 @section('konten')
-    @include('alumni.sidebar')
+    {{-- @include('alumni.sidebar') --}}
     <div class="container mt-4">
         <h1 class="text-center">Tracer Study</h1>
         <div class="padding box ">

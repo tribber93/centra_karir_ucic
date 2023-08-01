@@ -18,8 +18,7 @@ class  HomeController extends Controller
     public function admin()
     {
 
-        return view('admin.index');
-
+        return view('admin.dashboard_admin');
     }
     public function index()
     {
@@ -31,8 +30,7 @@ class  HomeController extends Controller
         //data partner
         //data alamat Kampuss
         // dd($kata_alumni);
-        return view('home', compact('berita', 'kata_alumni'));
-
+        return view('alumni.dashboard_alumni', compact('berita', 'kata_alumni'));
     }
 
 
@@ -73,7 +71,6 @@ class  HomeController extends Controller
             echo "Pertanyaan: {$question->pertanyaan} ==> : { $jawaban} \n";
             // ... and other properties of the Questions model
         }
-
     }
     public function tracer()
     {
@@ -136,10 +133,9 @@ class  HomeController extends Controller
             ]);
         }
 
-  // Respon sukses jika data berhasil disimpan
-    return response()->json(['message' => 'Data jawaban berhasil disimpan'], 200);
-
-}
+        // Respon sukses jika data berhasil disimpan
+        return response()->json(['message' => 'Data jawaban berhasil disimpan'], 200);
+    }
     /**
      * Display the specified resource.
      */
