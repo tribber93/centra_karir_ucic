@@ -103,7 +103,22 @@
     <script src="js/active.js"></script>
     {{-- Slider --}}
     {{-- <script src="js/main.js"></script> --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tracerLink = document.querySelector('.tracer-link a');
 
+            tracerLink.addEventListener('click', function (event) {
+                const userLoggedIn = true;
+
+                if (!userLoggedIn) {
+
+                    event.preventDefault();
+                } else {
+                    window.location.href = '/tracer';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
