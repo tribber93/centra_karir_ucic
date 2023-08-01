@@ -29,7 +29,10 @@ class AlumniController extends Controller
         // $dataArray = json_decode($jsonPertanyaan, true);
         // dd($dataArray);
 
-        return view('alumni.tracer_study', compact('alumni','tracer'));
+        // status tracer 0 dan 1 ye:)
+        $status_tracer = $alumni->status_tracer;
+
+        return view('alumni.tracer_study', compact('alumni','tracer', 'status_tracer'));
     }
 
     public function forum()

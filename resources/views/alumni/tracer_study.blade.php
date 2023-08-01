@@ -98,6 +98,10 @@
 
 
                    {{--  --}}
+                   @if ($status_tracer)
+                 <center>  Anda sudah tracer studi pada tanggal xx-xx-xx</center>
+
+                   @else
 
                    <table class="table row form-input" data-target="tracerCheckbox">
                     <thead class="thead-lightform-group">
@@ -175,11 +179,15 @@
                         @endforeach
                     </tbody>
                 </table>
+        <button id="btnGetData">Ambil Nilai</button>
+
+                   @endif
+
+
 
                 {{--  --}}
             </form>
         </div>
-        <button id="btnGetData">Ambil Nilai</button>
     </div>
 @endsection
 <style>
