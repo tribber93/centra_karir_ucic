@@ -11,7 +11,7 @@
     <!-- for ios 7 style, multi-resolution icon of 152x152 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
-    {{-- <link rel="apple-touch-icon" href="{{ asset('admin/css/images/logo.png') }}"> --}}
+    <link rel="apple-touch-icon" href="{{ asset('admin/css/images/logo.png') }}">
     <meta name="apple-mobile-web-app-title" content="Flatkit">
     <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -81,7 +81,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
                                 <span class="avatar w-32">
-                                    <img src="../admin/css/images/a0.jpg" alt="...">
+                                    <img src="{{ asset('admin/css/images/a0.jpg')}}" alt="...">
                                     <i class="on b-white bottom"></i>
                                 </span>
                             </a>
@@ -160,7 +160,10 @@
     <!-- ajax -->
     <script src="{{ asset('admin/libs/jquery/jquery-pjax/jquery.pjax.js') }}"></script>
     <script src="{{ asset('admin/scripts/ajax.js') }}"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+
     <!-- endbuild -->
+    @yield('scripts')
 </body>
 
 </html>

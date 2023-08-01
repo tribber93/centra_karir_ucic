@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\AlumniController;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -22,14 +23,24 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 
 Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
-    Route::get('/dashboard-alumni', [HomeController::class, 'index'])->name('dashboard-alumni');
-    Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
-    Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
-    Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
-    Route::get('/load-questions', [HomeController::class, 'question'])->name('load.questions');
-    Route::post('/simpan-jawaban', [HomeController::class, 'simpanJawaban'])->name('simpan.jawaban');
-    Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
+    Route::get('/alumni/dashboard', [AlumniController::class, 'dashboard'])->name('dashboard-alumni');
+    Route::get('/alumni/tracer_study', [AlumniController::class, 'tracer_study'])->name('tracer-study');
+    Route::get('/alumni/forum_diskusi', [AlumniController::class, 'forum'])->name('forum-diskusi');
+    // Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
+    // Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
+    // Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
+    // Route::get('/load-questions', [HomeController::class, 'question'])->name('load.questions');
+    // Route::post('/simpan-jawaban', [HomeController::class, 'simpanJawaban'])->name('simpan.jawaban');
+    // Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
+
+    // cut
+
+
+
 });
+    Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
+    Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
+
 Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/dashboard-admin', [HomeController::class, 'admin'])->name('dashboard-admin');
 });
@@ -60,15 +71,7 @@ Route::get('/admin/forum_diskusi', function () {
 Route::get('/admin/forum_diskusi/id', function () {
     return view('admin.detail_diskusi');
 });
-Route::get('/alumni/dashboard', function () {
-    return view('alumni.dashboard_alumni');
-});
-Route::get('/alumni/tracer_study', function () {
-    return view('alumni.tracer_study');
-});
-Route::get('/alumni/forum_diskusi', function () {
-    return view('alumni.forum_diskusi');
-});
+
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');

@@ -54,7 +54,7 @@ class LoginRegisterController extends Controller
             if (auth()->user()->role == 'admin') {
                 return redirect()->intended('/dashboard-admin');
             } else {
-                return redirect()->intended('/dashboard-alumni');
+                return redirect()->intended('/alumni/dashboard');
             }
 
 

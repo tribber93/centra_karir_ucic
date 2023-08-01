@@ -22,15 +22,15 @@ class  HomeController extends Controller
     }
     public function index()
     {
-        //data alumni
+        // //data alumni
         $kata_alumni = Testimoni::with('alumni')->get();
         //data berita
         $berita = Berita::take(3)->get();
 
-        //data partner
-        //data alamat Kampuss
+        // data partner
+        // data alamat Kampuss
         // dd($kata_alumni);
-        return view('alumni.dashboard_alumni', compact('berita', 'kata_alumni'));
+        return view('homepage.home', compact('berita', 'kata_alumni'));
     }
 
 
@@ -74,17 +74,26 @@ class  HomeController extends Controller
     }
     public function tracer()
     {
-        // $question = 'Apa warna favorit Anda?';
-        // $options = ['Merah', 'Biru', 'Kuning', 'Hijau'];
+        // $question = 'DISKUSI';
+        // $options = ['SANGAT BESAR',
+        // 'BESAR',
+        // 'CUKUP BESAR',
+        // 'KURANG',
+        // 'TIDAK SAMA SEKALI'];
+        $question = 'BERAPA BANYAK PERUSAHAAN/INSTANSI/INSTITUSI YANG MERESPON LAMARAN ANDA ?';
+        $options = [
+        ];
+        $status = 'publish';
 
-        // $namaModel = new Questions();
-        // $namaModel->pertanyaan = $question;
-        // $namaModel->opsi = json_encode($options);
-        // $namaModel->save();
-        $data_q = Questions::all();
+        $namaModel = new Questions();
+        $namaModel->pertanyaan = $question;
+    $namaModel->status = $status;
+        $namaModel->opsi = json_encode($options);
+        $namaModel->save();
+        // $data_q = Questions::all();
 
         // dd($data_q);
-        return view('coba', compact('data_q'));
+        // return view('coba', compact('data_q'));
         // return response()->json($data_q);
     }
     public function question(Request $request)

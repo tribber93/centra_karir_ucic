@@ -9,43 +9,43 @@
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="Bambang Hartono" disabled>
+                        <input type="text" class="form-control" value="{{$alumni->nama_alumni}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Angkatan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="2020" disabled>
+                        <input type="text" class="form-control" value="{{$alumni->angkatan}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Jenjang</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="S1" disabled>
+                        <input type="text" class="form-control" value="{{$alumni->jenjang}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Program Studi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="Teknik Informatika" disabled>
+                        <input type="text" class="form-control" value="{{$alumni->prodi}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">NIM</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="20200120093" disabled>
+                        <input type="text" class="form-control" value="{{$alumni->nim}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">Tahun Lulus</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="2024" disabled>
+                        <input type="text" class="form-control" value="{{$alumni->tahun_lulus}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">No. Telepon</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="{{$alumni->no_telpon}}">
                     </div>
                 </div>
                 <div class="form-group row align-items-center">
@@ -89,98 +89,102 @@
                         </span>
                     </div>
                 </div>
-                <div class="table-responsive my-4">
-                    <table class="table  row form-input" data-target="tracerCheckbox">
-                        <thead class="thead-lightform-group">
-                            <tr class="text-center align-items-center">
-                                <th class="col-7">MENURUT ANDA SEBERAPA BESAR PENEKANAN PADA METODE PEMBELAJARAN DI BAWAH
-                                    INI
-                                    DILAKSANAKAN DI
-                                    PROGRAM STUDI ANDA?</th>
-                                <th>TIDAK SAMA SEKALI</th>
-                                <th>KURANG</th>
-                                <th>CUKUP BESAR</th>
-                                <th>BESAR</th>
-                                <th>SANGAT BESAR</th>
-                            </tr>
-                            <?php 
-                    $array = ['Perkuliahan', 'Demonstrasi','Partisipasi dalam Proyek Riset', 'Magang', 'Praktikum','Kerja Lapangan','Diskusi'];
-                    for ($i=0; $i < count($array); $i++) { 
-                    ?>
-                            <tr>
-                                <td class="col-6">{{ $array[$i] }}</td>
-                                <td class="text-center">
-                                    <label class="md-check">
-                                        <input type="radio" name="q{{ $i }}" value="1">
-                                        <i class="blue"></i>
-                                    </label>
-                                </td>
-                                <td class="text-center">
-                                    <label class="md-check">
-                                        <input type="radio" name="q{{ $i }}" value="2">
-                                        <i class="blue"></i>
-                                    </label>
-                                </td>
-                                <td class="text-center">
-                                    <label class="md-check">
-                                        <input type="radio" name="q{{ $i }}" value="3">
-                                        <i class="blue"></i>
-                                    </label>
-                                </td>
-                                <td class="text-center">
-                                    <label class="md-check">
-                                        <input type="radio" name="q{{ $i }}" value="4">
-                                        <i class="blue"></i>
-                                    </label>
-                                </td>
-                                <td class="text-center">
-                                    <label class="md-check">
-                                        <input type="radio" name="q{{ $i }}" value="5">
-                                        <i class="blue"></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <?php
-                    }
-                    ?>
-                    </table>
-                </div>
-                <div class="option form-input" data-target="tracerCheckbox">
-                    <h6>KAPAN ANDA MULAI MENCARI PEKERJAAN?</h6>
-                    <br>
-                    <div class="form-group row pl-3">
-                        <label class="md-check -">
-                            <input type="radio" name="cariKerja">
-                            <i class="blue"></i>
-                            < 3 BULAN SEBELUM LULUS </label>
-                    </div>
-                    <div class="form-group row pl-3">
-                        <label class="md-check">
-                            <input type="radio" name="cariKerja">
-                            <i class="blue"></i>
-                            > 3 BULAN SESUDAH LULUS </label>
-                    </div>
-                    <div class="form-group row pl-3">
-                        <label class="md-check">
-                            <input type="radio" name="cariKerja">
-                            <i class="blue"></i>
-                            SAYA TIDAK MENCARI PEKERJAAN</label>
-                    </div>
-                    <div class="form-group row pl-3">
-                        <label for="other" class=" md-check">
-                            <input type="radio" name="cariKerja" value="other" id="other"
-                                onchange="toggleOtherInput()">
-                            {{-- <input type="radio" name="cariKerja"> --}}
-                            <i class="blue"></i>
-                            Lainnya
-                        </label><br>
 
-                        <div id="otherInput" style="display: none;">
-                            <input class="ml-3" type="text" name="cariKerja">
-                        </div>
-                    </div>
-                </div>
+
+
+
+
+
+
+
+                   {{--  --}}
+
+                   <table class="table row form-input" data-target="tracerCheckbox">
+                    <thead class="thead-lightform-group">
+                        <tr class="text-center align-items-center">
+                            <th class="col-7">MENURUT ANDA SEBERAPA BESAR PENEKANAN PADA METODE PEMBELAJARAN DI BAWAH INI DILAKSANAKAN DI PROGRAM STUDI ANDA?</th>
+                            <th>TIDAK SAMA SEKALI</th>
+                            <th>KURANG</th>
+                            <th>CUKUP BESAR</th>
+                            <th>BESAR</th>
+                            <th>SANGAT BESAR</th>
+                        </tr>
+                    </thead>
+                    <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
+
+                    <tbody style="width: 100%">
+                        @foreach ($tracer as $data)
+                            @if (empty(json_decode($data['opsi'])))
+                            <td colspan="5">
+
+                                <label>{{$data['pertanyaan']}}</label>
+                                <div class="form-group row form-input" data-target="tracerCheckbox">
+                                    <div class="col-sm-10">
+                                        <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
+
+                                        <input type="text" name="{{ $data['id'] }}" class="form-control" id="{{$data['id']}}" onchange="handleInputChange(this)">
+                                    </div>
+                                </div>
+                            </td>
+                            @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
+                                <tr>
+                                    <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
+
+                                    <td class="col-12">{{ $data['pertanyaan'] }}</td>
+                                    @foreach (json_decode($data['opsi']) as $opsi)
+                                        <td class="" style="padding-right: 40px">
+                                            <label class="md-check">
+                                                <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
+
+                                                <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class="" onclick="handleRadioClick(this)">
+                                                <i class="blue"></i>
+                                            </label>
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @else
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="option form-input " data-target="tracerCheckbox">
+
+                                            <h6 class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
+                                            <br>
+
+                                            @foreach (json_decode($data['opsi']) as $opsi)
+                                                <div class="form-group row pl-3">
+                                                    <label class="md-check">
+                                                        <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
+
+                                                        <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
+
+                                                        <i class="blue"></i>
+                                                        {{ $opsi }}
+
+                                                    </label>
+                                                </div>
+
+
+                                                @endforeach
+                                                <input type="text" class="form-control" name="{{ $data['id'] }}-text" class="form-control" style="display: none;" id="{{$data['id']}}-text" value="Tulis jika lainnya">
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+
+                {{--  --}}
             </form>
         </div>
+        <button id="btnGetData">Ambil Nilai</button>
     </div>
 @endsection
+<style>
+    .error-show {
+        display: block;
+        color: red;
+    }
+</style>

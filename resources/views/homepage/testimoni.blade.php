@@ -14,10 +14,10 @@
                 <div class="testimonial-slider owl-carousel">
                     @foreach ($kata_alumni as $data)
                         <div class="single-testimonial">
-                            <p>"{{ Str::limit($data->kutipan_alumni, 130) }}" </p>
+                            {{-- <p>"{{ Str::limit($data->kutipan_alumni, 130) }}" </p> --}}
                             <div class="bottom">
-                                <img src="{{ asset('assets/images/' . $data->alumni->image) }}" alt="#">
-                                <h4 class="name">{{ $data->alumni->nama_alumni }}<span>--</span></h4>
+                                {{-- <img src="{{ asset('assets/images/' . $data->alumni->image) }}" alt="#"> --}}
+                                {{-- <h4 class="name">{{ $data->alumni->nama_alumni }}<span>--</span></h4> --}}
                             </div>
                         </div>
                     @endforeach
