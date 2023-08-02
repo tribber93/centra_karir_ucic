@@ -124,7 +124,7 @@
                                 <label>{{$data['pertanyaan']}}</label>
                                 <div class="form-group row form-input" data-target="tracerCheckbox">
                                     <div class="col-sm-10">
-                                        <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
+                                        <div id="error-{{ $data['id'] }}" style="display: none;color:red"  class="error">Harus Terisi</div>
 
                                         <input type="text" name="{{ $data['id'] }}" class="form-control" id="{{$data['id']}}" onchange="handleInputChange(this)">
                                     </div>
@@ -132,14 +132,13 @@
                             </td>
                             @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
                                 <tr>
-                                    <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
-
-                                    <td class="col-12">{{ $data['pertanyaan'] }}</td>
+                                    <td class="col-12">
+                                        <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
+                                        {{ $data['pertanyaan'] }}
+                                    </td>
                                     @foreach (json_decode($data['opsi']) as $opsi)
-                                        <td class="" style="padding-right: 40px">
+                                     <td class="" style="padding-right: 40px">
                                             <label class="md-check">
-                                                <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
-
                                                 <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class="" onclick="handleRadioClick(this)">
                                                 <i class="blue"></i>
                                             </label>
@@ -150,6 +149,7 @@
                                 <tr>
                                     <td colspan="6">
                                         <div class="option form-input " data-target="tracerCheckbox">
+                                            <div id="error-{{ $data['id'] }}" style="display: none;color:red;"  class="error">Belum terisi</div>
 
                                             <h6 class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
                                             <br>
@@ -157,9 +157,7 @@
                                             @foreach (json_decode($data['opsi']) as $opsi)
                                                 <div class="form-group row pl-3">
                                                     <label class="md-check">
-                                                        <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
-
-                                                        <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
+             <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
 
                                                         <i class="blue"></i>
                                                         {{ $opsi }}
@@ -179,7 +177,7 @@
                         @endforeach
                     </tbody>
                 </table>
-        <button id="btnGetData">Ambil Nilai</button>
+        <button type="button" id="btnGetData">Ambil Nilai</button>
 
                    @endif
 

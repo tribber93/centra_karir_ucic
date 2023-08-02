@@ -54,7 +54,6 @@ function handleRadioClick(radio) {
                 console.log("as");
 
             } else {
-                // Jika pilihan lain dipilih, sembunyikan input type text untuk pilihan "LAINNYA"
                 textInput.style.display = 'none';
             }
             return { id, value };
@@ -64,7 +63,19 @@ function handleRadioClick(radio) {
     // console.log("Kamu memilih id:", id, "value:", value);
 
 }
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function () {
+        const radioName = this.name;
+        const checkedValue = document.querySelector(`input[name="${radioName}"]:checked`);
 
+        if (checkedValue === null) {
+            document.getElementById(`error-${radioName}`).style.display = 'block';
+        } else {
+            document.getElementById(`error-${radioName}`).style.display = 'none';
+        }
+
+    });
+});
 document.getElementById('btnGetData').addEventListener('click', () => {
     const inputElements = document.querySelectorAll('.additional-input');
     const radioElements = document.querySelectorAll('input[type="radio"]');
@@ -84,7 +95,7 @@ document.getElementById('btnGetData').addEventListener('click', () => {
         return;
     }
 
-    // Validasi untuk memastikan semua radio button telah diisi
+    // Validasi
     let isRadioValid = true;
     radioElements.forEach(radio => {
         const radioName = radio.name;
@@ -94,14 +105,13 @@ document.getElementById('btnGetData').addEventListener('click', () => {
         if (!isChecked) {
             isRadioValid = false;
             console.log(`Radio button ${radioName} belum diisi!`);
-
-            document.getElementById(`error-${radioName}`).classList.add('error-show');
-            return false;
+            document.getElementById(`error-${radioName}`).style.display = 'block';
+                  return false;
         } else {
             document.getElementById(`error-${radioName}`).classList.remove('error-show');
         }
     });
-
+// end val
     if (!isRadioValid) {
         return;
     }
@@ -121,19 +131,4 @@ document.getElementById('btnGetData').addEventListener('click', () => {
     console.log(outputLog);
 });
 
-$(document).ready(function () {
-    // ...
 
-    $('input[type="radio"]').on('change', function () {
-        const radioName = $(this).prop('name');
-        const isChecked = $(`input[name="${radioName}"]:checked`).val();
-
-        if (isChecked === 'LAINNYA') {
-            $(`#${radioName}-text`).show();
-        } else {
-            $(`#${radioName}-text`).hide();
-        }
-    });
-
-    // ...
-});
