@@ -41,17 +41,29 @@ function handleInputChange(input) {
 function handleRadioClick(radio) {
     const id = radio.name;
     var value = radio.value;
-    // var lainnya = document.getElementById(`${id}-text`);
     var textInput = document.getElementById(`${id}-text`);
 
         if (textInput) {
             if (value === 'LAINNYA') {
-                // Jika pilihan "LAINNYA" dipilih, set nilai value ke "0"
-                // textInput.value = '0';
-                // Tampilkan input type text untuk pilihan "LAINNYA"
                 textInput.style.display = 'content';
               value =  document.getElementById(`${id}-text`).value;
                 console.log("as");
+                $(document).ready(function () {
+                // input lainnyaa
+
+                    $('input[type="radio"]').on('change', function () {
+                        const radioName = $(this).prop('name');
+                        const isChecked = $(`input[name="${radioName}"]:checked`).val();
+
+                        if (isChecked === 'LAINNYA') {
+                            $(`#${radioName}-text`).show();
+                        } else {
+                            $(`#${radioName}-text`).hide();
+                        }
+                    });
+
+                    // ...
+                });
 
             } else {
                 textInput.style.display = 'none';
@@ -60,7 +72,6 @@ function handleRadioClick(radio) {
 
         }
         return { id, value };
-    // console.log("Kamu memilih id:", id, "value:", value);
 
 }
 document.querySelectorAll('input[type="radio"]').forEach(radio => {
