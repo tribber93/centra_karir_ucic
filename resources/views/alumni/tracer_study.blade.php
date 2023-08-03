@@ -125,7 +125,7 @@
 
                                     <label style="font-weight: 600">{{$data['pertanyaan']}}</label>
                                     <div class="form-group row form-input" data-target="tracerCheckbox">
-                                        <input type="text" name="{{ $data['id'] }}" class="additional-input form-control" id="{{ $data['id'] }}" onchange="handleInputChange(this)">
+                                        <input type="text" name="{{ $data['id'] }}" class="additional-input3 form-control" id="{{ $data['id'] }}" onchange="handleInputChange(this)">
                                     </div>
                                 </td>
                             </tr>
@@ -148,7 +148,7 @@
                                 <tr>
                                     <td colspan="6">
                                         <div class="option form-input " data-target="tracerCheckbox">
-                                            <div id="error-{{ $data['id'] }}" style="display: none;color:red;"  class="error">Belum terisi</div>
+                                            <div id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum terisi</div>
 
                                             <h6 class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
                                             {{-- <br> --}}
@@ -176,9 +176,8 @@
                         @endforeach
                     </tbody>
                 </table>
-        <button type="button" id="btnGetData">Ambil Nilai</button>
-
-                   @endif
+        <button type="button" id="btnGetData" class="md-btn md-raised m-b-sm w-xs indigo">Simpan</button>
+        @endif
 
 
 
@@ -186,6 +185,24 @@
             </form>
         </div>
     </div>
+    <!-- .modal -->
+    <div id="m-a-a" class="modal fade animate" data-backdrop="true">
+        <div class="modal-dialog" id="animate">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+            <p>Are you sure to execute this action?</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
+            <button type="button" class="btn danger p-x-md" data-dismiss="modal">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+        </div>
+    </div>
+  <!-- / .modal -->
 @endsection
 <style>
     .error-show {
