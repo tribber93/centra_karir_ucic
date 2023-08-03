@@ -47,12 +47,16 @@
                         </a>
                         <p>Kami sedang mencari seorang profesional berbakat untuk mengisi posisi IT Support di
                             perusahaan kami. Jika Anda memiliki pengalaman dan kualifikasi yang sesuai.</p>
-                        <a href="/admin/forum_diskusi/id">
-                            <i class="material-icons md-24">
-                                &#xe0b9;
-                                <span ui-include="'../assets/images/i_0.svg'"></span>
-                            </i>
-                            <span class="m-l-sm">0 Komentar</span>
+                        @if (Auth::user()->role == 'admin')
+                            <a href="/admin/forum_diskusi/id">
+                            @else
+                                <a href="/alumni/forum_diskusi/id">
+                        @endif
+                        <i class="material-icons md-24">
+                            &#xe0b9;
+                            <span ui-include="'../assets/images/i_0.svg'"></span>
+                        </i>
+                        <span class="m-l-sm">0 Komentar</span>
                         </a>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\AlumniController;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -63,6 +63,9 @@ Route::get('/detail-berita', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard_admin');
 });
+Route::get('/admin/kelola_tracer', function () {
+    return view('admin.kelola_tracer');
+});
 Route::get('/admin/kelola_berita', function () {
     return view('admin.kelola_berita');
 });
@@ -75,8 +78,14 @@ Route::get('/admin/kelola_alumni', function () {
 Route::get('/admin/forum_diskusi', function () {
     return view('admin.forum_diskusi');
 });
+
+
 Route::get('/admin/forum_diskusi/id', function () {
-    return view('admin.detail_diskusi');
+    return view('diskusi.detail_diskusi');
+});
+
+Route::get('/alumni/forum_diskusi/id', function () {
+    return view('diskusi.detail_diskusi');
 });
 
 Route::controller(LoginRegisterController::class)->group(function () {
