@@ -131,7 +131,7 @@
                             </tr>
                             @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
                                 <tr>
-                                    <td class="col-12">
+                                    <td class="col-12 text-lowercase" >
                                         <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
                                         {{ $data['pertanyaan'] }}
                                     </td>
@@ -155,7 +155,7 @@
 
                                             @foreach (json_decode($data['opsi']) as $opsi)
                                                 <div class="form-group row pl-3">
-                                                    <label class="md-check">
+                                                    <label class="md-check text-lowercase">
                                                         <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
 
                                                         <i class="blue"></i>
@@ -190,14 +190,14 @@
         <div class="modal-dialog" id="animate">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal</h5>
+                <h5 class="modal-title">Hallo {{ Auth::user()->name}}</h5>
             </div>
             <div class="modal-body text-center p-lg">
-            <p>Are you sure to execute this action?</p>
+            <p>Anda Yakin Akan Submit Tracer ?</p>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
-            <button type="button" class="btn danger p-x-md" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
+            <button type="button" class="md-btn md-raised p-x-md indigo" data-dismiss="modal">Yes</button>
             </div>
         </div><!-- /.modal-content -->
         </div>
