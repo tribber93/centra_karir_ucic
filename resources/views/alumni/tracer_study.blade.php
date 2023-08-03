@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 @if ($status_tracer)
-                <center>  Anda sudah tracer studi pada tanggal xx-xx-xx</center>
+                <center>  Anda sudah tracer studi pada tanggal {{$tanggal_tracer}}</center>
 
                   @else
                 <div class="form-group row align-items-center">

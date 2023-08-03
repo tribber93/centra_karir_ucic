@@ -33,8 +33,9 @@ class AlumniController extends Controller
 
         // status tracer 0 dan 1 ye:)
         $status_tracer = $alumni->status_tracer;
+        $tanggal_tracer = $alumni->updated_at;
 
-        return view('alumni.tracer_study', compact('alumni','tracer', 'status_tracer'));
+        return view('alumni.tracer_study', compact('alumni','tracer', 'status_tracer', 'tanggal_tracer'));
     }
 
     public function forum()
