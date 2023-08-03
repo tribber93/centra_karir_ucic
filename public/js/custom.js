@@ -32,7 +32,12 @@ checkbox.addEventListener("change", function () {
 
 function handleInputChange(input) {
     const id = input.id;
-    const value = input.value;
+    var value = input.value;
+    if (input.type === 'checkbox') {
+        value = input.checked;
+    } else {
+        value = input.value;
+    }
     console.log("Kamu memilih id:", id, "value:", value);
 
     return { id, value };
@@ -44,7 +49,7 @@ function handleRadioClick(radio) {
     var textInput = document.getElementById(`${id}-text`);
 
         if (textInput) {
-            if (value === 'LAINNYA') {
+            if (value === 'LAINNYA' ) {
                 textInput.style.display = 'content';
               value =  document.getElementById(`${id}-text`).value;
                 console.log("as");
@@ -99,6 +104,7 @@ document.getElementById('btnGetData').addEventListener('click', () => {
             console.log('Isian belum lengkap!');
             return false;
         }
+
     });
 
     if (!isInputValid) {

@@ -119,17 +119,16 @@
                     <tbody style="width: 100%">
                         @foreach ($tracer as $data)
                             @if (empty(json_decode($data['opsi'])))
-                            <td colspan="5">
+                            <tr>
+                                <td class="col-12">
+                                    <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
 
-                                <label>{{$data['pertanyaan']}}</label>
-                                <div class="form-group row form-input" data-target="tracerCheckbox">
-                                    <div class="col-sm-10">
-                                        <div id="error-{{ $data['id'] }}" style="display: none;color:red"  class="error">Harus Terisi</div>
-
-                                        <input type="text" name="{{ $data['id'] }}" class="form-control" id="{{$data['id']}}" onchange="handleInputChange(this)">
+                                    <label style="font-weight: 600">{{$data['pertanyaan']}}</label>
+                                    <div class="form-group row form-input" data-target="tracerCheckbox">
+                                        <input type="text" name="{{ $data['id'] }}" class="additional-input form-control" id="{{ $data['id'] }}" onchange="handleInputChange(this)">
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            </tr>
                             @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
                                 <tr>
                                     <td class="col-12">
@@ -152,12 +151,12 @@
                                             <div id="error-{{ $data['id'] }}" style="display: none;color:red;"  class="error">Belum terisi</div>
 
                                             <h6 class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
-                                            <br>
+                                            {{-- <br> --}}
 
                                             @foreach (json_decode($data['opsi']) as $opsi)
                                                 <div class="form-group row pl-3">
                                                     <label class="md-check">
-             <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
+                                                        <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
 
                                                         <i class="blue"></i>
                                                         {{ $opsi }}
