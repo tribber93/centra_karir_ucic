@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\AlumniController;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
 
 
 });
-    Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
-    Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
+Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
+Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
 
 Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/dashboard-admin', [HomeController::class, 'admin'])->name('dashboard-admin');
@@ -56,6 +56,9 @@ Route::get('/detail-berita', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard_admin');
 });
+Route::get('/admin/kelola_tracer', function () {
+    return view('admin.kelola_tracer');
+});
 Route::get('/admin/kelola_berita', function () {
     return view('admin.kelola_berita');
 });
@@ -68,8 +71,14 @@ Route::get('/admin/kelola_alumni', function () {
 Route::get('/admin/forum_diskusi', function () {
     return view('admin.forum_diskusi');
 });
+
+
 Route::get('/admin/forum_diskusi/id', function () {
-    return view('admin.detail_diskusi');
+    return view('diskusi.detail_diskusi');
+});
+
+Route::get('/alumni/forum_diskusi/id', function () {
+    return view('diskusi.detail_diskusi');
 });
 
 Route::controller(LoginRegisterController::class)->group(function () {

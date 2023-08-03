@@ -37,6 +37,14 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ url('admin/kelola_tracer') }}">
+                            <span class="nav-icon">
+                                <i class="fa fa-graduation-cap"></i>
+                            </span>
+                            <span class="nav-text">Kelola Tracer</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ url('admin/kelola_berita') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-newspaper-o"></i>

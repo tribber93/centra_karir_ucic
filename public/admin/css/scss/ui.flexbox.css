@@ -1,0 +1,25 @@
+/*
+Flexbox
+*/
+[layout],
+[data-layout] {
+  box-sizing: border-box;
+  display: -moz-flex;
+  display: flex;
+}
+
+[layout=column],
+[data-layout=column] {
+  flex-direction: column;
+}
+
+[layout=row],
+[data-layout=row] {
+  flex-direction: row;
+}
+
+[flex],
+[data-flex] {
+  box-sizing: border-box;
+  flex: 1;
+}/*# sourceMappingURL=ui.flexbox.css.map */
