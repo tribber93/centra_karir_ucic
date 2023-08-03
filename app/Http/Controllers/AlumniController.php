@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumni;
+use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Event\Tracer\Tracer;
+use Illuminate\Support\Facades\Log;
 
 class AlumniController extends Controller
 {
@@ -40,6 +42,58 @@ class AlumniController extends Controller
         //
         return view('alumni.forum_diskusi');
 
+    }
+     public function simpan_tracer(Request $request)
+    {
+        // Lakukan validasi data jika diperlukan
+        // $request->validate([...]);
+
+        // Ambil data dari request
+        $formData = $request->all();
+        $alumni = Alumni::where('user_id', Auth::user()->id)->first();
+        // $no_telp = Alumni::where('user_id', Auth::user()->id)->get('no_telpon');
+        // dd($alumni);
+
+        $alumni->status_kerja = $request->isChecked;
+        $alumni->nama_perusahaan = $request->namaPerusahaan;
+        $alumni->posisi = $request->posisi;
+        $alumni->mulai_bekerja = $request->mulaiBekerja;
+        $alumni->status_tracer = 1;
+        $alumni->no_telpon = $request->noTelp;
+    //   if ($alumni->no_telpon == $request->noTelp) {
+    //     $alumni->no_telpon = $alumni->no_telpon;
+    //   } else {
+
+        # code...
+    //   }
+
+        // Simpan data ke tabel yang diinginkan
+        // Misalnya, jika Anda menggunakan Eloquent ORM pada Laravel:
+        // YourModel::create($formData);
+
+        $alumni->save();
+
+        // Jika berhasil disimpan, kembalikan respons ke klien (misalnya, status berhasil)
+        return response()->json(['status' => 'success'], );
+    }
+    public function simpan(Request $request)
+    {
+        // Lakukan validasi data jika diperlukan
+        // $request->validate([...]);
+
+        // Ambil data dari request
+        // $formData = $request->all();
+        $alumni = Alumni::where('user_id', Auth::user()->id)->first();
+
+        $hasilTracer = new HasilTracer;
+        $jsonData = $request->json()->all();
+
+        $hasilTracer->jawaban = $jsonData;
+        $hasilTracer->alumni_id = $alumni->id;
+
+            $hasilTracer->save();
+
+        return response()->json(['status' => 'success'], );
     }
     public function getPertanyaan()
     {

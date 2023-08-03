@@ -10,7 +10,11 @@ class HasilTracer extends Model
     protected $table = 'hasil_tracer';
     protected $fillable = [
         // Kolom yang dapat diisi
-        'tracer_id', 'jawaban'
+        'tracer_id', 'jawaban', 'alumni_id'
+    ];
+    protected $casts = [
+        // Kolom yang bertipe data JSON
+        'jawaban' => 'array',
     ];
     public function question()
     {

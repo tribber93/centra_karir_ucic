@@ -16,7 +16,7 @@
     <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="shortcut icon" sizes="196x196" href="{{ asset('admin/css/images/logo.png') }}">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- style -->
     <link rel="stylesheet" href="{{ asset('admin/css/animate.css/animate.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('admin/css/glyphicons/glyphicons.css') }}" type="text/css" />
@@ -161,6 +161,7 @@
     <script src="{{ asset('admin/libs/jquery/jquery-pjax/jquery.pjax.js') }}"></script>
     <script src="{{ asset('admin/scripts/ajax.js') }}"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
 
     <!-- endbuild -->
     @yield('scripts')

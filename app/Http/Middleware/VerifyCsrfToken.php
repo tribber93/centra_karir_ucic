@@ -13,5 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        // 'alumni/simpan_tracer'
     ];
+
+
 }

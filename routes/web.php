@@ -32,13 +32,20 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     // Route::get('/load-questions', [HomeController::class, 'question'])->name('load.questions');
     // Route::post('/simpan-jawaban', [HomeController::class, 'simpanJawaban'])->name('simpan.jawaban');
     // Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
+    // simpan data tracer bro
+    Route::post('/alumni/simpan_tracer', [AlumniController::class, 'simpan_tracer'])->name('simpan-tracer');
+
 
     // cut
 
 
 
+    Route::post('/alumni/simpan', [AlumniController::class, 'simpan'])->name('simpan');
 });
-    Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
+// Route::post('/alumni/simpan_opsi', [AlumniController::class, 'simpan_opsi'])->name('simpan-opsi');
+
+
+Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
     Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
 
 Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {

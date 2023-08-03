@@ -45,9 +45,13 @@
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">No. Telepon</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="{{$alumni->no_telpon}}">
+                        <input type="text" id="noTelp" name="noTelp" class="form-control" placeholder="{{$alumni->no_telpon}}">
                     </div>
                 </div>
+                @if ($status_tracer)
+                <center>  Anda sudah tracer studi pada tanggal xx-xx-xx</center>
+
+                  @else
                 <div class="form-group row align-items-center">
                     <label class="col-2 form-control-label" for="tracerCheckbox">Sudah Bekerja?</label>
                     <div class="col-10">
@@ -56,18 +60,24 @@
                 </div>
 
                 <div class="form-group row form-input" data-target="tracerCheckbox">
+                    <span id="error-namaPerusahaan"  style="display: none;color:red; font-size:12px"  class="error col-12">Belum Terisi</span>
+
                     <label class="col-sm-2 form-control-label" for="additionalInput1">Nama Perusahaan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="additionalInput1">
+                        <input type="text"  class="form-control" id="namaPerusahaan" name="namaPerusahaan">
                     </div>
                 </div>
                 <div class="form-group row form-input" data-target="tracerCheckbox">
+                    <span id="error-posisi" style="display: none;color:red; font-size:12px"  class="error col-12">Belum Terisi</span>
+
                     <label class="col-sm-2 form-control-label" for="additionalInput1">Posisi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="additionalInput1">
+                        <input type="text" class="form-control" id="posisi" name="posisi">
                     </div>
                 </div>
                 <div class="form-group row form-input" data-target="tracerCheckbox">
+                    <span id="error-mulaiBekerja" style="display: none;color:red; font-size:12px"  class="error col-12">Belum Terisi</span>
+
                     <label class="col-sm-2 form-control-label" for="additionalInput1">Mulai Bekerja</label>
                     <div class='col-sm-4 input-group date' ui-jp="datetimepicker"
                         ui-options="{
@@ -83,25 +93,15 @@
                           close: 'fa fa-remove'
                         }
                       }">
-                        <input type='text' class="form-control">
+                        <input type='text' class="form-control" id="mulaiBekerja" name="mulaiBekerja">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
                     </div>
                 </div>
 
-
-
-
-
-
-
-
                    {{--  --}}
-                   @if ($status_tracer)
-                 <center>  Anda sudah tracer studi pada tanggal xx-xx-xx</center>
 
-                   @else
 
                    <table class="table row form-input" data-target="tracerCheckbox">
                     <thead class="thead-lightform-group">
@@ -116,7 +116,7 @@
                     </thead>
                     <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
 
-                    <tbody style="width: 100%">
+                    <tbody>
                         @foreach ($tracer as $data)
                             @if (empty(json_decode($data['opsi'])))
                             <tr>
@@ -197,7 +197,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
-            <button type="button" class="md-btn md-raised p-x-md indigo" data-dismiss="modal">Yes</button>
+            <button type="button" id="btnSubmitTracer" class="md-btn md-raised p-x-md indigo" data-dismiss="modal">Yes</button>
             </div>
         </div><!-- /.modal-content -->
         </div>
