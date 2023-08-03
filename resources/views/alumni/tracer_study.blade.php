@@ -119,27 +119,25 @@
                     <tbody style="width: 100%">
                         @foreach ($tracer as $data)
                             @if (empty(json_decode($data['opsi'])))
-                            <td colspan="5">
+                            <tr>
+                                <td class="col-12">
+                                    <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
 
-                                <label>{{$data['pertanyaan']}}</label>
-                                <div class="form-group row form-input" data-target="tracerCheckbox">
-                                    <div class="col-sm-10">
-                                        <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
-
-                                        <input type="text" name="{{ $data['id'] }}" class="form-control" id="{{$data['id']}}" onchange="handleInputChange(this)">
+                                    <label style="font-weight: 600">{{$data['pertanyaan']}}</label>
+                                    <div class="form-group row form-input" data-target="tracerCheckbox">
+                                        <input type="text" name="{{ $data['id'] }}" class="additional-input3 form-control" id="{{ $data['id'] }}" onchange="handleInputChange(this)">
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            </tr>
                             @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
                                 <tr>
-                                    <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
-
-                                    <td class="col-12">{{ $data['pertanyaan'] }}</td>
+                                    <td class="col-12 text-lowercase" >
+                                        <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
+                                        {{ $data['pertanyaan'] }}
+                                    </td>
                                     @foreach (json_decode($data['opsi']) as $opsi)
-                                        <td class="" style="padding-right: 40px">
+                                     <td class="" style="padding-right: 40px">
                                             <label class="md-check">
-                                                <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
-
                                                 <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class="" onclick="handleRadioClick(this)">
                                                 <i class="blue"></i>
                                             </label>
@@ -150,15 +148,14 @@
                                 <tr>
                                     <td colspan="6">
                                         <div class="option form-input " data-target="tracerCheckbox">
+                                            <div id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum terisi</div>
 
                                             <h6 class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
-                                            <br>
+                                            {{-- <br> --}}
 
                                             @foreach (json_decode($data['opsi']) as $opsi)
                                                 <div class="form-group row pl-3">
-                                                    <label class="md-check">
-                                                        <span class="error-message" id="error-{{$data['id']}}" style="display: none;">Pilih salah satu opsi</span>
-
+                                                    <label class="md-check text-lowercase">
                                                         <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
 
                                                         <i class="blue"></i>
@@ -179,9 +176,8 @@
                         @endforeach
                     </tbody>
                 </table>
-        <button id="btnGetData">Ambil Nilai</button>
-
-                   @endif
+        <button type="button" id="btnGetData" class="md-btn md-raised m-b-sm w-xs indigo">Simpan</button>
+        @endif
 
 
 
@@ -189,6 +185,24 @@
             </form>
         </div>
     </div>
+    <!-- .modal -->
+    <div id="m-a-a" class="modal fade animate" data-backdrop="true">
+        <div class="modal-dialog" id="animate">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hallo {{ Auth::user()->name}}</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+            <p>Anda Yakin Akan Submit Tracer ?</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
+            <button type="button" class="md-btn md-raised p-x-md indigo" data-dismiss="modal">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+        </div>
+    </div>
+  <!-- / .modal -->
 @endsection
 <style>
     .error-show {
