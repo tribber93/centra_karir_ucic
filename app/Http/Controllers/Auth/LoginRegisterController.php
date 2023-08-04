@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 class LoginRegisterController extends Controller
 {
     public function __construct()
@@ -38,7 +39,7 @@ class LoginRegisterController extends Controller
         Auth::attempt($credentials);
         $request->session()->regenerate();
         return redirect()->route('home')
-        ->withSuccess('You have successfully registered & logged in!');
+            ->withSuccess('You have successfully registered & logged in!');
     }
     public function authenticate(Request $request)
     {
@@ -52,17 +53,15 @@ class LoginRegisterController extends Controller
             $request->session()->regenerate();
 
             if (auth()->user()->role == 'admin') {
-                return redirect()->intended('/dashboard-admin');
+                return redirect()->intended('/admin/dashboard');
             } else {
                 return redirect()->intended('/alumni/dashboard');
             }
-
-
+        }
+        return back()->withErrors([
+            'email' => 'Your provided credentials do not match in our records.',
+        ])->onlyInput('email');
     }
-    return back()->withErrors([
-        'email' => 'Your provided credentials do not match in our records.',
-    ])->onlyInput('email');
-}
     public function login()
     {
         return view('login');
@@ -70,8 +69,7 @@ class LoginRegisterController extends Controller
 
     public function dashboard()
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             return redirect('/dashboard');
         }
 

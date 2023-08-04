@@ -21,22 +21,38 @@
             </div>
         </div>
 
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Single Blog -->
-                @include('components.card_berita')
-                <!-- End Single Blog -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Single Blog -->
-                @include('components.card_berita')
-                <!-- End Single Blog -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Single Blog -->
-                @include('components.card_berita')
-                <!-- End Single Blog -->
-            </div>
+        <div class="row d-flex justify-content-center flex-row-reverse">
+            @foreach ($informasi as $info)
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single Blog -->
+                    <div class="post-container">
+                        <div class="post">
+                            <div class="header_post">
+                                <img src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                                    alt="">
+                            </div>
+                            <a href="{{ url('/detail-berita') }}">
+                                <div class="body_post">
+                                    <div class="post_content">
+
+                                        <h1>{{ $info->judul }}</h1>
+                                        {!! $info->konten !!}
+
+                                        <div class="container_infos">
+                                            <div class="postedBy">
+                                                <span>Published</span>
+                                                Kamis, 30 Maret 2023
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <!-- End Single Blog -->
+                </div>
+            @endforeach
         </div>
     </div>
 </section>

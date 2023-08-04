@@ -45,22 +45,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/kelola_berita') }}">
+                        <a href="{{ url('admin/kelola_informasi') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-newspaper-o"></i>
                             </span>
-                            <span class="nav-text">Kelola Berita</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('admin/kelola_lowongan') }}">
-                            <span class="nav-icon">
-                                <i class="material-icons">
-                                    &#xe8f9;
-                                    <span ui-include="'../assets/images/i_0.svg'"></span>
-                                </i>
-                            </span>
-                            <span class="nav-text">Kelola Lowongan</span>
+                            <span class="nav-text">Kelola Informasi</span>
                         </a>
                     </li>
                     <li>

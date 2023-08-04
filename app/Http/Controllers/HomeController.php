@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Testimoni;
 use App\Models\Alumni;
+use App\Models\Informasi;
 use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
@@ -25,12 +26,12 @@ class  HomeController extends Controller
         // //data alumni
         $kata_alumni = Testimoni::with('alumni')->get();
         //data berita
-        $berita = Berita::take(3)->get();
+        $informasi = Informasi::take(3)->get();
 
         // data partner
         // data alamat Kampuss
         // dd($kata_alumni);
-        return view('homepage.home', compact('berita', 'kata_alumni'));
+        return view('homepage.home', compact('informasi', 'kata_alumni'));
     }
 
 
@@ -81,13 +82,12 @@ class  HomeController extends Controller
         // 'KURANG',
         // 'TIDAK SAMA SEKALI'];
         $question = 'BERAPA BANYAK PERUSAHAAN/INSTANSI/INSTITUSI YANG MERESPON LAMARAN ANDA ?';
-        $options = [
-        ];
+        $options = [];
         $status = 'publish';
 
         $namaModel = new Questions();
         $namaModel->pertanyaan = $question;
-    $namaModel->status = $status;
+        $namaModel->status = $status;
         $namaModel->opsi = json_encode($options);
         $namaModel->save();
         // $data_q = Questions::all();

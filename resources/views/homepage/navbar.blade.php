@@ -25,15 +25,22 @@
 
                                 </ul>
                             </nav>
-                            @if(Auth::check())
-                            <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button">
+                            @if (Auth::check())
+                                @if (Auth::user()->role == 'admin')
+                                    <a href="/admin/dashboard" class="button">Dashboard</a>
+                                @endif
+                                @if (Auth::user()->role == 'alumni')
+                                    <a href="/alumni/dashboard" class="button">Dasboard</a>
+                                @endif
+
+                                {{-- <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button">
                                 {{ Auth::user()->name }}
-                            </button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            </button> --}}
+                                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
-                            </form>
+                            </form> --}}
                             @else
-                            <a href="/login" class="button">Login</a>
+                                <a href="/login" class="button">Login</a>
 
                             @endif
                         </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\InformasiController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -46,14 +47,21 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
 
 
 Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
-    Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
+Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
 
 Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
-    Route::get('/dashboard-admin', [HomeController::class, 'admin'])->name('dashboard-admin');
+    Route::get('/admin/dashboard', [HomeController::class, 'admin'])->name('dashboard-admin');
+    Route::get('/admin/kelola_informasi', [InformasiController::class, 'index']);
+    Route::get('/admin/kelola_informasi/edit/{id}', [InformasiController::class, 'edit']);
+    Route::post('/admin/kelola_informasi/edit/{id}', [InformasiController::class, 'update']);
+    Route::get('/admin/kelola_informasi/delete/{id}', [InformasiController::class, 'destroy']);
+    Route::post('/admin/kelola_informasi/tambah', [InformasiController::class, 'store']);
+    Route::get('/admin/kelola_informasi/tambah', function () {
+        return view('admin.tambah_informasi');
+    });
 });
-Route::get('/detail', function () {
-    return view('berita.detail');
-});
+
+
 Route::get('/berita', function () {
     return view('berita.berita');
 });
@@ -66,12 +74,8 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/kelola_tracer', function () {
     return view('admin.kelola_tracer');
 });
-Route::get('/admin/kelola_berita', function () {
-    return view('admin.kelola_berita');
-});
-Route::get('/admin/kelola_berita/tambah', function () {
-    return view('admin.tambah_berita');
-});
+
+
 Route::get('/admin/kelola_alumni', function () {
     return view('admin.kelola_alumni');
 });
