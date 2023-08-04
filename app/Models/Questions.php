@@ -22,4 +22,8 @@ class Questions extends Model
     {
         return $this->belongsTo(HasilTracer::class, 'id');
     }
+    public function alumni()
+    {
+        return $this->hasMany(Alumni::class);
+    }
 }

@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     });
     Route::get('/admin/allTracer',[AdminController::class, 'showTracer']);
     Route::post('/admin/update_question',[AdminController::class, 'updateQuestion'])->name('admin-update-q');
+    Route::get('/admin/hasil_tracer',[AdminController::class, 'showTracer']);
 
 
 

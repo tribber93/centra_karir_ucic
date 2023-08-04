@@ -20,4 +20,5 @@ class Alumni extends Model
     // {
     //     return $this->hasMany(Testimoni::class, 'id', 'alumni_id');
     // }
+
 }

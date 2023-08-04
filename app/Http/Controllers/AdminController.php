@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
+use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 
@@ -98,8 +100,20 @@ class AdminController extends Controller
     public function showTracer()
     {
         //
-        $tracer = Questions::all();
-        dd($tracer);
+        $tracers = HasilTracer::with('alumni')->get();
+
+        // Loop through the collection and access the 'jawaban' attribute as an array for each model
+        $tracers = HasilTracer::with('alumni', 'tracer')->get();
+
+    // Loop through the collection and access the 'jawaban' and 'tracer' attributes
+    foreach ($tracers as $tracer) {
+        $jawabanArray = $tracer->jawaban;
+        $tracerData = $tracer->tracer;
+
+        // Now you have access to both the 'jawaban' array and the related 'Tracer' model data
+        dd($jawabanArray, $tracerData);
+    }
+        // return view("admin.hasil_tracer", compact('tracer'));
     }
     public function getQuestionById(Request $request)
     {
