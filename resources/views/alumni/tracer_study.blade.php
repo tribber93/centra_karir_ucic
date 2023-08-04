@@ -193,7 +193,7 @@
                 <h5 class="modal-title">Hallo {{ Auth::user()->name}}</h5>
             </div>
             <div class="modal-body text-center p-lg">
-            <p>Anda Yakin Akan Submit Tracer ?</p>
+            <p>Anda Yakin Akan Menyimpan Data Tracer ?</p>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>

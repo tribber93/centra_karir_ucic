@@ -1,181 +1,249 @@
 @extends('layouts.user_admin')
-@section('judul', 'Admin Dashboard')
+@section('judul', 'Kelola Tracer')
 @section('konten')
 
-    {{-- <div class="padding">
-        <div class="box p-4">
-            <h4>Kelola Tracer</h4>
-            <div class="container mt-5">
-                <form id="dynamicForm">
-                    <div id="questionsContainer">
-                        <!-- Container for dynamic questions -->
-                    </div>
-                    <button type="button" class="btn btn-primary" id="addQuestionBtn">Tambah Pertanyaan</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+
+{{-- @include('admin.sidebar') --}}
+    <div class="modal fade" id="questionModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="questionModalLabel">Edit Pertanyaan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <!-- Form pertanyaan akan ditampilkan di sini -->
+          <form id="modalQuestionForm">
+            <div class="form-group">
+                <label for="modalQuestionInput">Pertanyaan:</label>
+                <input type="text" class="form-control" id="modalQuestionInput" name="modalQuestionInput">
+            </div>
+            <div class="form-group">
+                <label for="modalQuestionOptions">Options:</label>
+                <div id="optionsContainer">
+                    <!-- Dynamic input elements for options will be added here -->
+                </div>
+            </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="saveModalQuestion()" ui-toggle-class="fade-left" ui-target="#animate">Update</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ############ PAGE START-->
+<div class="padding">
+    <div class="box">
+        <div class="box-header">
+            <h2>Tracer Create</h2>
+            <small>Tracer Studi Pertanyaan</small>
+        </div>
+        <div class="box-body">
+
+            {{-- <div class="m-2 float-right">
+
+                <button type="button" class="btn btn-primary" onclick="addNewQuestion()">
+                    <span><i class="fa fa-plus"></i> </span> Tambah Pertanyaan
+                </button>
+            </div>
+            <form id="questionForm">
+                <!-- Form pertanyaan dan opsi akan ditambahkan secara dinamis di sini -->
+                <button type="button" id="simpanPertanyaan" class="btn btn-success mt-3" onclick="saveQuestions()">Simpan Semua
+                    Pertanyaan</button>
+            </form>
+
+
+        </div> --}}
+        {{-- table--}}
+
+
+
+        {{-- a --}}
+     <div class="ml-3">
+        <table class="table row form-input" data-target="tracerCheckbox">
+            <thead class="thead-lightform-group">
+                <tr class="text-center align-items-center">
+                    <th class="col-7">MENURUT ANDA SEBERAPA BESAR PENEKANAN PADA METODE PEMBELAJARAN DI BAWAH INI DILAKSANAKAN DI PROGRAM STUDI ANDA?</th>
+                    <th>TIDAK SAMA SEKALI</th>
+                    <th>KURANG</th>
+                    <th>CUKUP BESAR</th>
+                    <th>BESAR</th>
+                    <th>SANGAT BESAR</th>
+                </tr>
+            </thead>
+            <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
+
+            <tbody>
+                @php
+                    $no = 1;
+                @endphp
+                @foreach ($tracer as $data)
+                    @if (empty(json_decode($data['opsi'])))
+                    <tr>
+                        <td class="col-12">
+                            <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
+
+                            <label onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}')" style="font-weight: 600">{{$data['pertanyaan']}}</label>
+                            <div class="form-group row form-input" data-target="tracerCheckbox">
+                                <input type="text" name="{{ $data['id'] }}" class="additional-input3 form-control" id="{{ $data['id'] }}" onchange="handleInputChange(this)">
+                            </div>
+                        </td>
+                    </tr>
+                    @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
+                        <tr>
+
+                            <td onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}')" class="col-12 text-lowercase" >
+                                <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
+                                {{ $data['pertanyaan'] }}
+                            </td>
+                            @foreach (json_decode($data['opsi']) as $opsi)
+                             <td class="" style="padding-right: 40px">
+                                    <label class="md-check">
+                                        <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class="" onclick="handleRadioClick(this)">
+                                        <i class="blue"></i>
+                                    </label>
+                                </td>
+                            @endforeach
+                        </tr>
+                    @else
+                        <tr>
+                            <td colspan="6">
+                                <div class="option form-input " data-target="tracerCheckbox">
+                                    <div id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum terisi</div>
+
+                                    <h6 onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}')"  class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
+                                    {{-- <br> --}}
+
+                                    @foreach (json_decode($data['opsi']) as $opsi)
+                                        <div class="form-group row pl-3">
+                                            <label class="md-check text-lowercase">
+                                                <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" onclick="handleRadioClick(this)">
+
+                                                <i class="blue"></i>
+                                                {{ $opsi }}
+
+                                            </label>
+                                        </div>
+
+
+                                        @endforeach
+                                        <input type="text" class="form-control" name="{{ $data['id'] }}-text" class="form-control" style="display: none;" id="{{$data['id']}}-text" value="Tulis jika lainnya">
+
+
+                                </div>
+                            </td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+     </div>
+     <div class="box-body">
+
+        <div class="m-2 float-right">
+
+            <button type="button" class="btn btn-primary" onclick="addNewQuestion()">
+                <span><i class="fa fa-plus"></i> </span> Tambah Pertanyaan
+            </button>
+        </div>
+        <form id="questionForm">
+            <!-- Form pertanyaan dan opsi akan ditambahkan secara dinamis di sini -->
+            <button type="button" id="simpanPertanyaan" class="btn btn-success mt-3" onclick="saveQuestions()">Simpan Semua
+                Pertanyaan</button>
+        </form>
+
+
     </div>
 
-    <script>
-        var questionCount = 0;
+            <script>
+            function editQuestion(id, pertanyaan, opsi) {
+            $('#modalQuestionInput').val(pertanyaan);
 
-        function addQuestion() {
-            var questionsContainer = document.getElementById('questionsContainer');
-            var questionDiv = document.createElement('div');
-            questionDiv.className = 'mb-4';
+            // Parse the options from the string
+            const optionsArray = JSON.parse(opsi);
 
-            var questionInput = document.createElement('input');
-            questionInput.type = 'text';
-            questionInput.className = 'form-control';
-            questionInput.name = 'questions[' + questionCount + '][text]';
-            questionInput.placeholder = 'Pertanyaan';
-            questionInput.required = true;
+            // Clear any existing input elements
+            $('#optionsContainer').empty();
 
-            var typeSelect = document.createElement('select');
-            typeSelect.className = 'form-control';
-            typeSelect.name = 'questions[' + questionCount + '][type]';
-            typeSelect.required = true;
+            // Create input elements for each option
+            optionsArray.forEach((option, index) => {
+                const optionId = `option-${index}`;
+                const inputElement = `<input type="text" class="form-control" id="${optionId}" name="${optionId}" value="${option}" />`;
+                $('#optionsContainer').append(inputElement);
+            });
 
-            var types = ['text', 'dropdown', 'checkbox', 'radio', 'skala_tabel'];
-            for (var i = 0; i < types.length; i++) {
-                var option = document.createElement('option');
-                option.value = types[i];
-                option.textContent = types[i];
-                typeSelect.appendChild(option);
+            $('#questionModal').modal('show');
+
+            // Save the question ID in a data attribute of the modal Save button
+            $('#questionModal .btn-primary').attr('data-question-id', id);
+        }
+            // Function to save the edited question
+            function saveModalQuestion() {
+              const questionId = $('#questionModal .btn-primary').attr('data-question-id');
+              const editedQuestion = $('#modalQuestionInput').val();
+
+              // Perform the necessary action to save the edited question (e.g., using AJAX to update the database)
+              // For demonstration purposes, I'll just update the question text in the table directly.
+              $(`#pertanyaan-${questionId}`).text(editedQuestion);
+
+              $('#questionModal').modal('hide');
             }
 
-            typeSelect.addEventListener('change', function() {
-                var selectedType = this.value;
-                var addOptionBtn = questionDiv.querySelector('.add-option-btn');
+            // update
 
-                if (selectedType === 'skala_tabel' || selectedType === 'text') {
-                    if (addOptionBtn) {
-                        addOptionBtn.style.display = 'none';
-                    }
-                } else {
-                    if (addOptionBtn) {
-                        addOptionBtn.style.display = 'block';
-                    }
-                }
-            });
+            function saveModalQuestion() {
+        const questionId = $('#questionModal .btn-primary').attr('data-question-id');
+        const editedQuestion = $('#modalQuestionInput').val();
+        const editedOptions = [];
 
-            var addOptionBtn = document.createElement('button');
-            addOptionBtn.type = 'button';
-            addOptionBtn.className = 'btn btn-secondary add-option-btn';
-            addOptionBtn.textContent = 'Tambah Opsi';
-            addOptionBtn.style.display = 'none';
-            addOptionBtn.addEventListener('click', function() {
-                addOption(this);
-            });
-
-            questionDiv.appendChild(questionInput);
-            questionDiv.appendChild(typeSelect);
-            questionDiv.appendChild(addOptionBtn);
-
-            questionsContainer.appendChild(questionDiv);
-
-            questionCount++;
-        }
-
-        function addOption(button) {
-            var optionsContainer = document.createElement('div');
-            optionsContainer.className = 'mt-3';
-
-            var optionInput = document.createElement('input');
-            optionInput.type = 'text';
-            optionInput.className = 'form-control';
-            optionInput.name = 'questions[' + questionCount + '][options][]';
-            optionInput.placeholder = 'Opsi';
-            optionInput.required = true;
-
-            var removeOptionBtn = document.createElement('button');
-            removeOptionBtn.type = 'button';
-            removeOptionBtn.className = 'btn btn-sm btn-danger mt-2';
-            removeOptionBtn.textContent = 'Hapus Opsi';
-            removeOptionBtn.addEventListener('click', function() {
-                optionsContainer.removeChild(optionInput);
-                optionsContainer.removeChild(removeOptionBtn);
-            });
-
-            optionsContainer.appendChild(optionInput);
-            optionsContainer.appendChild(removeOptionBtn);
-
-            button.parentElement.appendChild(optionsContainer);
-        }
-
-        document.getElementById('addQuestionBtn').addEventListener('click', function() {
-            addQuestion();
-        });
-    </script> --}}
-
-    <div class="padding">
-        <div class="box p-4">
-            <h4>Kelola Tracer</h4>
-            <div class="container mt-5">
-                <form id="dynamicForm">
-                    <div class="form-group">
-                        <label for="question">Pertanyaan</label>
-                        <input type="text" class="form-control" id="question" name="question" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Tipe</label>
-                        <select class="form-control" id="type" name="type" required>
-                            <option value="text">Text</option>
-                            <option value="dropdown">Dropdown</option>
-                            <option value="checkbox">Checkbox</option>
-                            <option value="radio">Radio Button</option>
-                            <option value="skala_tabel">Skala Tabel</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="optionsContainer">
-                        <!-- Container for dynamic options -->
-                    </div>
-                    <button type="button" class="btn btn-primary" style="display: none" id="addOptionBtn">Tambah
-                        Opsi</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <script>
-        // Function to add a new option field
-        function addOption() {
-            var optionsContainer = document.getElementById('optionsContainer');
-            var optionInput = document.createElement('input');
-            optionInput.setAttribute('type', 'text');
-            optionInput.setAttribute('class', 'form-control');
-            optionInput.setAttribute('name', 'options[]');
-            optionInput.setAttribute('required', true);
-
-            var optionDiv = document.createElement('div');
-            optionDiv.setAttribute('class', 'form-group');
-            optionDiv.appendChild(optionInput);
-
-            optionsContainer.appendChild(optionDiv);
-        }
-
-        // Add event listener to the "type" select element
-        document.getElementById('type').addEventListener('change', function() {
-            var type = this.value;
-            var optionsContainer = document.getElementById('optionsContainer');
-            var addOptionBtn = document.getElementById('addOptionBtn'); // Get the "Tambah Opsi" button element
-
-            optionsContainer.innerHTML = ''; // Clear previous options
-
-            if (type === 'dropdown' || type === 'checkbox' || type === 'radio' || type === 'skala_tabel') {
-                addOptionBtn.style.display = ''; // Show the "Tambah Opsi" button
-            } else {
-                addOptionBtn.style.display = 'none'; // Hide the "Tambah Opsi" button
-            }
+        // Retrieve the edited options from the input elements
+        $('#optionsContainer input').each(function() {
+            editedOptions.push($(this).val());
         });
 
-        // Add event listener to the "Tambah Opsi" button
-        document.getElementById('addOptionBtn').addEventListener('click', function() {
-            addOption();
-        });
-    </script>
+        // Create an object to send as JSON data in the AJAX request
+        const updatedData = {
+            id: questionId,
+            pertanyaan: editedQuestion,
+            opsi: JSON.stringify(editedOptions),
+        };
 
-@endsection
+        // Perform the AJAX request
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': getCsrfToken()
+        }
+    });
+    function getCsrfToken() {
+    return $('meta[name="csrf-token"]').attr('content');
+}
+        $.ajax({
+            url: '/admin/update_question', // Replace with the actual endpoint to update the question on the server
+            type: 'POST', // Use the appropriate HTTP method (POST, PUT, or PATCH) depending on your server implementation
+            data: updatedData,
+            success: function(response) {
+                // Update the table with the new data
+                const updatedQuestion = response.pertanyaan;
+                $(`#pertanyaan-${questionId}`).text(updatedQuestion);
+
+                // Hide the modal after successful update
+                $('#questionModal').modal('hide');
+                location.reload();
+            },
+            error: function(error) {
+                // Handle errors if necessary
+                console.error(error);
+            },
+        });
+    }
+          </script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
+        @endsection

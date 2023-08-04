@@ -111,19 +111,19 @@
                         <div ui-jp="plot" ui-refresh="app.setting.color"
                             ui-options="
                       [
-                        { data: [[1, 3.6], [2, 3.5], [3, 6], [4, 4], [5, 4.3], [6, 3.5], [7, 3.6]], 
-                          points: { show: true, radius: 0}, 
+                        { data: [[1, 3.6], [2, 3.5], [3, 6], [4, 4], [5, 4.3], [6, 3.5], [7, 3.6]],
+                          points: { show: true, radius: 0},
                             splines: { show: true, tension: 0.45, lineWidth: 2, fill: 1 }
                         },
-                        { data: [[1, 3], [2, 2.6], [3, 3.2], [4, 3], [5, 3.5], [6, 3], [7, 3.5]], 
-                          points: { show: true, radius: 0}, 
-                            splines: { show: true, tension: 0.45, lineWidth: 2, fill: 1 } 
+                        { data: [[1, 3], [2, 2.6], [3, 3.2], [4, 3], [5, 3.5], [6, 3], [7, 3.5]],
+                          points: { show: true, radius: 0},
+                            splines: { show: true, tension: 0.45, lineWidth: 2, fill: 1 }
                         },
-                        { data: [[1, 2], [2, 1.6], [3, 2.4], [4, 2.1], [5, 1.7], [6, 1.5], [7, 1.7]], 
-                          points: { show: true, radius: 0}, 
-                            splines: { show: true, tension: 0.45, lineWidth: 2, fill: 1 } 
+                        { data: [[1, 2], [2, 1.6], [3, 2.4], [4, 2.1], [5, 1.7], [6, 1.5], [7, 1.7]],
+                          points: { show: true, radius: 0},
+                            splines: { show: true, tension: 0.45, lineWidth: 2, fill: 1 }
                         }
-                      ], 
+                      ],
                       {
                         colors: ['#a88add','#0cc2aa','#fcc100'],
                         series: { shadowSize: 3 },
@@ -181,7 +181,7 @@
                             ui-options="
                       [
                         { data: [[1, 2], [2, 4], [3, 5], [4, 7], [5, 6], [6, 4], [7, 5], [8, 4]] }
-                      ], 
+                      ],
                       {
                         bars: { show: true, fill: true,  barWidth: 0.25, lineWidth: 1, fillColor: { colors: [{ opacity: 0.8 }, { opacity: 1}] }, align: 'center' },
                         colors: ['#a88add'],
@@ -240,7 +240,7 @@
                             ui-options="
                       [
                         { data: [[3, 1], [2, 2], [6, 3], [5, 4], [7, 5]] }
-                      ], 
+                      ],
                       {
                         bars: { horizontal: true, show: true, fill: true,  barWidth: 0.3, lineWidth: 1, fillColor: { colors: [{ opacity: 0.8 }, { opacity: 1}] }, align: 'center' },
                         colors: ['#0cc2aa'],

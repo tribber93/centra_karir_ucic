@@ -44,7 +44,7 @@ function handleRadioClick(radio) {
     var textInput = document.getElementById(`${id}-text`);
 
     if (textInput) {
-        if (value === 'LAINNYA') {
+        if (value === 'lainnya') {
             // Jika pilihan "LAINNYA" dipilih, set nilai value ke "0"
             // textInput.value = '0';
             // Tampilkan input type text untuk pilihan "LAINNYA"
