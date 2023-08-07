@@ -6,7 +6,7 @@
     <div class="padding">
         <h3>Tambah Informasi</h3>
         <br>
-        <form class="p-x-xs" method="POST" action="/admin/kelola_informasi/tambah">
+        <form class="p-x-xs" method="POST" action="/admin/kelola_informasi/tambah" enctype="multipart/form-data">
             @csrf <!-- Add this line to include CSRF token -->
 
             <div class="form-group row">
@@ -30,6 +30,16 @@
                 <label class="col-sm-2 form-control-label">Kategori</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="kategori">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label">Gambar</label>
+                <div class="col-sm-10">
+                    <div class="form-file">
+                        <input type="file" name="gambarInformasi" value="" required>
+                        <button class="btn white">Select file ...</button>
+                    </div>
                 </div>
             </div>
 

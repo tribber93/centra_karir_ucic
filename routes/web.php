@@ -72,7 +72,14 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/kelola_berita/tambah', function () {
         return view('admin.tambah_berita');
     });
-    Route::get('/admin/kelola_alumni', [AdminController::class, 'kelolaAlumni'])->name('admin-kelola-alumni');
+    Route::get('/admin/kelola_alumni', [AdminController::class, 'kelolaAlumni']);
+    Route::get('/admin/kelola_alumni/tambah', function () {
+        return view('admin.tambah_alumni');
+    });
+    Route::post('/admin/kelola_alumni/tambah', [AdminController::class, 'tambahAlumni']);
+    Route::get('/admin/kelola_alumni/edit/{id}', [AdminController::class, 'editAlumni']);
+    Route::post('/admin/kelola_alumni/edit/{id}', [AdminController::class, 'updateAlumni']);
+    Route::get('/admin/kelola_alumni/delete/{id}', [AdminController::class, 'deleteAlumni']);
     Route::get('/admin/forum_diskusi', function () {
         return view('admin.forum_diskusi');
     });
@@ -87,20 +94,10 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
         return view('diskusi.detail_diskusi');
     });
 });
-
-
-
-Route::get('/detail', function () {
-    return view('berita.detail');
+Route::get('/admin/forum_diskusi/id', function () {
+    return view('diskusi.detail_diskusi');
 });
-
-
-Route::get('/berita', function () {
-    return view('berita.berita');
-});
-Route::get('/detail-berita', function () {
-    return view('berita.detail');
-});
+Route::get('/detail-informasi/{id}', [HomeController::class, 'show']);
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
@@ -111,9 +108,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
 });
 // Route::auth();
 
-// Route::get('/login', function () {
-//     return view('login')->name('login');
-// });
+Route::get('/informasi', [HomeController::class, 'portal'])->name('semua_informasi');
 
 Route::get('/input_user', function () {
     User::create([

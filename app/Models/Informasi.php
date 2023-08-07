@@ -10,7 +10,7 @@ class Informasi extends Model
     protected $table = 'informasi';
     protected $fillable = [
         // Kolom yang dapat diisi
-        'penulis', 'jenis_informasi', 'judul', 'konten', 'kategori'
+        'penulis', 'jenis_informasi', 'judul', 'konten', 'kategori', 'gambar'
     ];
     use HasFactory;
 }

@@ -55,7 +55,7 @@
 
 
 
-    @include('homepage.berita')
+    @include('homepage.informasi')
     @include('homepage.testimoni')
     @include('homepage.sponsor')
     <!--Footer start-->

@@ -7,7 +7,8 @@
                     <div class="col-lg-2 col-md-2 col-12">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="/"><img src="assets/images/cic.png" alt="#" width="150"></a>
+                            <a href="/"><img src="{{ asset('assets/images/cic.png') }}" alt="#"
+                                    width="150"></a>
                         </div>
                         <!-- End Logo -->
                         <div class="mobile-nav"></div>
@@ -18,9 +19,9 @@
                             <nav class="navigation ">
                                 <ul class="nav menu">
                                     <li class="active"><a href="#home">Home</a></li>
-                                    <li><a href="#info">News</a></li>
-                                    <li><a href="#testimonials">Testimonials</a></li>
-                                    <li><a href="#footer">Contact Us</a></li>
+                                    <li><a href="#info">Informasi</a></li>
+                                    <li><a href="#testimonials">Kata Alumni</a></li>
+                                    <li><a href="#footer">Kontak Kami</a></li>
 
                                 </ul>
                             </nav>

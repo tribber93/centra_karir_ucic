@@ -27,11 +27,21 @@ class  HomeController extends Controller
         $kata_alumni = Testimoni::with('alumni')->get();
         //data berita
         $informasi = Informasi::take(3)->get();
+        // foreach ($informasi as $info) {
+        //     dd($info->konten);
+        // }
+
 
         // data partner
         // data alamat Kampuss
         // dd($kata_alumni);
         return view('homepage.home', compact('informasi', 'kata_alumni'));
+    }
+    public function portal()
+    {
+        $semua_informasi = Informasi::all();
+
+        return view('informasi.portal', compact('semua_informasi'));
     }
 
 
@@ -150,7 +160,8 @@ class  HomeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $informasi = Informasi::find($id);
+        return view('informasi.detail', compact('informasi'));
     }
 
     /**

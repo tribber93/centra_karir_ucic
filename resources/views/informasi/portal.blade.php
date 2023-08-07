@@ -49,31 +49,50 @@
     {{-- Konten --}}
     <section id="berita" class="overflow-hidden">
         <div class="container-fluid judul2 mb-5 px-5">
-            <h1><span style="color: #0352a1">|</span> Portal Berita</h1>
+            <h1><span style="color: #0352a1">|</span> Portal Informasi</h1>
         </div>
         <div class="row justify-content-around">
             <div class="col-12 col-md-7">
                 <div class="row d-flex justify-content-start">
-                    <div class="col-md-6 col-12">
-                        <!-- Single Blog -->
-                        @include('components.card_berita')
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <!-- Single Blog -->
-                        @include('components.card_berita')
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <!-- Single Blog -->
-                        @include('components.card_berita')
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <!-- Single Blog -->
-                        @include('components.card_berita')
-                        <!-- End Single Blog -->
-                    </div>
+                    @foreach ($semua_informasi as $info)
+                        <div class="col-md-6 col-12">
+                            <!-- Single Blog -->
+                            <div class="post-container">
+                                <div class="post">
+                                    <div class="header_post">
+                                        <img src="{{ asset($info->gambar) }}" alt="">
+                                    </div>
+                                    <a href="/detail-informasi/{{ $info->id }}">
+                                        <div class="body_post">
+                                            <div class="post_content">
+
+                                                <h1>{{ $info->judul }}</h1>
+                                                <p>{!! Str::limit($info->konten, 75) !!}</p>
+
+                                                <div class="container_infos row">
+                                                    <div class="col-5">
+                                                        <div class="postedBy">
+                                                            <span>Published</span>
+                                                            {{ $info->created_at->diffForHumans() }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <div class="postedBy">
+                                                            <span>Jenis</span>
+                                                            {{ $info->jenis_informasi }}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <!-- End Single Blog -->
+                        </div>
+                    @endforEach
                 </div>
 
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">

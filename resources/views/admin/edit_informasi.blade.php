@@ -1,12 +1,13 @@
 @extends('layouts.user_admin')
-@section('judul', 'Tambah Berita')
+@section('judul', 'Edit Informasi')
 @section('konten')
     <!-- ############ PAGE START-->
 
     <div class="padding">
         <h3>Edit Informasi</h3>
         <br>
-        <form class="p-x-xs" method="POST" action="/admin/kelola_informasi/edit/{{ $informasi->id }}">
+        <form class="p-x-xs" method="POST" action="/admin/kelola_informasi/edit/{{ $informasi->id }}"
+            enctype="multipart/form-data">
             @csrf <!-- Add this line to include CSRF token -->
 
 
@@ -34,6 +35,16 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label">Gambar</label>
+                <div class="col-sm-10">
+                    <div class="form-file">
+                        <input type="file" name="gambarInformasi" value="{{ $informasi->gambar }}">
+                        <button class="btn white">Select file ...</button>
+                    </div>
+                </div>
+            </div>
+            {{-- {{ $informasi->gambar }} --}}
             <div class="box m-b-md">
                 <textarea ui-jp="summernote" name="konten" id="summernote">
                     {{ $informasi->konten }}

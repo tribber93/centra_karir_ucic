@@ -4,7 +4,7 @@
             <div class="col-lg-4 col-md-4 col-12">
 
                 <div class="footer-logo mb-3">
-                    <img src="assets/images/cic.png" width="250" alt="#">
+                    <img src="{{ asset('assets/images/cic.png') }}" width="250" alt="#">
                 </div>
                 <div class="contact-info">
                     <p>

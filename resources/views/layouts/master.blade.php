@@ -25,30 +25,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="css/magnific-popup.min.css">
+    <link rel="stylesheet"
+        href="{{ asset('css/magnific-popup.min.css') }}>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet"
+        href="{{ asset('css/font-awesome.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/LineIcons.css">
+    <link rel="stylesheet" href="{{ asset('css/LineIcons.css') }}">
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="css/owl-carousel.css">
+    <link rel="stylesheet" href="{{ asset('css/owl-carousel.css') }}">
     <!-- Slicknav -->
-    <link rel="stylesheet" href="css/slicknav.min.css">
+    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}">
     <!-- Animat -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"> --}}
 
     {{-- Slider --}}
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <!-- Appkit StyleSheet -->
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
     <!-- Color CSS -->
-    <link rel="stylesheet" href="css/color/color1.css">
+    <link rel="stylesheet" href="{{ asset('css/color/color1.css') }}">
     <!--<link rel="stylesheet" href="css/color/color2.css">-->
     <!--<link rel="stylesheet" href="css/color/color3.css">-->
     <!--<link rel="stylesheet" href="css/color/color4.css">-->
@@ -62,11 +64,11 @@
 
 
     <!-- Jquery -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-migrate-3.0.0.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <!-- Popper JS -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
     <!-- Bootstrap JS -->
     {{-- <script src="js/bootstrap.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -76,38 +78,38 @@
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
     </script>
     <!-- Color JS -->
-    <script src="js/colors.js"></script>
+    <script src="{{ asset('js/colors.js') }}"></script>
     <!-- Steller JS -->
-    <script src="js/steller.js"></script>
+    <script src="{{ asset('js/steller.js') }}"></script>
     <!-- Slicknav JS -->
-    <script src="js/slicknav.min.js"></script>
+    <script src="{{ asset('js/slicknav.min.js') }}"></script>
     <!-- Owl Carousel JS -->
-    <script src="js/owl-carousel.js"></script>
+    <script src="{{ asset('js/owl-carousel.js') }}"></script>
     <!-- Magnific Popup JS -->
-    <script src="js/magnific-popup.js"></script>
+    <script src="{{ asset('js/magnific-popup.js') }}"></script>
     <!-- Waypoints JS -->
-    <script src="js/waypoints.min.js"></script>
+    <script src="{{ asset('js/waypoints.min.js') }}"></script>
     <!-- Wow Min JS -->
-    <script src="js/wow.min.js"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
     <!-- Jquery Counterup JS -->
-    <script src="js/jquery-counterup.min.js"></script>
+    <script src="{{ asset('js/jquery-counterup.min.js') }}"></script>
     <!-- Ytplayer JS -->
-    <script src="js/ytplayer.min.js"></script>
+    <script src="{{ asset('js/ytplayer.min.js') }}"></script>
     <!-- ScrollUp JS -->
-    <script src="js/scrollup.js"></script>
+    <script src="{{ asset('js/scrollup.js') }}"></script>
     <!-- Onepage Nav JS -->
-    <script src="js/onepage-nav.min.js"></script>
+    <script src="{{ asset('js/onepage-nav.min.js') }}"></script>
     <!-- Easing JS -->
-    <script src="js/easing.js"></script>
+    <script src="{{ asset('js/easing.js') }}"></script>
     <!-- Active JS -->
-    <script src="js/active.js"></script>
+    <script src="{{ asset('js/active.js') }}"></script>
     {{-- Slider --}}
     {{-- <script src="js/main.js"></script> --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const tracerLink = document.querySelector('.tracer-link a');
 
-            tracerLink.addEventListener('click', function (event) {
+            tracerLink.addEventListener('click', function(event) {
                 const userLoggedIn = true;
 
                 if (!userLoggedIn) {

@@ -13,7 +13,8 @@ class InformasiController extends Controller
      */
     public function index()
     {
-        $infos = Informasi::all(); // Ambil semua data berita dari model
+        $infos = Informasi::all();
+        // dd($infos->konten); // Ambil semua data berita dari model
         return view('admin.kelola_informasi', compact('infos'));
     }
 
@@ -30,11 +31,15 @@ class InformasiController extends Controller
      */
     public function store(Request $request)
     {
+        $file_nm = $request->gambarInformasi->getClientOriginalName();
+        $image = $request->gambarInformasi->move('thumbnail', $file_nm);
+
         $penulis = Auth::user()->name;
         $judul = $request->judul;
         $jenis_informasi = $request->jenis_informasi;
         $kategori = $request->kategori;
         $konten = $request->konten;
+        $gambar = $image;
 
         $simpan = Informasi::create([
             'penulis' => $penulis,
@@ -42,6 +47,7 @@ class InformasiController extends Controller
             'jenis_informasi' => $jenis_informasi,
             'kategori' => $kategori,
             'konten' => $konten,
+            'gambar' => $gambar
         ]);
 
         $simpan->save();
@@ -69,13 +75,22 @@ class InformasiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+
+
         $informasi = Informasi::find($id);
         $informasi->judul = $request->judul;
         $informasi->jenis_informasi = $request->jenis_informasi;
         $informasi->kategori = $request->kategori;
         $informasi->konten = $request->konten;
+        if ($request->gambar == null) {
+            $informasi->gambar = $informasi->gambar;
+        } else {
+            $file_nm = $request->gambarInformasi->getClientOriginalName();
+            $image = $request->gambarInformasi->move('thumbnail', $file_nm);
+            $informasi->gambar = $image;
+        }
         $informasi->save();
 
         return redirect()->back()->with('success', 'Informasi berhasil diubah');

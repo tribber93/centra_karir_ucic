@@ -81,7 +81,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
                                 <span class="avatar w-32">
-                                    <img src="{{ asset('admin/css/images/a0.jpg')}}" alt="...">
+                                    <img src="{{ asset('admin/css/images/a0.jpg') }}" alt="...">
                                     <i class="on b-white bottom"></i>
                                 </span>
                             </a>
@@ -92,7 +92,8 @@
                                 class="button">
                                 {{ Auth::user()->name }}
                             </button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
                             </form>
                         </li>
@@ -131,6 +132,8 @@
     </div>
 
     <!-- build:js scripts/app.html.js -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <!-- jQuery -->
     <script src="{{ asset('admin/libs/jquery/jquery/dist/jquery.js') }}"></script>
     <!-- Bootstrap -->
@@ -161,7 +164,7 @@
     <!-- ajax -->
     <script src="{{ asset('admin/libs/jquery/jquery-pjax/jquery.pjax.js') }}"></script>
     <script src="{{ asset('admin/scripts/ajax.js') }}"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+
     {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
 
     <!-- endbuild -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Alumni;
 use App\Models\HasilTracer;
 use App\Models\Questions;
@@ -37,8 +38,65 @@ class AdminController extends Controller
     }
     public function kelolaAlumni()
     {
-        //
-        return view('admin.kelola_alumni');
+        $alumni = Alumni::all();
+        return view('admin.kelola_alumni', compact('alumni'));
+    }
+    public function tambahAlumni(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->nama;
+        $user->email = $request->email;
+        $user->role = 'alumni';
+        $user->password = bcrypt($request->nim);
+
+        $user->save();
+
+        $alumni = new Alumni();
+        $alumni->user_id = $user->id;
+        $alumni->nama_alumni = ucwords($request->nama);
+        $alumni->nim = $request->nim;
+        $alumni->angkatan = $request->angkatan;
+        $alumni->jenjang = $request->jenjang;
+        $alumni->prodi = $request->prodi;
+        $alumni->tahun_lulus = $request->tahun_lulus;
+
+        $alumni->save();
+
+        return redirect()->back()->with('success', 'Informasi berhasil ditambahkan');
+    }
+    public function editAlumni($id)
+    {
+        $alumni = alumni::find($id);
+        $user = User::find($alumni->user_id);
+
+        return view('admin.edit_alumni', compact('alumni', 'user'));
+    }
+    public function updateAlumni(Request $request, $id)
+    {
+        $alumni = alumni::find($id);
+        $user = User::find($alumni->user_id);
+
+        $alumni->nama_alumni = ucwords($request->nama);
+        $user->email = $request->email;
+        $alumni->nim = $request->nim;
+        $alumni->angkatan = $request->angkatan;
+        $alumni->jenjang = $request->jenjang;
+        $alumni->prodi = $request->prodi;
+        $alumni->tahun_lulus = $request->tahun_lulus;
+
+        $user->save();
+        $alumni->save();
+
+        return redirect()->back()->with('success', 'Informasi berhasil diubah');
+    }
+    public function deleteAlumni($id)
+    {
+        $alumni = Alumni::find($id);
+        $user = User::find($alumni->user_id);
+        $user->delete();
+        $alumni->delete();
+
+        return redirect()->back()->with('success', 'Informasi berhasil dihapus');
     }
 
     /**
@@ -115,7 +173,6 @@ class AdminController extends Controller
 
         // Return the updated question as a JSON response
         return response()->json(['pertanyaan' => $pertanyaan]);
-
     }
 
     /**
@@ -134,7 +191,7 @@ class AdminController extends Controller
         //     $alumni = $hasilTracer->alumni;
         // $dataPertanyaan=   HasilTracer::get();
 
-//         $kolom = [];
+        //         $kolom = [];
 
         // Iterasi data pertanyaan
         // foreach ($tracer as $data) {
@@ -148,19 +205,19 @@ class AdminController extends Controller
         //     ];
         // }
 
-//         // Gunakan $kolom dalam pembuatan tabel, misalnya menggunakan plugin DataTables
-//         // Contoh menggunakan DataTables
-//         // return datatables()->of($data)
-//         //     ->addColumn($kolom) // Tambahkan kolom dinamis berdasarkan pertanyaan
-// //         //     ->toJson();
-// $hasilTracer = HasilTracer::find(72);
-// dd($hasilTracer->getOriginal());
+        //         // Gunakan $kolom dalam pembuatan tabel, misalnya menggunakan plugin DataTables
+        //         // Contoh menggunakan DataTables
+        //         // return datatables()->of($data)
+        //         //     ->addColumn($kolom) // Tambahkan kolom dinamis berdasarkan pertanyaan
+        // //         //     ->toJson();
+        // $hasilTracer = HasilTracer::find(72);
+        // dd($hasilTracer->getOriginal());
         //     // Now you can access the attributes of the 'alumni' model
         //     // For example, if 'alumni' has a 'name' attribute, you can access it like this:
         //     $alumniName = $alumni->nama_alumni;
         //     dd($alumniName);
         // }
-            // dd(count($tracer));
+        // dd(count($tracer));
 
 
         return view("admin.hasil_tracer", compact('tracer', 'pertanyaan', 'c'));
