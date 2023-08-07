@@ -54,7 +54,7 @@
                             </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/kelola_berita') }}">
+                        <a href="{{ url('admin/kelola_informasi') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-newspaper-o"></i>
                             </span>

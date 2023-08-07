@@ -18,7 +18,6 @@
                             <nav class="navigation ">
                                 <ul class="nav menu">
                                     <li class="active"><a href="#home">Home</a></li>
-                                    <li class="tracer-link"><a href="#">Tracer</a></li>
                                     <li><a href="#info">News</a></li>
                                     <li><a href="#testimonials">Testimonials</a></li>
                                     <li><a href="#footer">Contact Us</a></li>
