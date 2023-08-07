@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin-index');
     Route::get('/admin/kelola_tracer', [AdminController::class, 'kelolaTracer'])->name('admin-kelola_tracer');
     // simpan tracer data pertanyaan
-    // Route::post('/admin/kelola_tracer', [AdminController::class, 'simpanTracer']);
+    Route::post('/admin/kelola_tracer', [AdminController::class, 'simpanTracer']);
 
     Route::get('/admin/kelola_berita', [AdminController::class, 'kelolaBerita'])->name('admin-kelola-berita');
     Route::get('/admin/get_question_by_id', [AdminController::class, 'getQuestionById']);

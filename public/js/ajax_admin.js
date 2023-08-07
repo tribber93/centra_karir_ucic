@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 function addNewQuestion() {
-    // Check if a question has already been added
     const questionForms = document.getElementById('questionForm').querySelectorAll('.form-group');
     if (questionForms.length > 0  && questionForms.length == 1 ) {
         alert('Anda hanya dapat menambah satu pertanyaan.');
@@ -20,7 +19,7 @@ function addNewQuestion() {
         return;
     }
     const saveBtn = document.getElementById('ptn');
-    saveBtn.style.display = 'none';
+    // saveBtn.style.display = 'none';
 
     questionCount++;
     const questionForm = document.getElementById('questionForm');
@@ -142,19 +141,14 @@ function saveQuestions() {
       optionType: optionType,
       options: options,
     };
-    // modals alert
-    // $('#m-a-a').modal('show');
 
     questionsData.push(questionData);
 
     });
-//   });
-//   simpan ke database
 
 function getCsrfToken() {
     return $('meta[name="csrf-token"]').attr('content');
 }
-// const jsonData = JSON.stringify(questionsData);
 
 
 // end
@@ -164,7 +158,6 @@ $.ajaxSetup({
     }
 });
 console.log(questionsData);
-// document.getElementById('btnSubmitTracer').addEventListener('click', function () {
     $.ajax({
         url: '/admin/kelola_tracer',
         type: 'POST',
@@ -216,30 +209,24 @@ function getCountData() {
             'X-CSRF-Token': getCsrfToken()
         },
         success: function (response) {
-            // Update the status on success
             if (response.status === 'OK') {
-                // Show the modal
 
                 $('#pp').html(`Fungsi ini dilakukan untuk memback-up data tracer alumni yang sudah >3 bulan dan terdapat <strong>${response.data.count} data</strong>`);
 
                 $('#m-a-f').modal('show');
 
-                // Display the count in the modal
                 console.log(response.data.count);
 
-                // Perform any additional actions here if needed
                 console.log(response.status);
             }
         },
         error: function (xhr, status, error) {
-            // Handle error if necessary
             alert('An error occurred during the backup process.');
         }
     });
 }
 $(document).ready(function () {
     $('.btn-backup').on('click', function () {
-        // Make the AJAX request to the '/backup' route
         $.ajax({
             type: 'GET',
             url: '/admin/backup',
@@ -249,7 +236,6 @@ $(document).ready(function () {
                 'X-CSRF-Token': getCsrfToken()
             },
             success: function (response) {
-                // Update the status on success
 
                 if (response.status === 'OK') {
                     $('#m-a-G').modal('show');
@@ -263,98 +249,9 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                // Handle error if necessary
                 alert('An error occurred during the backup process.');
             }
         });
     });
 });
-
-// fungsi edit dong
-// function showModalQuestionsById(questionId) {
-//     $.ajax({
-//       url: '/admin/get_question_by_id',
-//       type: 'GET',
-//       data: { id: questionId },
-//       dataType: 'json',
-//       success: function (response) {
-//         if (response.status === 'success') {
-//           // Populate the modal with the question details
-//           const questionData = response.data;
-
-//           const modalQuestionForm = document.getElementById('modalQuestionForm');
-//           modalQuestionForm.innerHTML = '';
-
-//           const questionDiv = document.createElement('div');
-//           questionDiv.classList.add('form-group');
-
-//           const questionLabel = document.createElement('label');
-//           questionLabel.textContent = `Pertanyaan ${questionId}:`;
-//           questionDiv.appendChild(questionLabel);
-
-//           const questionInput = document.createElement('input');
-//           questionInput.type = 'text';
-//           questionInput.classList.add('form-control');
-//           questionInput.name = `question${questionId}`;
-//           questionInput.value = questionData.question;
-//           questionDiv.appendChild(questionInput);
-
-//           const optionTypeLabel = document.createElement('label');
-//           optionTypeLabel.textContent = 'Jenis Opsi:';
-//           questionDiv.appendChild(optionTypeLabel);
-
-//           const optionTypeSelect = document.createElement('select');
-//           optionTypeSelect.classList.add('form-control');
-//           optionTypeSelect.name = `optionType${questionId}`;
-//           optionTypeSelect.onchange = () => updateOptions(questionId);
-//           questionDiv.appendChild(optionTypeSelect);
-
-//           const optionTypeRadio = document.createElement('option');
-//           optionTypeRadio.value = 'radio';
-//           optionTypeRadio.textContent = 'Radio Button';
-//           optionTypeSelect.appendChild(optionTypeRadio);
-
-//           const optionTypeSelectOption = document.createElement('option');
-//           optionTypeSelectOption.value = 'select';
-//           optionTypeSelectOption.textContent = 'Select';
-//           optionTypeSelect.appendChild(optionTypeSelectOption);
-
-//           const optionsContainer = document.createElement('div');
-//           optionsContainer.id = `optionsContainer${questionId}`;
-//           questionDiv.appendChild(optionsContainer);
-
-//           const addOptionBtn = document.createElement('button');
-//           addOptionBtn.type = 'button';
-//           addOptionBtn.classList.add('btn', 'btn-primary', 'mt-2');
-//           addOptionBtn.textContent = 'Tambah Opsi';
-//           addOptionBtn.onclick = () => addOption(questionId);
-//           questionDiv.appendChild(addOptionBtn);
-
-//           // Tombol Edit
-//           const editBtn = document.createElement('button');
-//           editBtn.type = 'button';
-//           editBtn.classList.add('btn', 'btn-primary', 'ml-2');
-//           editBtn.textContent = 'Edit';
-//           editBtn.onclick = () => editModalQuestion(questionId);
-//           questionDiv.appendChild(editBtn);
-
-//           modalQuestionForm.appendChild(questionDiv);
-
-//           // Isi jenis opsi dan opsi jika ada data pertanyaan
-//           optionTypeSelect.value = questionData.optionType;
-//           updateOptions(questionId);
-
-//           // Tampilkan modal
-//           $('#questionModal').modal('show');
-//         } else {
-//           // Handle error here if needed
-//           console.error('Error fetching question data');
-//         }
-//       },
-//       error: function (xhr, status, error) {
-//         // Handle error here if needed
-//         console.error('Error fetching question data:', error);
-//       }
-//     });
-//   }
 
