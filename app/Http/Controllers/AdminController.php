@@ -9,7 +9,6 @@ use App\Models\Questions;
 use Illuminate\Http\Request;
 use App\Exports\TracerExport;
 use App\Models\Histori;
-use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 // ...

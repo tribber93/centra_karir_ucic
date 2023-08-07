@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('alumni/forum_diskusi') }}">
+                        <a href="{{ url('/alumni/forum_diskusi') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-comments-o"></i>
                             </span>

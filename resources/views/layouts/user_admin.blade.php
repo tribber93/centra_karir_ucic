@@ -87,12 +87,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
-                                <span class="avatar w-32">
-                                    <img src="{{ asset('admin/css/images/a0.jpg') }}" alt="...">
-                                    <i class="on b-white bottom"></i>
-                                </span>
-                            </a>
+
                             <div ui-include="'../views/blocks/dropdown.user.html'"></div>
                         </li>
 
