@@ -11,7 +11,7 @@ class Questions extends Model
     protected $table = 'tracer';
     protected $fillable = [
         // Kolom yang dapat diisi
-        'opsi', 'pertanyaan'
+        'opsi', 'pertanyaan', 'status'
     ];
 
     protected $casts = [

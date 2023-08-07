@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     Route::get('/alumni/dashboard', [AlumniController::class, 'dashboard'])->name('dashboard-alumni');
     Route::get('/alumni/tracer_study', [AlumniController::class, 'tracer_study'])->name('tracer-study');
     Route::get('/alumni/forum_diskusi', [AlumniController::class, 'forum'])->name('forum-diskusi');
+    Route::get('/alumni/getPertanyaanFromServer', [AlumniController::class, 'getPertanyaanById']);
     // Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
     // Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
     // Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
@@ -68,6 +69,7 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/allTracer',[AdminController::class, 'showTracer']);
     Route::post('/admin/update_question',[AdminController::class, 'updateQuestion'])->name('admin-update-q');
     Route::get('/admin/hasil_tracer',[AdminController::class, 'showTracer']);
+    Route::get('/admin/delete_question/{id}',[AdminController::class, 'deleteTracerQuestion']);
 
 
 

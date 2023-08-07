@@ -27,42 +27,37 @@
                 <table class="table m-b-none" ui-jp="footable" data-filter="#filter" data-page-size="5">
                     <thead>
                         <tr>
-                            <th data-toggle="true">
-                                Alumni
-                            </th>
-                            <th>
-                                Pertanyaan
-                            </th>
-                            <th data-hide="phone,tablet">
-                                Jawaban
-                            </th>
-                            <th data-hide="phone,tablet" data-name="Date Of Birth">
-                                Tanggal Tracer
-                            </th>
-                            <th data-hide="phone">
-                                Aksi
-                            </th>
+                            <th>Alumni</th>
+                            <!-- Loop through the questions and generate table headers -->
+                            <th>nama P</th>
+                            <th>Posisi</th>
+                            <th>Mulai</th>
+                           @foreach ($pertanyaan as $b )
+                           <th>{{$b->pertanyaan}}</th>
+
+                           @endforeach
+                            <th data-hide="phone,tablet" data-name="Date Of Birth">Tanggal Tracer</th>
+                            <th data-hide="phone">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($tracer as $data )
+                       <tr>
+                        <td>{{ $data->alumni->nama_alumni }}</td>
+                        @foreach($data->jawaban as $index => $item)
+                        @if($index >= 0)
+                            <!-- Kode yang ingin diulang untuk setiap $item dalam koleksi -->
+                          <td> {{ $item['value'] }}</td>
+                        @endif
+                    @endforeach
+                        {{-- @foreach($data->jawaban as $jawaban)
+                        <td>
 
-                        <tr>
-                            <td>Isidra</td>
-        <td><a href></a>
-            Jawaban: {{ json_encode($data->jawaban) }}
-        </td>
-                            <td>Traffic Court Referee</td>
-                            <td data-value="78025368997">22 Jun 1972</td>
-                            <td>
-                                <button type="button" class="btn btn-info"><span><i class="fa fa-edit"></i></span>
-                                    Edit</button>
-                                <button type="button" class="btn btn-danger"><span><i class="fa fa-remove"></i></span>
-                                    Hapus</button>
+                                {{ $jawaban['value'] }}
                             </td>
+                            @endforeach --}}
                         </tr>
-
-                        @endforeach
+                            @endforeach
 
 
                     </tbody>

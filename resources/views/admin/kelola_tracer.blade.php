@@ -13,23 +13,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
+                <p>
+                    <label class="md-check" id="statusQuestion">
+                        <input type="checkbox" class="has-value" onclick="updateStatusText()">
+                        <i class="indigo"></i>
+                        <span></span>
+                    </label>
+                </p>
                 <!-- Form pertanyaan akan ditampilkan di sini -->
                 <form id="modalQuestionForm">
                     <div class="form-group">
-                        <label for="modalQuestionInput">Pertanyaan:</label>
+                        <label for="modalQuestionInput">Pertanyaan: </label>
+
                         <input type="text" class="form-control" id="modalQuestionInput" name="modalQuestionInput">
                     </div>
-                    <div class="form-group">
-                        <label for="modalQuestionOptions">Options:</label>
-                        <div id="optionsContainer">
-                            <!-- Dynamic input elements for options will be added here -->
-                        </div>
+                    <div id="optionsContainer">
+                        <!-- Dynamic input elements for options will be added here -->
                     </div>
                 </form>
+
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="hapus()">Delete</button>
                 <button type="button" class="btn btn-primary" onclick="saveModalQuestion()" ui-toggle-class="fade-left"
                     ui-target="#animate">Update</button>
 
@@ -96,8 +105,20 @@
                                 class="error">Belum Terisi</span>
 
                             <label
-                                onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}')"
-                                style="font-weight: 600">{{$data['pertanyaan']}}</label>
+                                onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{$data['status']}}')"
+                                style="font-weight: 600">{{$data['pertanyaan']}}
+                                @if($data['status'] == 'none')
+                                <p style="font-size: 10px; color:red">
+                                    Disabled
+                                </p>
+                                      @else
+                                      <p style="font-size: 10px; color:green">
+                                        {{$data['status']}}
+                                    </p>
+
+                                    @endif
+                              </label>
+
                             <div class="form-group row form-input" data-target="tracerCheckbox">
                                 <input type="text" name="{{ $data['id'] }}" class="additional-input3 form-control"
                                     id="{{ $data['id'] }}" onchange="handleInputChange(this)">
@@ -107,15 +128,28 @@
                     @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
                     <tr>
 
-                        <td onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}')"
+                        <td onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{$data['status']}}')"
                             class="col-12 text-lowercase">
                             <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"
                                 class="error">Belum Terisi</span>
                             {{ $data['pertanyaan'] }}
+                            @if($data['status'] == 'none')
+                            <p style="font-size: 10px; color:red">
+                                Disabled
+                            </p>
+                                  @else
+                                  <p style="font-size: 10px; color:green">
+                                    {{$data['status']}}
+                                </p>
+
+                                @endif
                         </td>
                         @foreach (json_decode($data['opsi']) as $opsi)
+
                         <td class="" style="padding-right: 40px">
+
                             <label class="md-check">
+
                                 <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class=""
                                     onclick="handleRadioClick(this)">
                                 <i class="blue"></i>
@@ -123,15 +157,27 @@
                         </td>
                         @endforeach
                     </tr>
+
                     @else
+
                     <tr>
                         <td colspan="6">
                             <div class="option form-input " data-target="tracerCheckbox">
                                 <div id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"
                                     class="error">Belum terisi</div>
 
-                                <h6 onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}')"
+                                <h6 onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{$data['status']}}')"
                                     class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
+                                    @if($data['status'] == 'none')
+                                    <p style="font-size: 10px; color:red">
+                                        Disabled
+                                    </p>
+                                          @else
+                                          <p style="font-size: 10px; color:green">
+                                            {{$data['status']}}
+                                        </p>
+
+                                        @endif
                                 {{-- <br> --}}
 
                                 @foreach (json_decode($data['opsi']) as $opsi)
@@ -180,27 +226,65 @@
         </div>
 
         <script>
-            function editQuestion(id, pertanyaan, opsi) {
-            $('#modalQuestionInput').val(pertanyaan);
+             function hapus() {
+        const questionId = $('#questionModal .btn-primary').attr('data-question-id');
 
-            // Parse the options from the string
-            const optionsArray = JSON.parse(opsi);
+        function getCsrfToken() {
+    return $('meta[name="csrf-token"]').attr('content');
+}
+        $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': getCsrfToken()
+                    }
+                });
 
-            // Clear any existing input elements
-            $('#optionsContainer').empty();
+                $.ajax({
+                    url: `/admin/delete_question/${questionId}`, // Replace with the actual endpoint to delete the question on the server
+                    type: 'GET', // Use the appropriate HTTP method (DELETE) to delete the question
+                    success: function(response) {
+                        // If the deletion is successful, hide the modal and refresh the page
+                        $('#questionModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function(error) {
+                        // Handle errors if necessary
+                        console.error(error);
+                    },
+                });
+    }
+             function editQuestion(id, pertanyaan, opsi, status) {
+        $('#modalQuestionInput').val(pertanyaan);
 
-            // Create input elements for each option
-            optionsArray.forEach((option, index) => {
-                const optionId = `option-${index}`;
-                const inputElement = `<input type="text" class="form-control" id="${optionId}" name="${optionId}" value="${option}" />`;
-                $('#optionsContainer').append(inputElement);
-            });
+        // Parse the options from the string
+        const optionsArray = JSON.parse(opsi);
 
-            $('#questionModal').modal('show');
+        // Clear any existing input elements
+        $('#optionsContainer').empty();
 
-            // Save the question ID in a data attribute of the modal Save button
-            $('#questionModal .btn-primary').attr('data-question-id', id);
-        }
+        // Create input elements for each option
+        optionsArray.forEach((option, index) => {
+            const optionId = `option-${index}`;
+            const inputElement = `<input type="text" class="form-control" id="${optionId}" name="${optionId}" value="${option}" />`;
+            $('#optionsContainer').append(inputElement);
+        });
+
+        // Set the status checkbox based on the 'status' value
+        const statusCheckbox = $('#statusQuestion input');
+        statusCheckbox.prop('checked', status !== 'none');
+
+        // Display "Aktif" or "Status Publish" text depending on the checkbox status
+        const statusText = $('#statusQuestion span');
+        statusText.text(status === 'none' ? 'aktfikan' : 'Aktif');
+        statusCheckbox.on('click', function () {
+            const isChecked = $(this).prop('checked');
+            const newText = isChecked ? 'Aktif' : 'tracer Diasbeld';
+            statusText.text(newText);
+        });
+        $('#questionModal').modal('show');
+
+        // Save the question ID in a data attribute of the modal Save button
+        $('#questionModal .btn-primary').attr('data-question-id', id);
+    }
             // Function to save the edited question
             function saveModalQuestion() {
               const questionId = $('#questionModal .btn-primary').attr('data-question-id');
@@ -219,6 +303,8 @@
         const questionId = $('#questionModal .btn-primary').attr('data-question-id');
         const editedQuestion = $('#modalQuestionInput').val();
         const editedOptions = [];
+        const statusCheckbox = $('#statusQuestion input');
+        const status = statusCheckbox.prop('checked') ? 'publish' : 'none'
 
         // Retrieve the edited options from the input elements
         $('#optionsContainer input').each(function() {
@@ -230,6 +316,7 @@
             id: questionId,
             pertanyaan: editedQuestion,
             opsi: JSON.stringify(editedOptions),
+            status: status,
         };
 
         // Perform the AJAX request
@@ -259,6 +346,7 @@
                 console.error(error);
             },
         });
+
     }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>

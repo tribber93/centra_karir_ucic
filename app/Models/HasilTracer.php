@@ -19,12 +19,12 @@ class HasilTracer extends Model
     ];
     public function alumni()
     {
-        return $this->belongsTo(Alumni::class);
+        return $this->belongsTo(Alumni::class, 'alumni_id');
     }
-    public function tracer()
-    {
-        return $this->belongsTo(Tracer::class);
-    }
+    // public function tracer()
+    // {
+    //     return $this->belongsTo(Tracer::class);
+    // }
 
 
 

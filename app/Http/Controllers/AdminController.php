@@ -25,7 +25,7 @@ class AdminController extends Controller
     {
         //
         // $tracer = Questions::all();
-        $tracer = Questions::get();
+        $tracer = Questions::all();
 
         // dd($tracer);
         return view('admin.kelola_tracer', compact('tracer'));
@@ -50,27 +50,49 @@ class AdminController extends Controller
 
         foreach ($questionsData as $questionData) {
             $pertanyaan = $questionData['question'];
-            $optionsList = $questionData['options'];
+
+            // Check if the 'options' key exists in the $questionData array
+            if (array_key_exists('options', $questionData)) {
+                $optionsList = $questionData['options'];
+            } else {
+                // If 'options' key is not present or undefined, set it as an empty array
+                $optionsList = [];
+            }
+
+            // Handle the case where the optionsList is an empty array
+            if (empty($optionsList)) {
+                // Convert an empty array to the string "[]"
+                $optionsString = "[]";
+            } else {
+                // Convert the array to a JSON-encoded string
+                $optionsString = json_encode($optionsList);
+            }
 
             // Simpan data ke database untuk setiap pertanyaan
             $tracer = new Questions();
             $tracer->pertanyaan = $pertanyaan;
-            $tracer->opsi = json_encode($optionsList);
+            $tracer->opsi = $optionsString;
             $tracer->status = 'none';
             $tracer->save();
         }
 
-        // print_r($optionsList);
+        return response()->json(['status' => 'success']);
+    }
+    public function deleteTracerQuestion($id)
+    {
+        try {
+            // Find the question by ID
+            $question = Questions::findOrFail($id);
 
-        return response()->json(['message' => 'Pertanyaan berhasil disimpan.']);
+            // Delete the question
+            $question->delete();
 
-
-
-
-
-
-        // dd($questionsData);
-
+            // Return a success response
+            return response()->json(['message' => 'Question deleted successfully'], 200);
+        } catch (\Exception $e) {
+            // If an error occurs during deletion, return an error response
+            return response()->json(['message' => 'Failed to delete question'], 500);
+        }
     }
     public function updateQuestion(Request $request)
     {
@@ -79,6 +101,7 @@ class AdminController extends Controller
         $questionId = $request->input('id');
         $pertanyaan = $request->input('pertanyaan');
         $opsi = $request->input('opsi');
+        $status = $request->input('status');
 
         $jsonStringFromDatabase = trim($opsi, '"');
 
@@ -86,6 +109,7 @@ class AdminController extends Controller
         $question = Questions::find($questionId);
         $question->pertanyaan = $pertanyaan;
         $question->opsi = $jsonStringFromDatabase;
+        $question->status = $status;
         $question->update();
         // dd($jsonStringFromDatabase);
 
@@ -100,20 +124,46 @@ class AdminController extends Controller
     public function showTracer()
     {
         //
-        $tracers = HasilTracer::with('alumni')->get();
+        $tracer = HasilTracer::with('alumni')->get();
+        // $tracerr = HasilTracer::with('alumni')->find(73);
+        // $pertanyaan  = Questions::where('status', 'publish')->find(73);
+        $pertanyaan  = Questions::where('status', 'publish')->get()->reverse();
+        $c = ['sa', 'su', 'se', 'se', 'so'];
+        // foreach ($tracer as $hasilTracer) {
+        //     // Access the 'alumni' relation on the current $hasilTracer model
+        //     $alumni = $hasilTracer->alumni;
+        // $dataPertanyaan=   HasilTracer::get();
 
-        // Loop through the collection and access the 'jawaban' attribute as an array for each model
-        $tracers = HasilTracer::with('alumni', 'tracer')->get();
+//         $kolom = [];
 
-    // Loop through the collection and access the 'jawaban' and 'tracer' attributes
-    foreach ($tracers as $tracer) {
-        $jawabanArray = $tracer->jawaban;
-        $tracerData = $tracer->tracer;
+        // Iterasi data pertanyaan
+        // foreach ($tracer as $data) {
+        //     // Ambil nama pertanyaan
+        //     $pertanyaan = $data['pertanyaan'];
 
-        // Now you have access to both the 'jawaban' array and the related 'Tracer' model data
-        dd($jawabanArray, $tracerData);
-    }
-        // return view("admin.hasil_tracer", compact('tracer'));
+        //     // Tambahkan kolom baru ke dalam array
+        //     $kolom[] = [
+        //         'data' => $pertanyaan, // Nama kolom sesuai pertanyaan
+        //         'title' => $pertanyaan, // Judul kolom di tabel
+        //     ];
+        // }
+
+//         // Gunakan $kolom dalam pembuatan tabel, misalnya menggunakan plugin DataTables
+//         // Contoh menggunakan DataTables
+//         // return datatables()->of($data)
+//         //     ->addColumn($kolom) // Tambahkan kolom dinamis berdasarkan pertanyaan
+// //         //     ->toJson();
+// $hasilTracer = HasilTracer::find(72);
+// dd($hasilTracer->getOriginal());
+        //     // Now you can access the attributes of the 'alumni' model
+        //     // For example, if 'alumni' has a 'name' attribute, you can access it like this:
+        //     $alumniName = $alumni->nama_alumni;
+        //     dd($alumniName);
+        // }
+            // dd(count($tracer));
+
+
+        return view("admin.hasil_tracer", compact('tracer', 'pertanyaan', 'c'));
     }
     public function getQuestionById(Request $request)
     {

@@ -40,8 +40,8 @@ function addNewQuestion() {
     optionTypeSelect.appendChild(optionTypeRadio);
 
     const optionTypeSelectOption = document.createElement('option');
-    optionTypeSelectOption.value = 'select';
-    optionTypeSelectOption.textContent = 'Select';
+    optionTypeSelectOption.value = 'text';
+    optionTypeSelectOption.textContent = 'text';
     optionTypeSelect.appendChild(optionTypeSelectOption);
 
     const optionsContainer = document.createElement('div');
@@ -164,7 +164,7 @@ console.log(questionsData);
             if (response.status === 'success') {
                 console.log('Data berhasil disimpan ke tabel.');
 
-                // location.reload();
+                location.reload();
             }
 
         },
