@@ -198,6 +198,77 @@ function deleteQuestion(questionNumber) {
   const questionDiv = document.getElementById(`questionForm`).querySelector(`div.form-group:nth-child(${questionNumber})`);
   questionForm.removeChild(questionDiv);
 }
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': getCsrfToken()
+    }
+});
+function getCsrfToken() {
+    return $('meta[name="csrf-token"]').attr('content');
+}
+function getCountData() {
+    $.ajax({
+        type: 'GET',
+        url: '/admin/getCountData',
+        dataType: 'json',
+        data: { 'data': 'ok' },
+        headers: {
+            'X-CSRF-Token': getCsrfToken()
+        },
+        success: function (response) {
+            // Update the status on success
+            if (response.status === 'OK') {
+                // Show the modal
+
+                $('#pp').html(`Fungsi ini dilakukan untuk memback-up data tracer alumni yang sudah >3 bulan dan terdapat <strong>${response.data.count} data</strong>`);
+
+                $('#m-a-f').modal('show');
+
+                // Display the count in the modal
+                console.log(response.data.count);
+
+                // Perform any additional actions here if needed
+                console.log(response.status);
+            }
+        },
+        error: function (xhr, status, error) {
+            // Handle error if necessary
+            alert('An error occurred during the backup process.');
+        }
+    });
+}
+$(document).ready(function () {
+    $('.btn-backup').on('click', function () {
+        // Make the AJAX request to the '/backup' route
+        $.ajax({
+            type: 'GET',
+            url: '/admin/backup',
+            dataType: 'json',
+            data:{'data' : "ok"},
+            headers: {
+                'X-CSRF-Token': getCsrfToken()
+            },
+            success: function (response) {
+                // Update the status on success
+
+                if (response.status === 'OK') {
+                    $('#m-a-G').modal('show');
+                    $('#backupCount').text(response.data.count);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                    console.log(response.status);
+                location.reload();
+
+                }
+            },
+            error: function (xhr, status, error) {
+                // Handle error if necessary
+                alert('An error occurred during the backup process.');
+            }
+        });
+    });
+});
 
 // fungsi edit dong
 // function showModalQuestionsById(questionId) {

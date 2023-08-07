@@ -28,6 +28,7 @@ class TracerExport implements FromCollection, WithHeadings
                 'Nama Alumni' => $dataTracer->alumni['nama_alumni'],
                 'NIM' => $dataTracer->alumni['nim'],
                 'tanggal_tracer' => date_format($dataTracer->created_at,'d M Y'),
+                'tracer_ke' => $dataTracer->alumni['total_tracer'],
             ];
             // dd($rowData);
 
@@ -57,6 +58,7 @@ class TracerExport implements FromCollection, WithHeadings
             'Nama Alumni',
             'NIM',
             'tanggal_tracer',
+            'tracer_ke',
         ];
 
         // Tambahkan judul pertanyaan lainnya ke dalam heading

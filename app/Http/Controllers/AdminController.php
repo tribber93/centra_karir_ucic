@@ -7,8 +7,10 @@ use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use App\Exports\TracerExport;
+use App\Models\Histori;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Carbon\Carbon;
 // ...
 class AdminController extends Controller
 {
@@ -18,7 +20,12 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return view('admin.dashboard_admin');
+        $tracer = HasilTracer::count();
+        $tracer_lama = Histori::count();
+        $user = User::count();
+        $h_user  = $user -1;
+    //    dd($h_user);
+        return view('admin.dashboard_admin', compact('tracer', 'tracer_lama', 'h_user'));
     }
 
     /**
@@ -187,6 +194,67 @@ class AdminController extends Controller
         //     dd($alumniName);
         // }
             // dd(count($tracer));
+
+
+    }
+    public function getCount(Request $request)
+    {
+
+        // sleep(2);
+        if ($request->input('data') == "ok") {
+            # code...
+            $currentDate = Carbon::now();
+            $threeMonthsAgo = $currentDate->subMonths(3);
+            // $tracer = HasilTracer::get();
+            // 7 agustus
+            $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
+            $backupCount = 0;
+            foreach($tracer as $i){
+
+
+                $backupCount++;
+
+
+            }
+            return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
+
+        }
+
+
+
+
+    }
+    public function backup(Request $request)
+    {
+
+        // sleep(2);
+        if ($request->input('data') == "ok") {
+            # code...
+            $currentDate = Carbon::now();
+            $threeMonthsAgo = $currentDate->subMonths(3);
+            // $tracer = HasilTracer::get();
+            // 7 agustus
+            $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
+            $backupCount = 0;
+            foreach($tracer as $i){
+                Histori::create([
+                    'alumni_id' => $i->alumni_id,
+                    'jawaban' => $i->jawaban,
+                    'created_at' => $i->created_at,
+                    'updated_at' => $i->updated_at,
+                    // Add other attributes to be inserted into the "histori" table if needed.
+                ]);
+
+                $backupCount++;
+
+
+            }
+            HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->delete();
+            return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
+
+        }
+
+
 
 
     }

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\DiskusiController;
 use App\Http\Controllers\InformasiController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     Route::get('/alumni/dashboard', [AlumniController::class, 'dashboard'])->name('dashboard-alumni');
     Route::get('/alumni/tracer_study', [AlumniController::class, 'tracer_study'])->name('tracer-study');
-    Route::get('/alumni/forum_diskusi', [AlumniController::class, 'forum'])->name('forum-diskusi');
     Route::get('/alumni/getPertanyaanFromServer', [AlumniController::class, 'getPertanyaanById']);
     // Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
     // Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
@@ -38,10 +38,13 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     // simpan data tracer bro
     Route::post('/alumni/simpan_tracer', [AlumniController::class, 'simpan_tracer'])->name('simpan-tracer');
 
-    Route::get('/alumni/forum_diskusi/id', function () {
-        return view('diskusi.detail_diskusi');
-    });
+    Route::get('/alumni/forum_diskusi', [DiskusiController::class, 'index']);
+    Route::post('/posting-diskusi', [DiskusiController::class, 'postDiskusi']);
+    // Route::get('/get-diskusi-data', [DiskusiController::class, 'getDiskusi']);
+
     Route::post('/alumni/simpan', [AlumniController::class, 'simpan'])->name('simpan');
+    Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
+    Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
 });
 // Route::post('/alumni/simpan_opsi', [AlumniController::class, 'simpan_opsi'])->name('simpan-opsi');
 
@@ -61,13 +64,15 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
         return view('admin.tambah_informasi');
     });
     Route::get('/export/tracer', [AdminController::class, 'export']);
+    Route::get('/admin/backup', [AdminController::class, 'backup']);
+    Route::get('/admin/getCountData', [AdminController::class, 'getCount']);
 
 
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin-index');
     Route::get('/admin/kelola_tracer', [AdminController::class, 'kelolaTracer'])->name('admin-kelola_tracer');
     // simpan tracer data pertanyaan
-    Route::post('/admin/kelola_tracer', [AdminController::class, 'simpanTracer']);
+    // Route::post('/admin/kelola_tracer', [AdminController::class, 'simpanTracer']);
 
     Route::get('/admin/kelola_berita', [AdminController::class, 'kelolaBerita'])->name('admin-kelola-berita');
     Route::get('/admin/get_question_by_id', [AdminController::class, 'getQuestionById']);

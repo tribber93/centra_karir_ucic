@@ -82,5 +82,22 @@
         </div>
     </div>
     <!-- ############ PAGE END-->
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                // Konfigurasi Summernote lainnya...
+            });
+
+            // Handle form submission
+            $('form').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var kontenValue = $('#summernote').summernote('code'); // Get Summernote content
+                $('textarea[name="isi"]').val(kontenValue); // Set the textarea value
+                console.log(kontenValue); // View content in console
+                this.submit(); // Submit the form
+            });
+        });
+    </script>
 
 @endsection

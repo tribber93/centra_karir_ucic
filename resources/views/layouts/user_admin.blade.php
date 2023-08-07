@@ -53,16 +53,7 @@
 
                     <!-- navbar collapse -->
                     <div class="collapse navbar-collapse" id="collapse">
-                        <!-- link and dropdown -->
-                        <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href data-toggle="dropdown">
-                                    <i class="fa fa-fw fa-plus text-muted"></i>
-                                    <span>New</span>
-                                </a>
-                                <div ui-include="'../views/blocks/dropdown.new.html'"></div>
-                            </li>
-                        </ul>
+
 
                         <div ui-include="'../views/blocks/navbar.form.html'"></div>
                         <!-- / -->
@@ -79,23 +70,26 @@
                             <div ui-include="'../views/blocks/dropdown.notification.html'"></div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
-                                <span class="avatar w-32">
-                                    <img src="{{ asset('admin/css/images/a0.jpg')}}" alt="...">
-                                    <i class="on b-white bottom"></i>
-                                </span>
-                            </a>
+                            <div class="col-sm-2 text-sm-right">
+
+                                <div class="btn-group dropdown">
+                                    <span class="avatar w-32 " >
+                                        <img class="dropdown-toggle" data-toggle="dropdown" src="{{ asset('admin/css/images/a0.jpg')}}" alt="...">
+                                        <i class="on b-white bottom"></i>
+                                    </span>
+                                    <button class="btn white btn-sm dropdown-toggle" data-toggle="dropdown"></button>
+                                    <div class="dropdown-menu dropdown-menu-scale pull-right">
+                                        <a class="dropdown-item" href>{{Auth::user()->name}}</a>
+                                        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item" href>Logout</a>
+                                        <form style=" opacity: 0;  pointer-events: none;" id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <div ui-include="'../views/blocks/dropdown.user.html'"></div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="button">
-                                {{ Auth::user()->name }}
-                            </button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
+
                         <li class="nav-item hidden-md-up">
                             <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
                                 <i class="material-icons">&#xe5d4;</i>

@@ -6,7 +6,7 @@
             <a class="navbar-brand">
                 <div ui-include="'../assets/images/logo.svg'"></div>
                 <img src="../assets/images/logo.png" alt="." class="hide">
-                <span class="hidden-folded inline">Flatkit</span>
+                <span class="hidden-folded inline">Sentra Karir</span>
             </a>
             <!-- / brand -->
         </div>
@@ -15,7 +15,7 @@
 
                 <ul class="nav" ui-nav>
                     <li class="nav-header hidden-folded">
-                        <small class="text-muted">Main</small>
+                        <small class="text-muted">Menu</small>
                     </li>
 
                     <li>
@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/kelola_tracer') }}">
+                        <a href="/admin/kelola_tracer">
                             <span class="nav-icon">
                                 <i class="fa fa-graduation-cap"></i>
                             </span>
@@ -72,19 +72,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="b-t">
-            <div class="nav-fold">
-                <a href="profile.html">
-                    <span class="pull-left">
-                        <img src="../assets/images/a0.jpg" alt="..." class="w-40 img-circle">
-                    </span>
-                    <span class="clear hidden-folded p-x">
-                        <span class="block _500">Jean Reyes</span>
-                        <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
-                    </span>
-                </a>
-            </div>
-        </div>
+
     </div>
 </div>
 <!-- / -->

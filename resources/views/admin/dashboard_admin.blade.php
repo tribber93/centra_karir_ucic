@@ -6,25 +6,10 @@
     <div class="p-a white lt box-shadow">
         <div class="row">
             <div class="col-sm-6">
-                <h4 class="mb-0 _300">Welcome to Flatkit</h4>
-                <small class="text-muted">Bootstrap <strong>4</strong> Web App Kit with AngularJS</small>
+                <h4 class="mb-0 _300">Sentra Karir</h4>
+                <small class="text-muted">Universitas Catur Insan Cendekia </small>
             </div>
-            <div class="col-sm-6 text-sm-right">
-                <div class="m-y-sm">
-                    <span class="m-r-sm">Start manage:</span>
-                    <div class="btn-group dropdown">
-                        <button class="btn white btn-sm ">Projects</button>
-                        <button class="btn white btn-sm dropdown-toggle" data-toggle="dropdown"></button>
-                        <div class="dropdown-menu dropdown-menu-scale pull-right">
-                            <a class="dropdown-item" href>Members</a>
-                            <a class="dropdown-item" href>Tasks</a>
-                            <a class="dropdown-item" href>Inbox</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item">Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="padding">
@@ -36,9 +21,10 @@
                             <i class="material-icons">&#xe151;</i>
                         </span>
                     </div>
+                    {{-- pp --}}
                     <div class="clear">
-                        <h4 class="m-0 text-lg _300"><a href>125 <span class="text-sm">Emails</span></a></h4>
-                        <small class="text-muted">6 new arrivals.</small>
+                        <h4 class="m-0 text-lg _300"><a href>{{$tracer}} <span class="text-sm">Tracers baru</span></a></h4>
+                        <small class="text-muted">{{$tracer_lama}} Tracer lama</small>
                     </div>
                 </div>
             </div>
@@ -46,12 +32,12 @@
                 <div class="box p-a">
                     <div class="pull-left m-r">
                         <span class="w-48 rounded primary">
-                            <i class="material-icons">&#xe54f;</i>
+                            <i class="material-icons">&#xe8d3;</i>
                         </span>
                     </div>
                     <div class="clear">
-                        <h4 class="m-0 text-lg _300"><a href>40 <span class="text-sm">Projects</span></a></h4>
-                        <small class="text-muted">38 open.</small>
+                        <h4 class="m-0 text-lg _300"><a href>{{$h_user}} <span class="text-sm">User</span></a></h4>
+                        <small class="text-muted">Alumni Data</small>
                     </div>
                 </div>
             </div>
@@ -59,7 +45,8 @@
                 <div class="box p-a">
                     <div class="pull-left m-r">
                         <span class="w-48 rounded warn">
-                            <i class="material-icons">&#xe8d3;</i>
+                            <i class="material-icons">&#xe54f;</i>
+
                         </span>
                     </div>
                     <div class="clear">

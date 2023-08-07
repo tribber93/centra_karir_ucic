@@ -35,7 +35,7 @@
 
             <div class="box m-b-md">
                 <textarea ui-jp="summernote" name="konten" id="summernote">
-                    
+
                 </textarea>
 
             </div>
