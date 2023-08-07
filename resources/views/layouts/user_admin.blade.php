@@ -156,6 +156,7 @@
 
     <script src="{{ asset('admin/scripts/app.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/ajax_admin.js') }}"></script>
 
     <!-- ajax -->
     <script src="{{ asset('admin/libs/jquery/jquery-pjax/jquery.pjax.js') }}"></script>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
@@ -27,6 +28,7 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     Route::get('/alumni/dashboard', [AlumniController::class, 'dashboard'])->name('dashboard-alumni');
     Route::get('/alumni/tracer_study', [AlumniController::class, 'tracer_study'])->name('tracer-study');
     Route::get('/alumni/forum_diskusi', [AlumniController::class, 'forum'])->name('forum-diskusi');
+    Route::get('/alumni/getPertanyaanFromServer', [AlumniController::class, 'getPertanyaanById']);
     // Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
     // Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
     // Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
@@ -36,21 +38,20 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     // simpan data tracer bro
     Route::post('/alumni/simpan_tracer', [AlumniController::class, 'simpan_tracer'])->name('simpan-tracer');
 
-
-    // cut
-
-
-
+    Route::get('/alumni/forum_diskusi/id', function () {
+        return view('diskusi.detail_diskusi');
+    });
     Route::post('/alumni/simpan', [AlumniController::class, 'simpan'])->name('simpan');
 });
 // Route::post('/alumni/simpan_opsi', [AlumniController::class, 'simpan_opsi'])->name('simpan-opsi');
 
-
+Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
+});
 Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
 Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
 
 Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
-    Route::get('/admin/dashboard', [HomeController::class, 'admin'])->name('dashboard-admin');
+    // Route::get('/admin/dashboard', [HomeController::class, 'admin'])->name('dashboard-admin');
     Route::get('/admin/kelola_informasi', [InformasiController::class, 'index']);
     Route::get('/admin/kelola_informasi/edit/{id}', [InformasiController::class, 'edit']);
     Route::post('/admin/kelola_informasi/edit/{id}', [InformasiController::class, 'update']);
@@ -59,6 +60,38 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/kelola_informasi/tambah', function () {
         return view('admin.tambah_informasi');
     });
+
+
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin-index');
+    Route::get('/admin/kelola_tracer', [AdminController::class, 'kelolaTracer'])->name('admin-kelola_tracer');
+    // simpan tracer data pertanyaan
+    Route::post('/admin/kelola_tracer', [AdminController::class, 'simpanTracer']);
+
+    Route::get('/admin/kelola_berita', [AdminController::class, 'kelolaBerita'])->name('admin-kelola-berita');
+    Route::get('/admin/get_question_by_id', [AdminController::class, 'getQuestionById']);
+    Route::get('/admin/kelola_berita/tambah', function () {
+        return view('admin.tambah_berita');
+    });
+    Route::get('/admin/kelola_alumni', [AdminController::class, 'kelolaAlumni'])->name('admin-kelola-alumni');
+    Route::get('/admin/forum_diskusi', function () {
+        return view('admin.forum_diskusi');
+    });
+    Route::get('/admin/allTracer', [AdminController::class, 'showTracer']);
+    Route::post('/admin/update_question', [AdminController::class, 'updateQuestion'])->name('admin-update-q');
+    Route::get('/admin/hasil_tracer', [AdminController::class, 'showTracer']);
+    Route::get('/admin/delete_question/{id}', [AdminController::class, 'deleteTracerQuestion']);
+
+
+
+    Route::get('/admin/forum_diskusi/id', function () {
+        return view('diskusi.detail_diskusi');
+    });
+});
+
+
+
+Route::get('/detail', function () {
+    return view('berita.detail');
 });
 
 
@@ -68,30 +101,6 @@ Route::get('/berita', function () {
 Route::get('/detail-berita', function () {
     return view('berita.detail');
 });
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard_admin');
-});
-Route::get('/admin/kelola_tracer', function () {
-    return view('admin.kelola_tracer');
-});
-
-
-Route::get('/admin/kelola_alumni', function () {
-    return view('admin.kelola_alumni');
-});
-Route::get('/admin/forum_diskusi', function () {
-    return view('admin.forum_diskusi');
-});
-
-
-Route::get('/admin/forum_diskusi/id', function () {
-    return view('diskusi.detail_diskusi');
-});
-
-Route::get('/alumni/forum_diskusi/id', function () {
-    return view('diskusi.detail_diskusi');
-});
-
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');

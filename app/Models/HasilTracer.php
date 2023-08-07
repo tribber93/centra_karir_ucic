@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Event\Tracer\Tracer;
 
 class HasilTracer extends Model
 {
@@ -16,10 +17,14 @@ class HasilTracer extends Model
         // Kolom yang bertipe data JSON
         'jawaban' => 'array',
     ];
-    public function question()
+    public function alumni()
     {
-        return $this->belongsTo(Questions::class, 'tracer_id');
+        return $this->belongsTo(Alumni::class, 'alumni_id');
     }
+    // public function tracer()
+    // {
+    //     return $this->belongsTo(Tracer::class);
+    // }
 
 
 

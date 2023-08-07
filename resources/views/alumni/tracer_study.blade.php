@@ -45,7 +45,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 form-control-label">No. Telepon</label>
                     <div class="col-sm-10">
-                        <input type="text" id="noTelp" name="noTelp" class="form-control" placeholder="{{$alumni->no_telpon}}">
+                        <input type="text" id="noTelp" value="{{$alumni->no_telpon}}" name="noTelp" class="form-control" placeholder="{{$alumni->no_telpon}}">
                     </div>
                 </div>
                 @if ($status_tracer)
@@ -55,7 +55,7 @@
                 <div class="form-group row align-items-center">
                     <label class="col-2 form-control-label" for="tracerCheckbox">Sudah Bekerja?</label>
                     <div class="col-10">
-                        <input type="checkbox" id="tracerCheckbox" checked>
+                        <input type="checkbox" id="tracerCheckbox" onchange="handleInputChange(this)">
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
 
                     <label class="col-sm-2 form-control-label" for="additionalInput1">Nama Perusahaan</label>
                     <div class="col-sm-10">
-                        <input type="text"  class="form-control" id="namaPerusahaan" name="namaPerusahaan">
+                        <input type="text"  class="form-control" id="namaPerusahaan" name="namaPerusahaan" onchange="handleInputChange(this)">
                     </div>
                 </div>
                 <div class="form-group row form-input" data-target="tracerCheckbox">
@@ -72,7 +72,7 @@
 
                     <label class="col-sm-2 form-control-label" for="additionalInput1">Posisi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="posisi" name="posisi">
+                        <input type="text" class="form-control" id="posisi" name="posisi" onchange="handleInputChange(this)">
                     </div>
                 </div>
                 <div class="form-group row form-input" data-target="tracerCheckbox">
@@ -93,7 +93,7 @@
                           close: 'fa fa-remove'
                         }
                       }">
-                        <input type='text' class="form-control" id="mulaiBekerja" name="mulaiBekerja">
+                        <input type='text' class="form-control" id="mulaiBekerja" name="mulaiBekerja" onchange="handleInputChange(this)">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -118,33 +118,34 @@
 
                     <tbody>
                         @foreach ($tracer as $data)
-                            @if (empty(json_decode($data['opsi'])))
+                        @if ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
+                        <tr>
+                            <td class="col-12 text-lowercase" >
+                                <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
+                                {{ $data['pertanyaan'] }}
+                            </td>
+                            @foreach (json_decode($data['opsi']) as $opsi)
+                             <td class="" style="padding-right: 40px">
+                                    <label class="md-check">
+                                        <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class="" onclick="handleRadioClick(this)">
+                                        <i class="blue"></i>
+                                    </label>
+                                </td>
+                            @endforeach
+                        </tr>
+
+                            @elseif (empty(json_decode($data['opsi'])))
                             <tr>
                                 <td class="col-12">
                                     <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
 
-                                    <label style="font-weight: 600">{{$data['pertanyaan']}}</label>
+                                    <label for="{{ $data['id'] }}" style="font-weight: 600">{{ $data['pertanyaan'] }}</label>
                                     <div class="form-group row form-input" data-target="tracerCheckbox">
                                         <input type="text" name="{{ $data['id'] }}" class="additional-input3 form-control" id="{{ $data['id'] }}" onchange="handleInputChange(this)">
                                     </div>
                                 </td>
                             </tr>
-                            @elseif ($data['opsi'] === '["SANGAT BESAR","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
-                                <tr>
-                                    <td class="col-12 text-lowercase" >
-                                        <span id="error-{{ $data['id'] }}" style="display: none;color:red; font-size:12px"  class="error">Belum Terisi</span>
-                                        {{ $data['pertanyaan'] }}
-                                    </td>
-                                    @foreach (json_decode($data['opsi']) as $opsi)
-                                     <td class="" style="padding-right: 40px">
-                                            <label class="md-check">
-                                                <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}" class="" onclick="handleRadioClick(this)">
-                                                <i class="blue"></i>
-                                            </label>
-                                        </td>
-                                    @endforeach
-                                </tr>
-                            @else
+        @else
                                 <tr>
                                     <td colspan="6">
                                         <div class="option form-input " data-target="tracerCheckbox">
@@ -193,7 +194,7 @@
                 <h5 class="modal-title">Hallo {{ Auth::user()->name}}</h5>
             </div>
             <div class="modal-body text-center p-lg">
-            <p>Anda Yakin Akan Submit Tracer ?</p>
+            <p>Anda Yakin Akan Menyimpan Data Tracer ?</p>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>

@@ -11,7 +11,7 @@ class Questions extends Model
     protected $table = 'tracer';
     protected $fillable = [
         // Kolom yang dapat diisi
-        'opsi', 'pertanyaan'
+        'opsi', 'pertanyaan', 'status'
     ];
 
     protected $casts = [
@@ -21,5 +21,9 @@ class Questions extends Model
     public function hasil()
     {
         return $this->belongsTo(HasilTracer::class, 'id');
+    }
+    public function alumni()
+    {
+        return $this->hasMany(Alumni::class);
     }
 }

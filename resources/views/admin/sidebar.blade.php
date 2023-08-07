@@ -46,6 +46,15 @@
                     </li>
                     <li>
                         <a href="{{ url('admin/kelola_informasi') }}">
+                            <a href="{{ url('admin/hasil_tracer') }}">
+                                <span class="nav-icon">
+                                    <i class="fa fa-graduation-cap"></i>
+                                </span>
+                                <span class="nav-text">Hasil Tracer</span>
+                            </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('admin/kelola_berita') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-newspaper-o"></i>
                             </span>

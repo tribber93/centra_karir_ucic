@@ -23,13 +23,17 @@ class AlumniController extends Controller
     public function tracer_study()
     {
         $user_auth = Auth::user()->id;
-        $alumni = Alumni::find($user_auth);
+        $alumni = Alumni::where('user_id', $user_auth)->first();
         // dd($alumni);
         // tracing
-        $tracer = Questions::where('status','publish')->get();
+        $tracer = Questions::where('status', 'publish')
+        ->get();
+        // $tracer = $trace->sortBy(function ($item) {
+        //     return $item->nama_perusahaan ? 0 : 1;
+        // });
         // $jsonPertanyaan = json_encode($tracer);
         // $dataArray = json_decode($jsonPertanyaan, true);
-        // dd($dataArray);
+        // dd($tracer);
 
         // status tracer 0 dan 1 ye:)
         $status_tracer = $alumni->status_tracer;
@@ -60,13 +64,14 @@ class AlumniController extends Controller
         $alumni->posisi = $request->posisi;
         $alumni->mulai_bekerja = $request->mulaiBekerja;
         $alumni->status_tracer = 1;
-        $alumni->no_telpon = $request->noTelp;
-    //   if ($alumni->no_telpon == $request->noTelp) {
-    //     $alumni->no_telpon = $alumni->no_telpon;
-    //   } else {
-
+        $alumni->total_tracer +=1;
+        // $alumni->no_telpon = $request->noTelp;
+   if ($alumni->no_telpon == $request->noTelp) {
+        $alumni->no_telpon = $alumni->no_telpon;
+      } else {
+     $alumni->no_telpon = $request->noTelp;
         # code...
-    //   }
+      }
 
         // Simpan data ke tabel yang diinginkan
         // Misalnya, jika Anda menggunakan Eloquent ORM pada Laravel:
@@ -102,6 +107,20 @@ class AlumniController extends Controller
 
 
         return view('alumni.forum_diskusi');
+
+    }
+    public function getPertanyaanById(Request $request)
+    {
+        //
+
+
+        $id = $request->query('id');
+
+        // Fetch 'pertanyaan' from the 'quiesioner' table based on the 'id'
+        $quiesionerData = Questions::where('id', $id)->first();
+
+        // Return the 'pertanyaan' data as JSON response
+        return response()->json(['pertanyaan' => $quiesionerData->pertanyaan]);
 
     }
 
