@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/kelola_informasi/tambah', function () {
         return view('admin.tambah_informasi');
     });
+    Route::get('/export/tracer', [AdminController::class, 'export']);
+
 
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin-index');

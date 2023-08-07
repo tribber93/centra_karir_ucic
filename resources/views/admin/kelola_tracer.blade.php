@@ -78,7 +78,7 @@
 
         {{-- a --}}
         <div class="ml-3">
-            <table class="table row form-input" data-target="tracerCheckbox">
+            {{-- <table class="table row form-input" data-target="tracerCheckbox">
                 <thead class="thead-lightform-group">
                     <tr class="text-center align-items-center">
                         <th class="col-7">MENURUT ANDA SEBERAPA BESAR PENEKANAN PADA METODE PEMBELAJARAN DI BAWAH INI
@@ -89,7 +89,7 @@
                         <th>BESAR</th>
                         <th>SANGAT BESAR</th>
                     </tr>
-                </thead>
+                </thead> --}}
                 <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu
                     opsi</span>
 
@@ -211,8 +211,8 @@
 
             <div class="m-2 float-right">
 
-                <button type="button" class="btn btn-primary" onclick="addNewQuestion()">
-                    <span><i class="fa fa-plus"></i> </span> Tambah Pertanyaan
+                <button type="button" id="ptn" style="display: none" class="btn btn-primary" onclick="addNewQuestion()">
+                    <span style="display: none"><i class="fa fa-plus"></i> </span> Tambah Pertanyaan
                 </button>
             </div>
             <form id="questionForm">
