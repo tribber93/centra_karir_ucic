@@ -52,14 +52,15 @@
                 <center>  Anda sudah tracer studi pada tanggal {{$tanggal_tracer}}</center>
 
                   @else
-                <div class="form-group row align-items-center">
+
+                  <div class="form-group row align-items-center">
                     <label class="col-2 form-control-label" for="tracerCheckbox">Sudah Bekerja?</label>
                     <div class="col-10">
                         <input type="checkbox" id="tracerCheckbox" onchange="handleInputChange(this)">
                     </div>
                 </div>
 
-                <div class="form-group row form-input" data-target="tracerCheckbox">
+                {{-- <div class="form-group row form-input" data-target="tracerCheckbox">
                     <span id="error-namaPerusahaan"  style="display: none;color:red; font-size:12px"  class="error col-12">Belum Terisi</span>
 
                     <label class="col-sm-2 form-control-label" for="additionalInput1">Nama Perusahaan</label>
@@ -98,13 +99,13 @@
                             <span class="fa fa-calendar"></span>
                         </span>
                     </div>
-                </div>
+                </div> --}}
 
                    {{--  --}}
 
 
                    <table class="table row form-input" data-target="tracerCheckbox">
-                    <thead class="thead-lightform-group">
+                    {{-- <thead class="thead-lightform-group">
                         <tr class="text-center align-items-center">
                             <th class="col-7">MENURUT ANDA SEBERAPA BESAR PENEKANAN PADA METODE PEMBELAJARAN DI BAWAH INI DILAKSANAKAN DI PROGRAM STUDI ANDA?</th>
                             <th>TIDAK SAMA SEKALI</th>
@@ -113,7 +114,7 @@
                             <th>BESAR</th>
                             <th>SANGAT BESAR</th>
                         </tr>
-                    </thead>
+                    </thead> --}}
                     <span class="error-message" id="error-radioGroup2" style="display: none; color: red;">Pilih salah satu opsi</span>
 
                     <tbody>

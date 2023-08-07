@@ -7,7 +7,12 @@ use App\Models\Alumni;
 use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
-
+use App\Exports\TracerExport;
+use App\Models\Histori;
+use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+// ...
 class AdminController extends Controller
 {
     /**
@@ -16,7 +21,12 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return view('admin.dashboard_admin');
+        $tracer = HasilTracer::count();
+        $tracer_lama = Histori::count();
+        $user = User::count();
+        $h_user  = $user -1;
+    //    dd($h_user);
+        return view('admin.dashboard_admin', compact('tracer', 'tracer_lama', 'h_user'));
     }
 
     /**
@@ -182,10 +192,33 @@ class AdminController extends Controller
     {
         //
         $tracer = HasilTracer::with('alumni')->get();
-        // $tracerr = HasilTracer::with('alumni')->find(73);
-        // $pertanyaan  = Questions::where('status', 'publish')->find(73);
-        $pertanyaan  = Questions::where('status', 'publish')->get()->reverse();
-        $c = ['sa', 'su', 'se', 'se', 'so'];
+        $pertanyaan = Questions::where('status', 'publish')->get();
+
+        // foreach ($tracer as $data) {
+        //     // Lakukan foreach pada setiap pertanyaan
+        //     foreach ($pertanyaan as $pertanyaanItem) {
+        //         // Cari jawaban yang sesuai dengan pertanyaan saat ini
+        //         $jawaban = collect($data->jawaban)->where('pertanyaan', $pertanyaanItem->pertanyaan)->first();
+
+        //         // Jika ada jawaban yang sesuai, tampilkan
+        //         if ($jawaban) {
+        //             echo "ID Alumni: " . $data->alumni->id . "<br>";
+        //             echo "Nama Alumni: " . $data->alumni->nama . "<br>";
+        //             echo "Pertanyaan: " . $pertanyaanItem->pertanyaan . "<br>";
+        //             echo "Jawaban: " . $jawaban['value'] . "<br><br>";
+        //         } else {
+        //             // Jika tidak ada jawaban yang sesuai, tampilkan pesan
+        //             echo "ID Alumni: " . $data->alumni->id . "<br>";
+        //             echo "Nama Alumni: " . $data->alumni->nama . "<br>";
+        //             echo "Pertanyaan: " . $pertanyaanItem->pertanyaan . "<br>";
+        //             echo "Jawaban: Tidak ada jawaban <br><br>";
+        //         }
+        //     }
+        // }
+        return view("admin.hasil_tracer", compact('tracer', 'pertanyaan'));
+
+
+
         // foreach ($tracer as $hasilTracer) {
         //     // Access the 'alumni' relation on the current $hasilTracer model
         //     $alumni = $hasilTracer->alumni;
@@ -220,7 +253,67 @@ class AdminController extends Controller
         // dd(count($tracer));
 
 
-        return view("admin.hasil_tracer", compact('tracer', 'pertanyaan', 'c'));
+    }
+    public function getCount(Request $request)
+    {
+
+        // sleep(2);
+        if ($request->input('data') == "ok") {
+            # code...
+            $currentDate = Carbon::now();
+            $threeMonthsAgo = $currentDate->subMonths(3);
+            // $tracer = HasilTracer::get();
+            // 7 agustus
+            $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
+            $backupCount = 0;
+            foreach($tracer as $i){
+
+
+                $backupCount++;
+
+
+            }
+            return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
+
+        }
+
+
+
+
+    }
+    public function backup(Request $request)
+    {
+
+        // sleep(2);
+        if ($request->input('data') == "ok") {
+            # code...
+            $currentDate = Carbon::now();
+            $threeMonthsAgo = $currentDate->subMonths(3);
+            // $tracer = HasilTracer::get();
+            // 7 agustus
+            $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
+            $backupCount = 0;
+            foreach($tracer as $i){
+                Histori::create([
+                    'alumni_id' => $i->alumni_id,
+                    'jawaban' => $i->jawaban,
+                    'created_at' => $i->created_at,
+                    'updated_at' => $i->updated_at,
+                    // Add other attributes to be inserted into the "histori" table if needed.
+                ]);
+
+                $backupCount++;
+
+
+            }
+            HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->delete();
+            return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
+
+        }
+
+
+
+
     }
     public function getQuestionById(Request $request)
     {
@@ -261,5 +354,9 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function export()
+    {
+        return Excel::download(new TracerExport, 'tracer.xlsx');
     }
 }
