@@ -52,7 +52,7 @@
             <div class="nav-fold">
                 <a href="profile.html">
                     <span class="pull-left">
-                        <img src="{{asset('assets/admin/images/a0.jpg')}}" alt="..." class="w-40 img-circle">
+                        <img src="{{ asset('admin/css/images/a0.jpg') }}" alt="..." class="w-40 img-circle">
                     </span>
                     <span class="clear hidden-folded p-x">
                         <span class="block _500">Jean Reyes</span>

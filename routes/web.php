@@ -37,19 +37,17 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     // Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
     // simpan data tracer bro
     Route::post('/alumni/simpan_tracer', [AlumniController::class, 'simpan_tracer'])->name('simpan-tracer');
-
+    // Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
     Route::get('/alumni/forum_diskusi', [DiskusiController::class, 'index']);
-    Route::post('/posting-diskusi', [DiskusiController::class, 'postDiskusi']);
     // Route::get('/get-diskusi-data', [DiskusiController::class, 'getDiskusi']);
 
-    Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
-    Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
     Route::post('/alumni/simpan', [AlumniController::class, 'simpan'])->name('simpan');
 });
+
 // Route::post('/alumni/simpan_opsi', [AlumniController::class, 'simpan_opsi'])->name('simpan-opsi');
 
-Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
-});
+// Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
+// });
 Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
 Route::get('/getPertanyaan', [AlumniController::class, 'getPertanyaan'])->name('tracer-pertanyaan');
 
@@ -67,11 +65,11 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/backup', [AdminController::class, 'backup']);
     Route::get('/admin/getCountData', [AdminController::class, 'getCount']);
     Route::get('/admin/forum_diskusi', [DiskusiController::class, 'index']);
-    Route::post('/posting-diskusi', [DiskusiController::class, 'postDiskusi']);
-    // Route::get('/get-diskusi-data', [DiskusiController::class, 'getDiskusi']);
+    // Route::post('/posting-diskusi', [DiskusiController::class, 'postDiskusi']);
+    // // Route::get('/get-diskusi-data', [DiskusiController::class, 'getDiskusi']);
 
-    Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
-    Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
+    // Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
+    // Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
 
 
 
@@ -98,9 +96,6 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::post('/admin/update_question', [AdminController::class, 'updateQuestion'])->name('admin-update-q');
     Route::get('/admin/hasil_tracer', [AdminController::class, 'showTracer']);
     Route::get('/admin/delete_question/{id}', [AdminController::class, 'deleteTracerQuestion']);
-
-
-
 });
 
 Route::get('/detail-informasi/{id}', [HomeController::class, 'show']);
@@ -123,3 +118,6 @@ Route::get('/input_user', function () {
         'password' => Hash::make('adminadmin')
     ]);
 });
+Route::post('/posting-diskusi', [DiskusiController::class, 'postDiskusi']);
+Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
+Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
