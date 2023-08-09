@@ -118,6 +118,8 @@
                     if (response.status === 'success') {
                         console.log('Komentar berhasil dihapus dari server.');
                         $(`.sl-content .user-name[data-id="${commentId}"]`).closest('.sl-item').remove();
+                        location.reload();
+
                     }
                 },
                 error: function(error) {
