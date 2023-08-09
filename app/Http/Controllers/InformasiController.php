@@ -13,7 +13,7 @@ class InformasiController extends Controller
      */
     public function index()
     {
-        $infos = Informasi::all();
+        $infos = Informasi::latest()->get();
         // dd($infos->konten); // Ambil semua data berita dari model
         return view('admin.kelola_informasi', compact('infos'));
     }

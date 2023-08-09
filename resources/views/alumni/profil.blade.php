@@ -3,16 +3,17 @@
 @section('konten')
     <div class="container m-3">
         <div class="box">
-            <form action="">
+            <form method="POST" action="/alumni/profil" enctype="multipart/form-data">
+                @csrf
                 <div class="box-header">
                     <h2>Data Alumni</h2>
                 </div>
 
                 <table class="table table-striped b-t">
                     <thead>
-                        <img class="p-4" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Circle-icons-image.svg"
+                        <img class="p-4" src="{{ $alumni->image == null ? asset('img\user.png') : asset($alumni->image) }}"
                             alt="" height="200px">
-                        <input type="file" id="exampleInputFile" class="form-control">
+                        <input type="file" id="fotoProfil" name="fotoProfil" class="form-control"><br>
                     </thead>
                     <tbody>
                         <tr>
@@ -83,7 +84,7 @@
                             <td>:</td>
                             <td colspan="5">
                                 <input type="text" id="noTelp" value="{{ $alumni->no_telpon }}" name="noTelp"
-                                    class="form-control" placeholder="{{ $alumni->no_telpon }}">
+                                    class="form-control">
                             </td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -94,7 +95,8 @@
                             <td>Testimoni</td>
                             <td>:</td>
                             <td colspan="5">
-                                <input type="text" id="testimoniAlumni" name="testimoniAlumni" class="form-control"">
+                                <input type="text" id="testimoniAlumni" name="testimoniAlumni" class="form-control"
+                                    value="{{ $alumni->testimoni }}">
                             </td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -105,7 +107,7 @@
                 </table>
                 <div class="form-group row justify-content-end p-3">
                     <div class="col-sm-4 col-sm-offset-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
             </form>

@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     Route::get('/alumni/getPertanyaanFromServer', [AlumniController::class, 'getPertanyaanById']);
     Route::post('/alumni/simpan_tracer', [AlumniController::class, 'simpan_tracer'])->name('simpan-tracer');
     Route::get('alumni/profil', [AlumniController::class, 'profil'])->name('profil-alumni');
+    Route::post('alumni/profil', [AlumniController::class, 'updateProfil']);
     // Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
     Route::get('/alumni/forum_diskusi', [DiskusiController::class, 'index']);
     // Route::get('/get-diskusi-data', [DiskusiController::class, 'getDiskusi']);
