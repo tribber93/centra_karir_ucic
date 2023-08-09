@@ -91,6 +91,10 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::post('/admin/update_question', [AdminController::class, 'updateQuestion'])->name('admin-update-q');
     Route::get('/admin/hasil_tracer', [AdminController::class, 'showTracer']);
     Route::get('/admin/delete_question/{id}', [AdminController::class, 'deleteTracerQuestion']);
+    Route::get('/admin/testimoni_alumni', [AdminController::class, 'testimoni']);
+    Route::get('/admin/get-testimonial-detail/{id}', [AdminController::class, 'getDetailAlumni']);
+    Route::post('/admin/update-testimonial-status/{id}', [DiskusiController::class, 'updateStatusTestimoni']);
+
 });
 
 Route::get('/detail-informasi/{id}', [HomeController::class, 'show']);

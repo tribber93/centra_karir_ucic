@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
 use App\Models\Diskusi;
 use App\Models\DiskusiKomentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Alumni;
-
 
 class DiskusiController extends Controller
 {
@@ -105,5 +104,18 @@ class DiskusiController extends Controller
 
         $dk->delete();
         return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus broo.']);
+    }
+    public function updateStatusTestimoni(Request $request, $id)
+    {
+
+        $dk  =  Alumni::find($id);
+        // dd($id);
+        $status = $request->input('status');
+
+        $dk->status_testimoni = $status;
+
+
+        $dk->save();
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil masuk broo.']);
     }
 }
