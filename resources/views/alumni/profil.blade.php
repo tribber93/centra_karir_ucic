@@ -3,10 +3,11 @@
 @section('konten')
     <div class="container m-3">
         <div class="box">
-            <div class="box-header">
-                <h2>Data Alumni</h2>
-            </div>
             <form action="">
+                <div class="box-header">
+                    <h2>Data Alumni</h2>
+                </div>
+
                 <table class="table table-striped b-t">
                     <thead>
                         <img class="p-4" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Circle-icons-image.svg"
@@ -69,6 +70,15 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
+                            <td>Total Tracer</td>
+                            <td>:</td>
+                            <td colspan="5">{{ $alumni->total_tracer }}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
                             <td>Nomor Telepon</td>
                             <td>:</td>
                             <td colspan="5">
@@ -93,10 +103,13 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="form-group row justify-content-end p-3">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
             </form>
 
         </div>
-    </div>
-    </div>
     </div>
 @endsection
