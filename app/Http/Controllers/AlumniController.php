@@ -135,6 +135,24 @@ class AlumniController extends Controller
 
         return view('alumni.profil', compact('alumni'));
     }
+    public function updateProfil(Request $request)
+    {
+        $user_auth = Auth::user()->id;
+        $alumni = Alumni::where('user_id', $user_auth)->first();
+        $alumni->no_telpon = $request->noTelp;
+        $alumni->testimoni = $request->testimoniAlumni;
+        if ($request->fotoProfil == null) {
+            $alumni->image = $alumni->image;
+        } else {
+            $file_nm = $request->fotoProfil->getClientOriginalName();
+            $image = $request->fotoProfil->move('thumbnail', $file_nm);
+            $alumni->image = $image;
+        }
+        $alumni->save();
+
+        return redirect()->back()->with('success', 'Informasi berhasil diubah');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
