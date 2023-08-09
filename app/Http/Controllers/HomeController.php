@@ -24,7 +24,7 @@ class  HomeController extends Controller
     public function index()
     {
         // //data alumni
-        $kata_alumni = Testimoni::with('alumni')->get();
+        $kata_alumni = Alumni::where('status_testimoni', 1)->get()->take(5);
         //data berita
         $informasi = Informasi::latest()->take(3)->get();
         // foreach ($informasi as $info) {
