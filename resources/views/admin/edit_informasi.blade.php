@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            {{-- {{ $informasi->gambar }} --}}
+            {{ $informasi->gambar }}
             <div class="box m-b-md">
                 <textarea ui-jp="summernote" name="konten" id="summernote">
                     {{ $informasi->konten }}

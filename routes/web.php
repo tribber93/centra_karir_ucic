@@ -121,3 +121,5 @@ Route::get('/input_user', function () {
 Route::post('/posting-diskusi', [DiskusiController::class, 'postDiskusi']);
 Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
 Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
+Route::post('/update-komentar/{id}', [DiskusiController::class, 'editKomentar']);
+Route::get('/delete-komentar/{id}', [DiskusiController::class, 'deleteKomentar']);

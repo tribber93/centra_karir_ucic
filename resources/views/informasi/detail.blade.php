@@ -74,16 +74,17 @@
                     <div class="col-10 col-md-12 mb-5">
                         <div class="card">
                             <div class="card-header text-center">
+
                                 <h4 class="text-bold">Kategori</h4>
                             </div>
                             <div class="card-body">
+                                @foreach ($kategori as $item)
                                 <ul>
-                                    <li><a href="#">Kategori 1</a></li>
-                                    <li><a href="#">Kategori 2</a></li>
-                                    <li><a href="#">Kategori 3</a></li>
-                                    <li><a href="#">Kategori 4</a></li>
-                                    <li><a href="#">Kategori 5</a></li>
+                                    <li><a href="#">{{$item->kategori}}</a></li>
+
                                 </ul>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -94,20 +95,17 @@
                                     <li class="list-group-item text-center bg-light">
                                         <h4 class="font-weight-bold">Berita</h4>
                                     </li>
-                                    <li class="list-group-item mt-3">
-                                        <h5 class="card-title">Junior Web-Developer</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">12 Juli 2023</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.</p>
-                                        <a href="#" class="card-link">Selengkapnya...</a>
-                                    </li>
-                                    <li class="list-group-item mt-3">
-                                        <h5 class="card-title">Junior Web-Developer</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">12 Juli 2023</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.</p>
-                                        <a href="#" class="card-link">Selengkapnya...</a>
-                                    </li>
+
+                                </li>
+                                @foreach ($berita as $item)
+                                <li class="list-group-item mt-3">
+                                    <h5 class="card-title">{{$item->judul}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{$item->created_at->diffForHumans()}}</h6>
+                                    <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                    <a href="/detail-informasi/{{$item->id}} " class="card-link">Selengkapnya...</a>
+                                </li>
+                                @endforeach
+
 
                                 </ul>
                             @endif
@@ -116,20 +114,14 @@
                                     <li class="list-group-item text-center bg-light">
                                         <h4 class="font-weight-bold">Lowongan</h4>
                                     </li>
+                                    @foreach ($lowongan as $item)
                                     <li class="list-group-item mt-3">
-                                        <h5 class="card-title">Junior Web-Developer</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">12 Juli 2023</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.</p>
-                                        <a href="#" class="card-link">Selengkapnya...</a>
+                                        <h5 class="card-title">{{$item->judul}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{$item->created_at->diffForHumans()}}</h6>
+                                        <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                        <a href="/detail-informasi/{{$item->id}} " class="card-link">Selengkapnya...</a>
                                     </li>
-                                    <li class="list-group-item mt-3">
-                                        <h5 class="card-title">Junior Web-Developer</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">12 Juli 2023</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.</p>
-                                        <a href="#" class="card-link">Selengkapnya...</a>
-                                    </li>
+                                    @endforeach
 
                                 </ul>
                             @endif
