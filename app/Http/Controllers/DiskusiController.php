@@ -32,11 +32,15 @@ class DiskusiController extends Controller
 
         $judul = $data['judul'];
         $isi = $data['isi'];
-        $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
+        // $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
 
         $diskusi->judul = $judul;
         $diskusi->isi = $isi;
-        $diskusi->alumni_id = $alumni->id;
+        // $diskusi->alumni_id = $alumni->id;
+        if (Auth::user()->role != 'admin') {
+            $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
+            $diskusi->alumni_id = $alumni->id;
+        }
         $diskusi->user_id = Auth::user()->id;
         $diskusi->save();
 
@@ -63,7 +67,6 @@ class DiskusiController extends Controller
     }
     public function postKomentarById(Request $request, $id)
     {
-        $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
 
         $data = $request->input('data'); // Mengambil data dari AJAX yang dikirimkan dengan key 'data'
         $dk  = new DiskusiKomentar();
@@ -76,7 +79,10 @@ class DiskusiController extends Controller
         $dk->diskusi_id = $idDiskusi;
         $dk->user_id = Auth::user()->id;
         $dk->isi = $isi;
-        $dk->alumni_id = $alumni->id;
+        if (Auth::user()->role != 'admin') {
+            $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
+            $dk->alumni_id = $alumni->id;
+        }
         $dk->save();
         // dd($request->all());
         return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
