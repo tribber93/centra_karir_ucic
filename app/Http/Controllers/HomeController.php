@@ -161,7 +161,11 @@ class  HomeController extends Controller
     public function show(string $id)
     {
         $informasi = Informasi::find($id);
-        return view('informasi.detail', compact('informasi'));
+        $kategori = Informasi::all();
+        $lowongan = Informasi::where('jenis_informasi', 'lowongan')->get();
+        $berita = Informasi::where('jenis_informasi', 'berita')->get();
+        // dd($lowongan);
+        return view('informasi.detail', compact('informasi', 'kategori', 'lowongan', 'berita'));
     }
 
     /**

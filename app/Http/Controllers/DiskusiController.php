@@ -50,9 +50,11 @@ return response()->json(['status' => 'success', 'message' => 'Data berhasil disi
         $dkC = DiskusiKomentar::with('user')->where('diskusi_id', $id)
         ->count();
 
+        $auth = Auth::user()->name;
+
 
         //  ->orderByDesc('created_at')
-    return view('diskusi.detail_diskusi', compact('diskusi', 'dk', 'dkC'));
+    return view('diskusi.detail_diskusi', compact('diskusi', 'dk', 'dkC' ,'auth'));
     }
     public function postKomentarById(Request $request, $id){
 
@@ -72,6 +74,27 @@ return response()->json(['status' => 'success', 'message' => 'Data berhasil disi
         return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
 
     // return view('diskusi.detail_diskusi', compact('diskusi'));
+    }
+    public function editKomentar(Request $request, $id){
+
+        $data = $request->input('isi'); // Mengambil data dari AJAX yang dikirimkan dengan key 'data'
+        $dk  =  DiskusiKomentar::find($id);
+        // dd($dk);
+        $dk->isi = $data;
+
+        // dd($data);
+        $dk->save();
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
+
+    // return view('diskusi.detail_diskusi', compact('diskusi'));
+    }
+    public function deleteKomentar($id){
+
+        $dk  =  DiskusiKomentar::find($id);
+
+        $dk->delete();
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus broo.']);
+
     }
 
 

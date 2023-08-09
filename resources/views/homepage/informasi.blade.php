@@ -34,7 +34,7 @@
                                 <div class="body_post">
                                     <div class="post_content">
                                         <h1>{{ $info->judul }}</h1>
-                                        <div>{!! Str::limit($info->konten, 75) !!}</div>
+                                        <p>{!! Str::limit($info->konten, 100) !!}</p>
                                         <div class="container_infos">
                                             <div class="postedBy">
                                                 <span>Published</span>
