@@ -50,7 +50,7 @@
         </div>
         <div class="b-t">
             <div class="nav-fold">
-                <a href="profile.html">
+                <a href="{{ route('profil-alumni') }}">
                     <span class="pull-left">
                         <img src="{{ asset('admin/css/images/a0.jpg') }}" alt="..." class="w-40 img-circle">
                     </span>

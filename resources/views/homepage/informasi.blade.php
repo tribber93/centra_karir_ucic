@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="row d-flex justify-content-center flex-row-reverse">
+        <div class="row d-flex justify-content-center flex-row">
             @foreach ($informasi as $info)
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- Single Blog -->
@@ -34,7 +34,7 @@
                                 <div class="body_post">
                                     <div class="post_content">
                                         <h1>{{ $info->judul }}</h1>
-                                        <p>{!! Str::limit($info->konten, 75) !!}</p>
+                                        <div>{!! Str::limit($info->konten, 75) !!}</div>
                                         <div class="container_infos">
                                             <div class="postedBy">
                                                 <span>Published</span>

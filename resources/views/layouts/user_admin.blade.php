@@ -62,41 +62,57 @@
 
                     <!-- navbar right -->
                     <ul class="nav navbar-nav ml-auto flex-row">
-                        <li class="nav-item dropdown pos-stc-xs">
-                            <a class="nav-link mr-2" href data-toggle="dropdown">
-                                <i class="material-icons">&#xe7f5;</i>
-                                <span class="label label-sm up warn">3</span>
-                            </a>
-                            <div ui-include="'../views/blocks/dropdown.notification.html'"></div>
-                        </li>
                         <li class="nav-item dropdown">
-                            <div class="col-sm-2 text-sm-right">
-
-                                <div class="btn-group dropdown">
-                                    <span class="avatar w-32 " >
-                                        <img class="dropdown-toggle" data-toggle="dropdown" src="{{ asset('admin/css/images/a0.jpg')}}" alt="...">
-                                        <i class="on b-white bottom"></i>
-                                    </span>
-                                    <button class="btn white btn-sm dropdown-toggle" data-toggle="dropdown"></button>
-                                    <div class="dropdown-menu dropdown-menu-scale pull-right">
-                                        <a class="dropdown-item" href>{{Auth::user()->name}}</a>
-                                        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item" href>Logout</a>
-                                        <form style=" opacity: 0;  pointer-events: none;" id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
+                                <span class="avatar w-32">
+                                    <img class="dropdown-toggle" data-toggle="dropdown"
+                                        src="{{ asset('admin/css/images/a0.jpg') }}" alt="...">
+                                    <i class="on b-white bottom"></i>
+                                </span>
+                            </a>
                             <div ui-include="'../views/blocks/dropdown.user.html'"></div>
                         </li>
 
-                        <li class="nav-item hidden-md-up">
-                            <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
-                                <i class="material-icons">&#xe5d4;</i>
-                            </a>
+                        <li class="nav-item">
+                            <button class="btn white btn-sm dropdown-toggle" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu dropdown-menu-scale pull-right">
+                                <a href="{{ route('profil-alumni') }}" class="dropdown-item"
+                                    href>{{ Auth::user()->name }}</a>
+                                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    class="dropdown-item" href>Logout</a>
+                                <form style=" opacity: 0;  pointer-events: none;" id="logout-form"
+                                    action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
                         </li>
                     </ul>
+                    {{-- <ul class="nav navbar-nav ml-auto flex-row justify-items-end">
+                        <li class="nav-item dropdown ">
+                            <div class="btn-group dropdown">
+                                <span class="avatar h-50">
+                                    <img class="dropdown-toggle" data-toggle="dropdown"
+                                        src="{{ asset('admin/css/images/a0.jpg') }}" alt="...">
+                                    <i class="on b-white bottom"></i>
+                                </span>
+                                <button class="btn white btn-sm dropdown-toggle" data-toggle="dropdown"></button>
+                                <div class="dropdown-menu dropdown-menu-scale pull-right">
+                                    <a class="dropdown-item" href>{{ Auth::user()->name }}</a>
+                                    <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                        class="dropdown-item" href>Logout</a>
+                                    <form style=" opacity: 0;  pointer-events: none;" id="logout-form"
+                                        action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div ui-include="'../views/blocks/dropdown.user.html'"></div>
+
+                        </li>
+                    </ul> --}}
                     <!-- / navbar right -->
                 </div>
             </div>

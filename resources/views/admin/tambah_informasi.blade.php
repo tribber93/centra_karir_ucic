@@ -37,7 +37,7 @@
                 <label class="col-sm-2 form-control-label">Gambar</label>
                 <div class="col-sm-10">
                     <div class="form-file">
-                        <input type="file" name="gambarInformasi" value="" required>
+                        <input type="file" name="gambarInformasi" required>
                         <button class="btn white">Select file ...</button>
                     </div>
                 </div>

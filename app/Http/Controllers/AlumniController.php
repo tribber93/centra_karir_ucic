@@ -7,6 +7,9 @@ use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Informasi;
+use App\Models\Diskusi;
+use App\Models\User;
 use PHPUnit\Event\Tracer\Tracer;
 use Illuminate\Support\Facades\Log;
 
@@ -17,8 +20,12 @@ class AlumniController extends Controller
      */
     public function dashboard()
     {
+        $informasi = Informasi::orderBy('created_at', 'desc')->first();
+        $berita = $informasi::where('jenis_informasi', 'berita')->take(5)->get();
+        $lowongan = $informasi::where('jenis_informasi', 'lowongan')->take(5)->get();
+        $diskusi = Diskusi::with('user')->orderBy('created_at', 'desc')->first()->take(5)->get();
 
-        return view('alumni.dashboard_alumni');
+        return view('alumni.dashboard_alumni', compact('berita', 'lowongan', 'diskusi'));
     }
     public function tracer_study()
     {
@@ -27,7 +34,7 @@ class AlumniController extends Controller
         // dd($alumni);
         // tracing
         $tracer = Questions::where('status', 'publish')
-        ->get();
+            ->get();
         // $tracer = $trace->sortBy(function ($item) {
         //     return $item->nama_perusahaan ? 0 : 1;
         // });
@@ -39,16 +46,15 @@ class AlumniController extends Controller
         $status_tracer = $alumni->status_tracer;
         $tanggal_tracer = $alumni->updated_at;
 
-        return view('alumni.tracer_study', compact('alumni','tracer', 'status_tracer', 'tanggal_tracer'));
+        return view('alumni.tracer_study', compact('alumni', 'tracer', 'status_tracer', 'tanggal_tracer'));
     }
 
     public function forum()
     {
         //
         return view('alumni.forum_diskusi');
-
     }
-     public function simpan_tracer(Request $request)
+    public function simpan_tracer(Request $request)
     {
         // Lakukan validasi data jika diperlukan
         // $request->validate([...]);
@@ -64,14 +70,14 @@ class AlumniController extends Controller
         $alumni->posisi = $request->posisi;
         $alumni->mulai_bekerja = $request->mulaiBekerja;
         $alumni->status_tracer = 1;
-        $alumni->total_tracer +=1;
+        $alumni->total_tracer += 1;
         // $alumni->no_telpon = $request->noTelp;
-   if ($alumni->no_telpon == $request->noTelp) {
-        $alumni->no_telpon = $alumni->no_telpon;
-      } else {
-     $alumni->no_telpon = $request->noTelp;
-        # code...
-      }
+        if ($alumni->no_telpon == $request->noTelp) {
+            $alumni->no_telpon = $alumni->no_telpon;
+        } else {
+            $alumni->no_telpon = $request->noTelp;
+            # code...
+        }
 
         // Simpan data ke tabel yang diinginkan
         // Misalnya, jika Anda menggunakan Eloquent ORM pada Laravel:
@@ -80,7 +86,7 @@ class AlumniController extends Controller
         $alumni->save();
 
         // Jika berhasil disimpan, kembalikan respons ke klien (misalnya, status berhasil)
-        return response()->json(['status' => 'success'], );
+        return response()->json(['status' => 'success'],);
     }
     public function simpan(Request $request)
     {
@@ -97,9 +103,9 @@ class AlumniController extends Controller
         $hasilTracer->jawaban = $jsonData;
         $hasilTracer->alumni_id = $alumni->id;
 
-            $hasilTracer->save();
+        $hasilTracer->save();
 
-        return response()->json(['status' => 'success'], );
+        return response()->json(['status' => 'success'],);
     }
     public function getPertanyaan()
     {
@@ -107,7 +113,6 @@ class AlumniController extends Controller
 
 
         return view('alumni.forum_diskusi');
-
     }
     public function getPertanyaanById(Request $request)
     {
@@ -121,10 +126,15 @@ class AlumniController extends Controller
 
         // Return the 'pertanyaan' data as JSON response
         return response()->json(['pertanyaan' => $quiesionerData->pertanyaan]);
-
     }
 
+    public function profil()
+    {
+        $user_auth = Auth::user()->id;
+        $alumni = Alumni::where('user_id', $user_auth)->first();
 
+        return view('alumni.profil', compact('alumni'));
+    }
     /**
      * Show the form for creating a new resource.
      */

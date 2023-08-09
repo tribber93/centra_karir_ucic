@@ -29,14 +29,8 @@ Route::group(['middleware' => ['auth', 'isLogin:alumni']], function () {
     Route::get('/alumni/dashboard', [AlumniController::class, 'dashboard'])->name('dashboard-alumni');
     Route::get('/alumni/tracer_study', [AlumniController::class, 'tracer_study'])->name('tracer-study');
     Route::get('/alumni/getPertanyaanFromServer', [AlumniController::class, 'getPertanyaanById']);
-    // Route::get('/create', [HomeController::class, 'create'])->name('home.ceate');
-    // Route::get('/createTestimoni', [HomeController::class, 'createTestimoni'])->name('home.createTestimoni');
-    // Route::get('/tracer', [HomeController::class, 'tracer'])->name('tracer');
-    // Route::get('/load-questions', [HomeController::class, 'question'])->name('load.questions');
-    // Route::post('/simpan-jawaban', [HomeController::class, 'simpanJawaban'])->name('simpan.jawaban');
-    // Route::get('/hq', [HomeController::class, 'quesionarTerisi']);
-    // simpan data tracer bro
     Route::post('/alumni/simpan_tracer', [AlumniController::class, 'simpan_tracer'])->name('simpan-tracer');
+    Route::get('alumni/profil', [AlumniController::class, 'profil'])->name('profil-alumni');
     // Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar']);
     Route::get('/alumni/forum_diskusi', [DiskusiController::class, 'index']);
     // Route::get('/get-diskusi-data', [DiskusiController::class, 'getDiskusi']);

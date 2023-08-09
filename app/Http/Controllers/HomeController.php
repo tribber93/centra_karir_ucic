@@ -26,7 +26,7 @@ class  HomeController extends Controller
         // //data alumni
         $kata_alumni = Testimoni::with('alumni')->get();
         //data berita
-        $informasi = Informasi::take(3)->get();
+        $informasi = Informasi::latest()->take(3)->get();
         // foreach ($informasi as $info) {
         //     dd($info->konten);
         // }
