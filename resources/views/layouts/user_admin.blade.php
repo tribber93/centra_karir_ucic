@@ -37,6 +37,9 @@
             @include('admin.sidebar');
         @else
             @include('alumni.sidebar');
+            @php
+                $var = App\Models\Alumni::where('user_id', Auth::user()->id)->firstOrfail();
+            @endphp
         @endif
         <!-- content -->
         <div id="content" class="app-content box-shadow-z0" role="main">
@@ -65,8 +68,15 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
                                 <span class="avatar w-32">
-                                    <img class="dropdown-toggle" data-toggle="dropdown"
-                                        src="{{ asset('admin/css/images/a0.jpg') }}" alt="...">
+                                    {{-- <img class="" data-toggle="dropdown"
+                                        src="{{ asset('admin/css/images/a0.jpg') }}" alt="..."> --}}
+                                    @if (Auth::user()->role == 'admin')
+                                        <img src="{{ asset('img\user.png') }}" class="dropdown-toggle">
+                                        {{-- {{ $dataDiskusi->alumni->image }} --}}
+                                    @else
+                                        <img src="{{ $var->image == null ? asset('img\user.png') : asset($var->image) }}"
+                                            class="dropdown-toggle">
+                                    @endif
                                     <i class="on b-white bottom"></i>
                                 </span>
                             </a>

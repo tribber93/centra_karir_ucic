@@ -23,7 +23,10 @@ class AlumniController extends Controller
         $informasi = Informasi::orderBy('created_at', 'desc')->first();
         $berita = $informasi::where('jenis_informasi', 'berita')->take(5)->get();
         $lowongan = $informasi::where('jenis_informasi', 'lowongan')->take(5)->get();
-        $diskusi = Diskusi::with('user')->orderBy('created_at', 'desc')->first()->take(5)->get();
+        $diskusi = Diskusi::with('user')->take(5)->get();
+        // $alumni = Alumni::where('user_id', Auth::user()->id)->get();
+        // dd($alumni);
+
 
         return view('alumni.dashboard_alumni', compact('berita', 'lowongan', 'diskusi'));
     }

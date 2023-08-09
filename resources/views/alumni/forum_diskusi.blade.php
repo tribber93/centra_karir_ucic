@@ -40,7 +40,13 @@
 
                     <div class="list-item mb-3">
                         <div class="list-left">
-                            <img src="{{ asset('admin/css/images/a0.jpg') }}" class="w-40 circle">
+                            @if ($data->user->role == 'admin')
+                                <img src="{{ asset('img\user.png') }}" class="w-40 circle">
+                                {{-- {{ $dataDiskusi->alumni->image }} --}}
+                            @else
+                                <img src="{{ $data->alumni->image == null ? asset('img\user.png') : asset($data->alumni->image) }}"
+                                    class="w-40 circle">
+                            @endif
                         </div>
                         <div class="list-body">
 

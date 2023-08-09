@@ -19,7 +19,8 @@
                                     </span>
                                 </a>
                                 <div class="clear">
-                                    <a href="/detail-informasi/{{$dataLowongan->id}}" class="_500 text-ellipsis">{{ $dataLowongan->judul }}</a>
+                                    <a href="/detail-informasi/{{ $dataLowongan->id }}"
+                                        class="_500 text-ellipsis">{{ $dataLowongan->judul }}</a>
                                     <small class="text-muted">{{ $dataLowongan->created_at->diffForHumans() }}</small>
                                 </div>
                         @endforeach
@@ -40,8 +41,9 @@
                                         <img src="{{ asset($dataBerita->gambar) }}" class="w-full" alt="...">
                                     </span>
                                 </a>
-                                    <a href="/detail-informasi/{{$dataBerita->id}}" class="_500 text-ellipsis">{{ $dataBerita->judul }}</a>
-                                    <small class="text-muted">{{ $dataBerita->created_at->diffForHumans() }}</small>
+                                <a href="/detail-informasi/{{ $dataBerita->id }}"
+                                    class="_500 text-ellipsis">{{ $dataBerita->judul }}</a>
+                                <small class="text-muted">{{ $dataBerita->created_at->diffForHumans() }}</small>
                         @endforeach
                     </ul>
                 </div>
@@ -50,27 +52,40 @@
                 <div class="box">
                     <div class="box-header">
                         <span class="label success pull-right">5</span>
-                        <h3 ><a href="/alumni/forum_diskusi">Forum Diskusi</a></h3>
+                        <h3><a href="/alumni/forum_diskusi">Forum Diskusi</a></h3>
                         <small>5 postingan diskusi terbaru</small>
                     </div>
                     <div class="box-body">
                         <div class="streamline b-l m-b m-l">
-                            @foreach ($diskusi as $dataDiskusi)
-                                <div class="sl-item">
-                                    <div class="sl-left">
-                                        <img src="../assets/images/a2.jpg" class="img-circle">
-                                    </div>
-                                    <div class="sl-content">
-                                        <div class="row">
-                                            <p class="text-info">{{ $dataDiskusi->user->name }}</p>
-                                            <span
-                                                class="m-l-sm sl-date">{{ $dataBerita->created_at->diffForHumans() }}</span>
+                            @if (empty($diskusi))
+                                cok
+                            @else
+                                @foreach ($diskusi as $dataDiskusi)
+                                    <div class="sl-item">
+                                        <div class="sl-left">
+                                            @if ($dataDiskusi->user->role == 'admin')
+                                                <img src="{{ asset('img\user.png') }}" class="img-circle">
+                                                {{-- {{ $dataDiskusi->alumni->image }} --}}
+                                            @else
+                                                <img src="{{ $dataDiskusi->alumni->image == null ? asset('img\user.png') : asset($dataDiskusi->alumni->image) }}"
+                                                    class="img-circle">
+                                            @endif
                                         </div>
+                                        <div class="sl-content">
+                                            <div class="row">
+                                                <p class="text-info">{{ $dataDiskusi->user->name }}</p>
+                                                <span
+                                                    class="m-l-sm sl-date">{{ $dataBerita->created_at->diffForHumans() }}</span>
+                                            </div>
 
-                                        <div><a href="/komentar/forum_diskusi/{{$dataDiskusi->id}}">{{ $dataDiskusi->judul }}</a></div>
+                                            <div><a
+                                                    href="/komentar/forum_diskusi/{{ $dataDiskusi->id }}">{{ $dataDiskusi->judul }}</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
+
                         </div>
                         <a href class="btn btn-sm white text-u-c m-y-xs">Load More</a>
                     </div>

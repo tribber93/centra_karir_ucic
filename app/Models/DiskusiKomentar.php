@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DiskusiKomentar extends Model
 {
     use HasFactory;
-    protected $table='diskusi_komentar';
+    protected $table = 'diskusi_komentar';
     protected $guarded = [];
     public function diskusi()
     {
@@ -17,5 +17,9 @@ class DiskusiKomentar extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function alumni()
+    {
+        return $this->belongsTo(Alumni::class);
     }
 }

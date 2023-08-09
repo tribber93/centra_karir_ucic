@@ -6,12 +6,15 @@ use App\Models\Diskusi;
 use App\Models\DiskusiKomentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Alumni;
+
 
 class DiskusiController extends Controller
 {
     //
-    public function index(){
-        $diskusi = Diskusi::with('user')->get();
+    public function index()
+    {
+        $diskusi = Diskusi::latest()->with('user')->get();
         $jumlahKomentarPerDiskusi = [];
 
         foreach ($diskusi as $d) {
@@ -19,7 +22,7 @@ class DiskusiController extends Controller
             $jumlahKomentarPerDiskusi[$d->id] = $jumlahKomentar;
         }
         // dd($jumlahKomentar);
-    return view('alumni.forum_diskusi', compact('diskusi', 'jumlahKomentarPerDiskusi'));
+        return view('alumni.forum_diskusi', compact('diskusi', 'jumlahKomentarPerDiskusi'));
     }
 
     public function postDiskusi(Request $request)
@@ -30,33 +33,38 @@ class DiskusiController extends Controller
 
         $judul = $data['judul'];
         $isi = $data['isi'];
+        $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
+
+        $diskusi->judul = $judul;
+        $diskusi->isi = $isi;
+        $diskusi->alumni_id = $alumni->id;
+        $diskusi->user_id = Auth::user()->id;
+        $diskusi->save();
 
 
-      $diskusi->judul =$judul;
-$diskusi->isi = $isi;
-$diskusi->user_id = Auth::user()->id;
-$diskusi->save();
 
-
-
-return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
     }
 
-    public function komentar($id){
+    public function komentar($id)
+    {
         $diskusi = Diskusi::with('user')->find($id);
         // dd($diskusi);
-        $dk = DiskusiKomentar::with('user')->where('diskusi_id', $id)
-        ->get();
+        $dk = DiskusiKomentar::with('user', 'alumni')->where('diskusi_id', $id)
+            ->get();
         $dkC = DiskusiKomentar::with('user')->where('diskusi_id', $id)
-        ->count();
+            ->count();
+
 
         $auth = Auth::user()->name;
 
 
         //  ->orderByDesc('created_at')
-    return view('diskusi.detail_diskusi', compact('diskusi', 'dk', 'dkC' ,'auth'));
+        return view('diskusi.detail_diskusi', compact('diskusi', 'dk', 'dkC', 'auth'));
     }
-    public function postKomentarById(Request $request, $id){
+    public function postKomentarById(Request $request, $id)
+    {
+        $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
 
         $data = $request->input('data'); // Mengambil data dari AJAX yang dikirimkan dengan key 'data'
         $dk  = new DiskusiKomentar();
@@ -69,13 +77,15 @@ return response()->json(['status' => 'success', 'message' => 'Data berhasil disi
         $dk->diskusi_id = $idDiskusi;
         $dk->user_id = Auth::user()->id;
         $dk->isi = $isi;
+        $dk->alumni_id = $alumni->id;
         $dk->save();
         // dd($request->all());
         return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
 
-    // return view('diskusi.detail_diskusi', compact('diskusi'));
+        // return view('diskusi.detail_diskusi', compact('diskusi'));
     }
-    public function editKomentar(Request $request, $id){
+    public function editKomentar(Request $request, $id)
+    {
 
         $data = $request->input('isi'); // Mengambil data dari AJAX yang dikirimkan dengan key 'data'
         $dk  =  DiskusiKomentar::find($id);
@@ -86,16 +96,14 @@ return response()->json(['status' => 'success', 'message' => 'Data berhasil disi
         $dk->save();
         return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
 
-    // return view('diskusi.detail_diskusi', compact('diskusi'));
+        // return view('diskusi.detail_diskusi', compact('diskusi'));
     }
-    public function deleteKomentar($id){
+    public function deleteKomentar($id)
+    {
 
         $dk  =  DiskusiKomentar::find($id);
 
         $dk->delete();
         return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus broo.']);
-
     }
-
-
 }

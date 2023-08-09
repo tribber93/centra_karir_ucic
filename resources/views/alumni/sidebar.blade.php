@@ -1,3 +1,6 @@
+@php
+    $var = App\Models\Alumni::where('user_id', Auth::user()->id)->firstOrfail();
+@endphp
 <div id="aside" class="app-aside modal nav-dropdown">
     <!-- fluid app aside -->
     <div class="left navside dark dk" data-layout="column">
@@ -52,10 +55,13 @@
             <div class="nav-fold">
                 <a href="{{ route('profil-alumni') }}">
                     <span class="pull-left">
-                        <img src="{{ asset('admin/css/images/a0.jpg') }}" alt="..." class="w-40 img-circle">
+                        <img src="{{ $var->image == null ? asset('img\user.png') : asset($var->image) }}"
+                            class="w-40 circle">
                     </span>
                     <span class="clear hidden-folded p-x">
-                        <span class="block _500">Jean Reyes</span>
+                        <span class="block _500">
+                            {{ $var->nama_alumni }}
+                        </span>
                         <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
                     </span>
                 </a>
