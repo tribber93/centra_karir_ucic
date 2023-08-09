@@ -19,7 +19,7 @@
                                     </span>
                                 </a>
                                 <div class="clear">
-                                    <a href class="_500 text-ellipsis">{{ $dataLowongan->judul }}</a>
+                                    <a href="/detail-informasi/{{$dataLowongan->id}}" class="_500 text-ellipsis">{{ $dataLowongan->judul }}</a>
                                     <small class="text-muted">{{ $dataLowongan->created_at->diffForHumans() }}</small>
                                 </div>
                         @endforeach
@@ -35,15 +35,13 @@
                     <ul class="list no-border">
                         @foreach ($berita as $dataBerita)
                             <li class="list-item">
-                                <a herf class="pull-left m-r">
+                                <a class="pull-left m-r">
                                     <span class="w-40">
                                         <img src="{{ asset($dataBerita->gambar) }}" class="w-full" alt="...">
                                     </span>
                                 </a>
-                                <div class="clear">
-                                    <a href class="_500 text-ellipsis">{{ $dataBerita->judul }}</a>
+                                    <a href="/detail-informasi/{{$dataBerita->id}}" class="_500 text-ellipsis">{{ $dataBerita->judul }}</a>
                                     <small class="text-muted">{{ $dataBerita->created_at->diffForHumans() }}</small>
-                                </div>
                         @endforeach
                     </ul>
                 </div>
@@ -52,7 +50,7 @@
                 <div class="box">
                     <div class="box-header">
                         <span class="label success pull-right">5</span>
-                        <h3>Forum Diskusi</h3>
+                        <h3 ><a href="/alumni/forum_diskusi">Forum Diskusi</a></h3>
                         <small>5 postingan diskusi terbaru</small>
                     </div>
                     <div class="box-body">
@@ -69,7 +67,7 @@
                                                 class="m-l-sm sl-date">{{ $dataBerita->created_at->diffForHumans() }}</span>
                                         </div>
 
-                                        <div><a href>{{ $dataDiskusi->judul }}</a></div>
+                                        <div><a href="/komentar/forum_diskusi/{{$dataDiskusi->id}}">{{ $dataDiskusi->judul }}</a></div>
                                     </div>
                                 </div>
                             @endforeach
