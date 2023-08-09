@@ -39,7 +39,7 @@ class  HomeController extends Controller
     }
     public function portal()
     {
-        $semua_informasi = Informasi::all();
+        $semua_informasi = Informasi::latest()->get();
 
         return view('informasi.portal', compact('semua_informasi'));
     }
