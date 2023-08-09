@@ -68,7 +68,7 @@
 
         </div>
     </div>
-    < <script>
+    <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': getCsrfToken()

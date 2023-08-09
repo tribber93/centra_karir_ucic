@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
 use App\Models\Diskusi;
 use App\Models\DiskusiKomentar;
 use Illuminate\Http\Request;
@@ -94,6 +95,19 @@ return response()->json(['status' => 'success', 'message' => 'Data berhasil disi
 
         $dk->delete();
         return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus broo.']);
+
+    }
+    public function updateStatusTestimoni(Request $request,$id){
+
+        $dk  =  Alumni::find($id);
+        // dd($id);
+        $status = $request->input('status');
+
+        $dk->status_testimoni = $status;
+
+
+        $dk->save();
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil masuk broo.']);
 
     }
 

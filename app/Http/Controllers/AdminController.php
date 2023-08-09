@@ -27,6 +27,21 @@ class AdminController extends Controller
     //    dd($h_user);
         return view('admin.dashboard_admin', compact('tracer', 'tracer_lama', 'h_user'));
     }
+    public function testimoni()
+    {
+        //
+        $testimoni = Alumni::paginate(5);
+    //    dd($h_user);
+        return view('admin.testimoni_alumni', compact('testimoni'));
+    }
+    public function getDetailAlumni($id)
+    {
+        //
+        $testimoni = Alumni::find($id);
+
+        // Mengembalikan data dalam format JSON
+        return response()->json($testimoni);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +62,7 @@ class AdminController extends Controller
     }
     public function kelolaAlumni()
     {
-        $alumni = Alumni::all();
+        $alumni = Alumni::paginate(10);
         return view('admin.kelola_alumni', compact('alumni'));
     }
     public function tambahAlumni(Request $request)
