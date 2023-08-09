@@ -122,3 +122,7 @@ Route::get('/komentar/forum_diskusi/{id}', [DiskusiController::class, 'komentar'
 Route::post('/posting-komentar-byID/{id}', [DiskusiController::class, 'postKomentarById']);
 Route::post('/update-komentar/{id}', [DiskusiController::class, 'editKomentar']);
 Route::get('/delete-komentar/{id}', [DiskusiController::class, 'deleteKomentar']);
+
+Route::get('/get-discussion/{id}', [DiskusiController::class, 'getDiscussion']);
+Route::post('/edit-discussion/{id}', [DiskusiController::class, 'editDiscussion']);
+Route::get('/delete-discussion/{id}', [DiskusiController::class, 'deleteDiscussion']);

@@ -184,6 +184,9 @@
     <!-- ajax -->
     <script src="{{ asset('admin/libs/jquery/jquery-pjax/jquery.pjax.js') }}"></script>
     <script src="{{ asset('admin/scripts/ajax.js') }}"></script>
+    <script src="{{ asset('js/diskusi2.js') }}"></script>
+    <script src="{{ asset('js/diskusi1.js') }}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
     {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
 
