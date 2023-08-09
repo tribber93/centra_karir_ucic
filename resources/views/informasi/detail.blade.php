@@ -61,7 +61,10 @@
                         <p class="meta">Oleh <span class="author">{{ $informasi->penulis }}</span> pada <span
                                 class="date">{{ $informasi->created_at->diffForHumans() }}</span></p>
                         <img src="{{ asset($informasi->gambar) }}" alt="Gambar Artikel" class="img-fluid mb-4 rounded">
-                        {!! $informasi->konten !!}
+                        <div class="konten">
+                            {!! $informasi->konten !!}
+                        </div>
+
                         <div class="text-center my-5">
                             <a href="/informasi" class="btn btn-primary btn-read-more">Baca Artikel Lainnya</a>
                         </div>
@@ -79,10 +82,10 @@
                             </div>
                             <div class="card-body">
                                 @foreach ($kategori as $item)
-                                <ul>
-                                    <li><a href="#">{{$item->kategori}}</a></li>
+                                    <ul>
+                                        <li><a href="#">{{ $item->kategori }}</a></li>
 
-                                </ul>
+                                    </ul>
                                 @endforeach
 
                             </div>
@@ -96,15 +99,17 @@
                                         <h4 class="font-weight-bold">Berita</h4>
                                     </li>
 
-                                </li>
-                                @foreach ($berita as $item)
-                                <li class="list-group-item mt-3">
-                                    <h5 class="card-title">{{$item->judul}}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{$item->created_at->diffForHumans()}}</h6>
-                                    <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
-                                    <a href="/detail-informasi/{{$item->id}} " class="card-link">Selengkapnya...</a>
-                                </li>
-                                @endforeach
+                                    </li>
+                                    @foreach ($berita as $item)
+                                        <li class="list-group-item mt-3">
+                                            <h5 class="card-title">{{ $item->judul }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                {{ $item->created_at->diffForHumans() }}</h6>
+                                            <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                            <a href="/detail-informasi/{{ $item->id }} "
+                                                class="card-link">Selengkapnya...</a>
+                                        </li>
+                                    @endforeach
 
 
                                 </ul>
@@ -115,12 +120,14 @@
                                         <h4 class="font-weight-bold">Lowongan</h4>
                                     </li>
                                     @foreach ($lowongan as $item)
-                                    <li class="list-group-item mt-3">
-                                        <h5 class="card-title">{{$item->judul}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$item->created_at->diffForHumans()}}</h6>
-                                        <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
-                                        <a href="/detail-informasi/{{$item->id}} " class="card-link">Selengkapnya...</a>
-                                    </li>
+                                        <li class="list-group-item mt-3">
+                                            <h5 class="card-title">{{ $item->judul }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                {{ $item->created_at->diffForHumans() }}</h6>
+                                            <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                            <a href="/detail-informasi/{{ $item->id }} "
+                                                class="card-link">Selengkapnya...</a>
+                                        </li>
                                     @endforeach
 
                                 </ul>

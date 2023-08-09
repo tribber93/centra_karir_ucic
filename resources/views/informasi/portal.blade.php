@@ -66,7 +66,7 @@
                                         <div class="body_post">
                                             <div class="post_content">
 
-                                                <h1>{{ $info->judul }}</h1>
+                                                <h1>{{ Str::limit($info->judul, 50) }}</h1>
                                                 <p>{!! Str::limit($info->konten, 75) !!}</p>
 
                                                 <div class="container_infos row">

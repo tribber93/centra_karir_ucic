@@ -33,7 +33,7 @@
                             <a href="/detail-informasi/{{ $info->id }}">
                                 <div class="body_post">
                                     <div class="post_content">
-                                        <h1>{{ $info->judul }}</h1>
+                                        <h1>{{ Str::limit($info->judul, 50) }}</h1>
                                         <p>{!! Str::limit($info->konten, 100) !!}</p>
                                         <div class="container_infos">
                                             <div class="postedBy">
