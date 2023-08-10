@@ -50,7 +50,7 @@
                         <td>{{ $data->testimoni }}</td>
                         <td>{{ $data->status_testimoni == 0 || is_null($data->status_testimoni) ? 'non-aktif' : 'Aktif' }}</td>
                         <td data-value="3">
-                            <button data-id="{{ $data->id }}" type="button" class="btn btn-danger detail-button" data-toggle="modal" data-target="#modal-{{ $data->id }}">Detail</button>
+                            <button style="background-color: #0cc2aa !important; color:white" data-id="{{ $data->id }}" type="button" class="btn detail-button" data-toggle="modal" data-target="#modal-{{ $data->id }}">Detail</button>
 
                             <!-- Modal for testimonial details -->
                             <div class="modal fade" id="modal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel-{{ $data->id }}">
@@ -94,7 +94,7 @@
     </div>
 </div>
 <!-- ############ PAGE END-->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
      $('#closeModalButton').click(function() {
         // Reload the page

@@ -13,4 +13,8 @@ class Histori extends Model
         'jawaban' => 'array',
     ];
     protected $guarded = [];
+    public function alumni()
+    {
+        return $this->belongsTo(Alumni::class, 'alumni_id');
+    }
 }

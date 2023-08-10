@@ -77,6 +77,14 @@
                             <span class="nav-text">Testimoni Alumni</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('/admin/backup-data') }}">
+                            <span class="nav-icon">
+                                <i class="fa fa-download"></i>
+                            </span>
+                            <span class="nav-text">Backup data</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

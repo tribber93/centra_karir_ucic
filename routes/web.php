@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
         return view('admin.tambah_informasi');
     });
     Route::get('/export/tracer', [AdminController::class, 'export']);
+    Route::get('/export/tracer_histori', [AdminController::class, 'exportTracerHistori']);
     Route::get('/admin/backup', [AdminController::class, 'backup']);
     Route::get('/admin/getCountData', [AdminController::class, 'getCount']);
     Route::get('/admin/forum_diskusi', [DiskusiController::class, 'index']);
@@ -70,6 +71,8 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin-index');
     Route::get('/admin/kelola_tracer', [AdminController::class, 'kelolaTracer'])->name('admin-kelola_tracer');
+    Route::get('/admin/backup-data', [AdminController::class, 'backupData']);
+
     // simpan tracer data pertanyaan
     Route::post('/admin/kelola_tracer', [AdminController::class, 'simpanTracer']);
 
