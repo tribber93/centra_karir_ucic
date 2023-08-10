@@ -95,6 +95,10 @@ Route::group(['middleware' => ['auth', 'isLogin:admin']], function () {
     Route::get('/admin/get-testimonial-detail/{id}', [AdminController::class, 'getDetailAlumni']);
     Route::post('/admin/update-testimonial-status/{id}', [DiskusiController::class, 'updateStatusTestimoni']);
 
+    Route::get('/admin/partner', [AdminController::class, 'partner']);
+    Route::post('/admin/partner', [AdminController::class, 'tambahPartner']);
+    Route::post('/admin/partner/edit/{id}', [AdminController::class, 'editPartner']);
+    Route::get('/admin/partner/hapus/{id}', [AdminController::class, 'hapusPartner']);
 });
 
 Route::get('/detail-informasi/{id}', [HomeController::class, 'show']);

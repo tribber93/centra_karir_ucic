@@ -77,6 +77,14 @@
                             <span class="nav-text">Testimoni Alumni</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('admin/partner') }}">
+                            <span class="nav-icon">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <span class="nav-text">Kelola Partner</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

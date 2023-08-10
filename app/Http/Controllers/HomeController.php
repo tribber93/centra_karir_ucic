@@ -7,6 +7,7 @@ use App\Models\Testimoni;
 use App\Models\Alumni;
 use App\Models\Informasi;
 use App\Models\HasilTracer;
+use App\Models\Partner;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,7 @@ class  HomeController extends Controller
         $kata_alumni = Alumni::where('status_testimoni', 1)->get()->take(5);
         //data berita
         $informasi = Informasi::latest()->take(3)->get();
+        $partner = Partner::all();
         // foreach ($informasi as $info) {
         //     dd($info->konten);
         // }
@@ -35,7 +37,7 @@ class  HomeController extends Controller
         // data partner
         // data alamat Kampuss
         // dd($kata_alumni);
-        return view('homepage.home', compact('informasi', 'kata_alumni'));
+        return view('homepage.home', compact('informasi', 'kata_alumni', 'partner'));
     }
     public function portal()
     {

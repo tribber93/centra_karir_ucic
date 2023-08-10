@@ -10,9 +10,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="brand-slider">
-                    <div class="slingle-brand">
-                        <img src="img/01.png" alt="#">
-                    </div>
+                    @foreach ($partner as $p)
+                        <div class="slingle-brand">
+                            <img src="{{ asset($p->logo_partner) }}" alt="#">
+                        </div>
+                    @endforeach
+
                     <div class="slingle-brand">
                         <img src="img/02.png" alt="#">
                     </div>

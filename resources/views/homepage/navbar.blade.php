@@ -17,12 +17,31 @@
                         <!-- Main Menu -->
                         <div class="main-menu">
                             <nav class="navigation ">
-                                <ul class="nav menu">
-                                    <li class="active"><a href="#home">Home</a></li>
-                                    <li><a href="#info">Informasi</a></li>
-                                    <li><a href="#testimonials">Kata Alumni</a></li>
-                                    <li><a href="#footer">Kontak Kami</a></li>
+                                <ul class="nav">
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="{{ url('/informasi') }}">News</a></li>
+                                    <li><a href="#testimonials">Testimonials</a></li>
+                                    <li><a href="#footer">Contact Us</a></li>
+                                    <li><a href="/login" class="button d-md-none">Login</a></li>
+                                </ul>
+                                <ul class="nav menu d-md-none">
+                                    <li><a href="/">Home</a></li>
+                                    <li class="active"><a href="{{ url('/informasi') }}">News</a></li>
+                                    <li><a href="#testimonials">Testimonials</a></li>
+                                    <li><a href="#footer">Contact Us</a></li>
+                                    <li>
+                                        @if (Auth::check())
+                                            @if (Auth::user()->role == 'admin')
+                                                <a href="/admin/dashboard" class="button">Dashboard</a>
+                                            @endif
+                                            @if (Auth::user()->role == 'alumni')
+                                                <a href="/alumni/dashboard" class="button">Dasboard</a>
+                                            @endif
+                                        @else
+                                            <a href="/login" class="button">Login</a>
 
+                                        @endif
+                                    </li>
                                 </ul>
                             </nav>
                             @if (Auth::check())
@@ -32,13 +51,6 @@
                                 @if (Auth::user()->role == 'alumni')
                                     <a href="/alumni/dashboard" class="button">Dasboard</a>
                                 @endif
-
-                                {{-- <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button">
-                                {{ Auth::user()->name }}
-                            </button> --}}
-                                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form> --}}
                             @else
                                 <a href="/login" class="button">Login</a>
 

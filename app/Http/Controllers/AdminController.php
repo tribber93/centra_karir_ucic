@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Alumni;
+use App\Models\Partner;
 use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use App\Exports\TracerExport;
 use App\Models\Histori;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 // ...
 class AdminController extends Controller
 {
@@ -23,15 +26,15 @@ class AdminController extends Controller
         $tracer = HasilTracer::count();
         $tracer_lama = Histori::count();
         $user = User::count();
-        $h_user  = $user -1;
-    //    dd($h_user);
+        $h_user  = $user - 1;
+        //    dd($h_user);
         return view('admin.dashboard_admin', compact('tracer', 'tracer_lama', 'h_user'));
     }
     public function testimoni()
     {
         //
         $testimoni = Alumni::paginate(5);
-    //    dd($h_user);
+        //    dd($h_user);
         return view('admin.testimoni_alumni', compact('testimoni'));
     }
     public function getDetailAlumni($id)
@@ -280,20 +283,13 @@ class AdminController extends Controller
             // 7 agustus
             $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
             $backupCount = 0;
-            foreach($tracer as $i){
+            foreach ($tracer as $i) {
 
 
                 $backupCount++;
-
-
             }
             return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
-
         }
-
-
-
-
     }
     public function backup(Request $request)
     {
@@ -307,7 +303,7 @@ class AdminController extends Controller
             // 7 agustus
             $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
             $backupCount = 0;
-            foreach($tracer as $i){
+            foreach ($tracer as $i) {
                 Histori::create([
                     'alumni_id' => $i->alumni_id,
                     'jawaban' => $i->jawaban,
@@ -317,17 +313,10 @@ class AdminController extends Controller
                 ]);
 
                 $backupCount++;
-
-
             }
             HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->delete();
             return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
-
         }
-
-
-
-
     }
     public function getQuestionById(Request $request)
     {
@@ -344,6 +333,46 @@ class AdminController extends Controller
 
         // Convert the question data to an array and return it in the response
         return response()->json(['status' => 'success', 'data' => $question->toArray()]);
+    }
+
+    public function partner()
+    {
+        $partner = Partner::all();
+        return view("admin.partner", compact('partner'));
+    }
+    public function tambahPartner(Request $request)
+    {
+        $file_nm = $request->logoPartner->getClientOriginalName();
+        $image = $request->logoPartner->move('partner', $file_nm);
+
+        $partner = new Partner();
+        $partner->nama_partner = $request->namaPartner;
+        $partner->logo_partner = $image;
+
+        $partner->save();
+
+        return redirect()->back()->with('success', 'Informasi berhasil ditambahkan');
+    }
+    public function editPartner(Request $request, $id)
+    {
+        $partner = Partner::find($id);
+        $partner->nama_partner = $request->editNamaPartner;
+        if ($request->editLogoPartner != null) {
+            $file_nm = $request->editLogoPartner->getClientOriginalName();
+            $image = $request->editLogoPartner->move('partner', $file_nm);
+            $partner->logo_partner = $image;
+        }
+
+        $partner->save();
+
+        return redirect()->back()->with('success', 'Informasi berhasil ditambahkan');
+    }
+    public function hapusPartner(string $id)
+    {
+        $partner = Partner::find($id);
+        $partner->delete();
+
+        return redirect()->back()->with('success', 'partner berhasil dihapus');
     }
 
     /**
