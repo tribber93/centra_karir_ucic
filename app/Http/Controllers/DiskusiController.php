@@ -11,6 +11,51 @@ use Illuminate\Support\Facades\Auth;
 class DiskusiController extends Controller
 {
     //
+    public function getDiscussion($id)
+    {
+        $discussion = Diskusi::find($id);
+        // dd($discussion);
+        return response()->json([
+            'status' => 'success',
+            'data' => $discussion
+        ]);
+    }
+    public function editDiscussion(Request $request, $id)
+    {
+        $discussion = Diskusi::find($id);
+
+        $discussion->judul = $request->input('judul');
+        $discussion->isi = $request->input('isi');
+        $discussion->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data diskusi berhasil diubah'
+        ]);
+    }
+
+    public function deleteDiscussion($id)
+    {
+        $discussion = Diskusi::find($id);
+        $komentarParent = DiskusiKomentar::where('diskusi_id', $id)->get();
+        foreach($komentarParent as $a){
+            $a->delete();
+
+        }
+        if (!$discussion) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data diskusi tidak ditemukan'
+            ], 404);
+        }
+
+        $discussion->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data diskusi berhasil dihapus'
+        ]);
+    }
     public function index()
     {
         $diskusi = Diskusi::latest()->with('user')->get();
@@ -32,11 +77,9 @@ class DiskusiController extends Controller
 
         $judul = $data['judul'];
         $isi = $data['isi'];
-        // $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
 
         $diskusi->judul = $judul;
         $diskusi->isi = $isi;
-        // $diskusi->alumni_id = $alumni->id;
         if (Auth::user()->role != 'admin') {
             $alumni = Alumni::where('user_id', Auth::user()->id)->firstOrfail();
             $diskusi->alumni_id = $alumni->id;
@@ -68,10 +111,9 @@ class DiskusiController extends Controller
     public function postKomentarById(Request $request, $id)
     {
 
-        $data = $request->input('data'); // Mengambil data dari AJAX yang dikirimkan dengan key 'data'
+        $data = $request->input('data');
         $dk  = new DiskusiKomentar();
 
-        // Misalnya, jika Anda ingin menyimpan data ke database:
         $idDiskusi = $data['diskusiId'];
         $isi = $data['isi'];
 
@@ -92,7 +134,7 @@ class DiskusiController extends Controller
     public function editKomentar(Request $request, $id)
     {
 
-        $data = $request->input('isi'); // Mengambil data dari AJAX yang dikirimkan dengan key 'data'
+        $data = $request->input('isi');
         $dk  =  DiskusiKomentar::find($id);
         // dd($dk);
         $dk->isi = $data;
