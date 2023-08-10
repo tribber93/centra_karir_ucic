@@ -20,15 +20,15 @@
                                 <ul class="nav">
                                     <li><a href="/">Home</a></li>
                                     <li><a href="{{ url('/informasi') }}">News</a></li>
-                                    <li><a href="#testimonials">Testimonials</a></li>
-                                    <li><a href="#footer">Contact Us</a></li>
+                                    <li><a href="/#testimonials">Testimonials</a></li>
+                                    <li><a href="/#footer">Contact Us</a></li>
                                     <li><a href="/login" class="button d-md-none">Login</a></li>
                                 </ul>
                                 <ul class="nav menu d-md-none">
                                     <li><a href="/">Home</a></li>
                                     <li class="active"><a href="{{ url('/informasi') }}">News</a></li>
-                                    <li><a href="#testimonials">Testimonials</a></li>
-                                    <li><a href="#footer">Contact Us</a></li>
+                                    <li><a href="/#testimonials">Testimonials</a></li>
+                                    <li><a href="/#footer">Contact Us</a></li>
                                     <li>
                                         @if (Auth::check())
                                             @if (Auth::user()->role == 'admin')

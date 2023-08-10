@@ -28,8 +28,21 @@ class AdminController extends Controller
         $tracer_lama = Histori::count();
         $user = User::count();
         $h_user  = $user - 1;
-        //    dd($h_user);
-        return view('admin.dashboard_admin', compact('tracer', 'tracer_lama', 'h_user'));
+        $prodi = Alumni::distinct('prodi')->pluck('prodi');
+        $sudah_kerja = [];
+        $belum_kerja = [];
+        $alumni_perprodi = [];
+        foreach ($prodi as $pd) {
+            $jumlahAlumniperProdi = Alumni::where('prodi', $pd)->count();
+            $alumniKerja = Alumni::where('prodi', $pd)->where('status_kerja', 'true')->count();
+            $alumniBelumKerja = $jumlahAlumniperProdi - $alumniKerja;
+            array_push($sudah_kerja, $alumniKerja);
+            array_push($belum_kerja, $alumniBelumKerja);
+            array_push($alumni_perprodi, $jumlahAlumniperProdi);
+        }
+
+        // dd($sudah_kerja);
+        return view('admin.dashboard_admin', compact('tracer', 'tracer_lama', 'h_user', 'prodi', 'sudah_kerja', 'belum_kerja', 'alumni_perprodi'));
     }
     public function testimoni()
     {

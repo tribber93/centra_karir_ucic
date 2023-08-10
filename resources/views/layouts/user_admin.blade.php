@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('admin/css/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" />
     <!-- build:css admin/css/styles/app.min.css -->
     <link rel="stylesheet" href="{{ asset('admin/css/styles/app.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('admin/css/styles/custom.css') }}" type="text/css" />
     <!-- endbuild -->
     <link rel="stylesheet" href="{{ asset('admin/css/styles/font.css') }}" type="text/css" />
 </head>
