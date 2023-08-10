@@ -169,6 +169,22 @@ class AdminController extends Controller
 
         return response()->json(['status' => 'success']);
     }
+    public function updateQuestionStatus(Request $request)
+    {
+        $questionId = $request->input('id');
+        $newStatus = $request->input('status');
+        // dd($request->all());
+
+        try {
+            $question = Questions::find($questionId);
+            $question->status = $newStatus;
+            $question->save();
+
+            return response()->json(['message' => 'Question status updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error updating question status'], 500);
+        }
+    }
     public function deleteTracerQuestion($id)
     {
         try {

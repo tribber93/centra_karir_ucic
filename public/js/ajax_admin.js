@@ -1,6 +1,5 @@
 let questionsData = [];
 let questionCount = 0;
-
 document.addEventListener('DOMContentLoaded', function() {
     const questionForms = document.getElementById('questionForm').querySelectorAll('.form-group');
     const saveBtn = document.getElementById('ptn');
@@ -12,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 function addNewQuestion() {
+    $('#simpanPertanyaan').show();
     const questionForms = document.getElementById('questionForm').querySelectorAll('.form-group');
     if (questionForms.length > 0  && questionForms.length == 1 ) {
         alert('Anda hanya dapat menambah satu pertanyaan.');
