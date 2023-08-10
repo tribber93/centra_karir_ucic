@@ -3,3 +3,4 @@
 	<path d="M 4 4 L 34 4 L 24 24 Z" fill="rgba(0,0,0,0.15)" />
 	<path d="M 4 4 L 24 4 L 4  44 Z" fill="{{app.setting.color.primary}}" />
 </svg>
+public\admin\css\images\logo.svg

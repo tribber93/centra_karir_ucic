@@ -9,6 +9,7 @@ use App\Models\HasilTracer;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use App\Exports\TracerExport;
+use App\Exports\TracerExportHistori;
 use App\Models\Histori;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
@@ -57,6 +58,14 @@ class AdminController extends Controller
 
         // dd($tracer);
         return view('admin.kelola_tracer', compact('tracer'));
+    }
+    public function backupData()
+    {
+        $tracer = Histori::with('alumni')->get();
+        $pertanyaan = Questions::where('status', 'publish')->get();
+
+        // dd($tracer);
+        return view('admin.backup_data', compact('tracer', 'pertanyaan'));
     }
     public function kelolaBerita()
     {
@@ -401,5 +410,9 @@ class AdminController extends Controller
     public function export()
     {
         return Excel::download(new TracerExport, 'tracer.xlsx');
+    }
+    public function exportTracerHistori()
+    {
+        return Excel::download(new TracerExportHistori, 'tracerHistori.xlsx');
     }
 }
