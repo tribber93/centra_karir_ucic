@@ -25,15 +25,6 @@
                     <div class="slingle-brand active">
                         <img src="img/04.png" alt="#">
                     </div>
-                    <div class="slingle-brand">
-                        <img src="img/05.png" alt="#">
-                    </div>
-                    <div class="slingle-brand active">
-                        <img src="img/04.png" alt="#">
-                    </div>
-                    <div class="slingle-brand">
-                        <img src="img/05.png" alt="#">
-                    </div>
                 </div>
                 <!-- Add Arrows -->
             </div>

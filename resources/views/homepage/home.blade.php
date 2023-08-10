@@ -8,19 +8,36 @@
         <div class="container-fluid">
             <div class="row align-items-center justify-content-center gap-4">
                 <div class="col-lg-3 col-md-5 col-9">
-                    <div class="card">
-                        <div class="row d-flex align-items-center p-2">
-                            <div class="col-3 ">
-                                <img src="assets/icons/job-seeker.png" alt="" width="75" height="75">
-                            </div>
-                            <div class="col-9">
-                                <h5 class="card-title"><strong>Lowongan Kerja</strong></h5>
-                                <p class="card-text">Pusat Pengembangan Karir dan Alumni UCIC</p>
+                    <a href="https://tracerstudy.kemdikbud.go.id/kuesioner">
+                        <div class="card">
+                            <div class="row d-flex align-items-center p-2">
+                                <div class="col-3 ">
+                                    <img src="assets/icons/clipboard.png" alt="" width="75" height="75">
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="card-title"><strong>Tracer Study</strong></h5>
+                                    <p class="card-text">Isi tracer study di situs Kemendikbud</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-5 col-9">
+                    <a href="/informasi">
+                        <div class="card">
+                            <div class="row d-flex align-items-center p-2">
+                                <div class="col-3 ">
+                                    <img src="assets/icons/job-seeker.png" alt="" width="75" height="75">
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="card-title"><strong>Lowongan Kerja</strong></h5>
+                                    <p class="card-text">Pusat Pengembangan Karir dan Alumni UCIC</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {{-- <div class="col-lg-3 col-md-5 col-9">
                     <div class="card">
                         <div class="row d-flex align-items-center p-2">
                             <div class="col-3 ">
@@ -32,20 +49,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-5 col-9">
-                    <div class="card">
-                        <div class="row d-flex align-items-center p-2">
-                            <div class="col-3 ">
-                                <img src="assets/icons/job-seeker.png" alt="" width="75" height="75">
-                            </div>
-                            <div class="col-9">
-                                <h5 class="card-title"><strong>Lowongan Kerja</strong></h5>
-                                <p class="card-text">Pusat Pengembangan Karir dan Alumni UCIC</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
