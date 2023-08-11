@@ -156,7 +156,7 @@ class AdminController extends Controller
         $questionsData = $request->questionsData;
 
         foreach ($questionsData as $questionData) {
-            $pertanyaan = $questionData['question'];
+            $pertanyaan =ucwords( $questionData['question']);
 
             // Check if the 'options' key exists in the $questionData array
             if (array_key_exists('options', $questionData)) {
@@ -178,12 +178,28 @@ class AdminController extends Controller
             // Simpan data ke database untuk setiap pertanyaan
             $tracer = new Questions();
             $tracer->pertanyaan = $pertanyaan;
-            $tracer->opsi = $optionsString;
+            $tracer->opsi = ucwords($optionsString);
             $tracer->status = 'none';
             $tracer->save();
         }
 
         return response()->json(['status' => 'success']);
+    }
+    public function updateQuestionStatus(Request $request)
+    {
+        $questionId = $request->input('id');
+        $newStatus = $request->input('status');
+        // dd($request->all());
+
+        try {
+            $question = Questions::find($questionId);
+            $question->status = $newStatus;
+            $question->save();
+
+            return response()->json(['message' => 'Question status updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error updating question status'], 500);
+        }
     }
     public function deleteTracerQuestion($id)
     {

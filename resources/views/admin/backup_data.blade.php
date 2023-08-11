@@ -61,15 +61,16 @@
             </div>
             <!-- / .modal -->
             <div class="table-responsive">
-                <table id="tracer-table" class="table table-striped b-t">
-                    <thead>
+                <table id="tracer-table" class="table table-bordered b-t">
+                    <thead style="background-color: #f5f5f5;">
                         <tr>
-                            <th>No. </th>
-                            <th>Alumni</th>
+                            <th style="height: 100px; vertical-align: middle;">No. </th>
+                            <th style="height: 100px; vertical-align: middle;">Alumni</th>
                             @foreach ($pertanyaan as $b)
-                                <th>{{ $b->pertanyaan }}</th>
+                                <th style="height: 100px; vertical-align: middle;">{{ strtolower($b->pertanyaan) }}</th>
                             @endforeach
-                            <th>Tanggal Tracer</th>
+                            <th style="height: 100px; vertical-align: middle;">Tanggal Tracer</th>
+
                         </tr>
                     </thead>
                     <tbody>

@@ -1,6 +1,5 @@
 let questionsData = [];
 let questionCount = 0;
-
 document.addEventListener('DOMContentLoaded', function() {
     const questionForms = document.getElementById('questionForm').querySelectorAll('.form-group');
     const saveBtn = document.getElementById('ptn');
@@ -12,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 function addNewQuestion() {
+    $('#simpanPertanyaan').show();
     const questionForms = document.getElementById('questionForm').querySelectorAll('.form-group');
     if (questionForms.length > 0  && questionForms.length == 1 ) {
         alert('Anda hanya dapat menambah satu pertanyaan.');
@@ -135,11 +135,15 @@ function saveQuestions() {
     optionElements.forEach((optionElement) => {
       options.push(optionElement.value);
     });
-
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+      }
     const questionData = {
       question: question,
       optionType: optionType,
-      options: options,
+      options: toTitleCase(options),
     };
 
     questionsData.push(questionData);
