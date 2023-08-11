@@ -135,11 +135,15 @@ function saveQuestions() {
     optionElements.forEach((optionElement) => {
       options.push(optionElement.value);
     });
-
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+      }
     const questionData = {
       question: question,
       optionType: optionType,
-      options: options,
+      options: toTitleCase(options),
     };
 
     questionsData.push(questionData);

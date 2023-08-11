@@ -140,7 +140,7 @@ class AdminController extends Controller
         $questionsData = $request->questionsData;
 
         foreach ($questionsData as $questionData) {
-            $pertanyaan = $questionData['question'];
+            $pertanyaan =ucwords( $questionData['question']);
 
             // Check if the 'options' key exists in the $questionData array
             if (array_key_exists('options', $questionData)) {
@@ -162,7 +162,7 @@ class AdminController extends Controller
             // Simpan data ke database untuk setiap pertanyaan
             $tracer = new Questions();
             $tracer->pertanyaan = $pertanyaan;
-            $tracer->opsi = $optionsString;
+            $tracer->opsi = ucwords($optionsString);
             $tracer->status = 'none';
             $tracer->save();
         }

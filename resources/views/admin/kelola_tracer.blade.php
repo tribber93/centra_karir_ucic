@@ -100,14 +100,18 @@
                                             <label
                                                 onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')"
                                                 style="font-weight: 600">{{ $data['pertanyaan'] }}
+
                                                 <span id="statusText-{{ $data['id'] }}"
                                                     style="font-size: 10px; color:{{ $data['status'] === 'publish' ? 'green' : 'red' }}">
                                                     {{ $data['status'] === 'publish' ? '(Publish)' : '(Disabled)' }}
                                                 </span>
-                                            </label>
 
-                                            <div class="form-group row form-input" data-target="tracerCheckbox">
-                                                <input type="text" name="{{ $data['id'] }}"
+
+
+                                            </label>
+                                            <span class="btn btn-success" onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')">Aksi</span>
+                                            <div class="form-group r ow form-input" data-target="tracerCheckbox">
+                                                {{-- <input type="text" name="{{ $data['id'] }}" --}}
                                                     class="additional-input3 form-control" id="{{ $data['id'] }}"
                                                     onchange="handleInputChange(this)">
                                             </div>
@@ -122,6 +126,7 @@
                                             <i class="indigo"></i>
                                             <span></span>
                                         </label>
+
                                         <td onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')"
                                             class="col-12 text-lowercase">
 
