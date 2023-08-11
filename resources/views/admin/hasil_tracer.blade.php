@@ -17,7 +17,7 @@
                 <div class="m-2 float-right">
                     <a href="/export/tracer ">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            <span><i class="fa fa-plus"></i> </span> Cetak
+                            </span> Export ke Excel
                         </button>
                     </a>
 
@@ -66,9 +66,12 @@
                         <tr>
                             <th>No. </th>
                             <th>Alumni</th>
-                            @foreach ($pertanyaan as $b)
-                                <th>{{ $b->pertanyaan }}</th>
-                            @endforeach
+                            @if (count($tracer) > 0)
+                                @foreach ($tracer[0]->jawaban as $b)
+                                    <th>{{ Str::limit($b['pertanyaan'], 30) }}</th>
+                                @endforeach
+
+                            @endif
                             <th>Tanggal Tracer</th>
                         </tr>
                     </thead>
@@ -80,11 +83,11 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $data->alumni->nama_alumni }}</td>
-                                @foreach ($data->jawaban as $index => $item)
-                                    @if ($index >= 0)
-                                        <!-- Kode yang ingin diulang untuk setiap $item dalam koleksi -->
-                                        <td> {{ $item['value'] }}</td>
-                                    @endif
+                                @foreach ($data->jawaban as $item)
+                                    {{-- @if ($index >= 0) --}}
+                                    <!-- Kode yang ingin diulang untuk setiap $item dalam koleksi -->
+                                    <td> {{ $item['value'] }}</td>
+                                    {{-- @endif --}}
                                 @endforeach
                                 {{-- @foreach ($data->jawaban as $jawaban)
                             <td>
