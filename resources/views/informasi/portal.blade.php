@@ -1,5 +1,10 @@
 @extends('layouts.master')
-@section('judul', 'Portal Berita')
+@if (url()->current() == url('/berita'))
+    @section('judul', 'Portal Berita')
+@else
+    @section('judul', 'Portal Lowongan')
+@endif
+{{-- @section('judul', 'Portal Berita') --}}
 @section('konten')
     {{-- Navbar --}}
     <!-- Header Area -->
