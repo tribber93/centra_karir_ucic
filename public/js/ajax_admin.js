@@ -52,6 +52,12 @@ function addNewQuestion() {
     optionTypeRadio.textContent = 'Radio Button';
     optionTypeSelect.appendChild(optionTypeRadio);
 
+    // Tambahkan opsi "Yes / No"
+    const optionTypeYesNo = document.createElement('option');
+    optionTypeYesNo.value = 'yesno';
+    optionTypeYesNo.textContent = 'Yes / No';
+    optionTypeSelect.appendChild(optionTypeYesNo);
+
     const optionTypeSelectOption = document.createElement('option');
     optionTypeSelectOption.value = 'text';
     optionTypeSelectOption.textContent = 'text';
@@ -74,7 +80,7 @@ function addNewQuestion() {
 function addOption(questionNumber) {
     const optionsContainer = document.getElementById(`optionsContainer${questionNumber}`);
     const optionType = document.querySelector(`select[name=optionType${questionNumber}]`).value;
-
+    const optionCount = optionsContainer.childElementCount / 2 + 1;
     if (optionType === 'radio') {
         const optionCount = optionsContainer.childElementCount / 2 + 1;
 
@@ -92,6 +98,48 @@ function addOption(questionNumber) {
         deleteOptionBtn.onclick = () => deleteOption(questionNumber, optionCount);
         optionsContainer.appendChild(newOption);
         optionsContainer.appendChild(deleteOptionBtn);
+    }
+    else if (optionType === 'yesno') {
+        const newOptionYes = document.createElement('input');
+        newOptionYes.setAttribute('type', 'radio');
+        newOptionYes.setAttribute('name', `question${questionNumber}Option${optionCount}`);
+        newOptionYes.setAttribute('value', 'yes');
+        newOptionYes.classList.add('form-check-input');
+        optionsContainer.appendChild(newOptionYes);
+
+        const labelYes = document.createElement('label');
+        labelYes.textContent = 'Ya';
+        labelYes.classList.add('form-check-label');
+        optionsContainer.appendChild(labelYes);
+
+        const inputIfYes = document.createElement('input');
+        inputIfYes.setAttribute('type', 'text');
+        inputIfYes.setAttribute('name', `question${questionNumber}Option${optionCount}Input`);
+        inputIfYes.setAttribute('placeholder', 'Masukkan jika Ya dipilih');
+        inputIfYes.classList.add('form-control', 'ml-2', 'mt-2');
+        inputIfYes.style.display = 'none'; // Sembunyikan awalnya
+        optionsContainer.appendChild(inputIfYes);
+
+        newOptionYes.addEventListener('change', function() {
+            if (newOptionYes.checked) {
+                inputIfYes.style.display = 'block'; // Tampilkan jika Ya dipilih
+            } else {
+                inputIfYes.style.display = 'none'; // Sembunyikan jika lain dipilih
+            }
+        });
+
+        const newOptionNo = document.createElement('input');
+        newOptionNo.setAttribute('type', 'radio');
+        newOptionNo.setAttribute('name', `question${questionNumber}Option${optionCount}`);
+        newOptionNo.setAttribute('value', 'no');
+        newOptionNo.classList.add('form-check-input');
+        optionsContainer.appendChild(newOptionNo);
+
+        const labelNo = document.createElement('label');
+        labelNo.textContent = 'Tidak';
+        labelNo.classList.add('form-check-label');
+        optionsContainer.appendChild(labelNo);
+
     }
 }
 
@@ -145,6 +193,22 @@ function saveQuestions() {
     optionElements.forEach((optionElement) => {
       options.push(optionElement.value);
     });
+    if (optionType === 'yesno') {
+        const optionYesRadio = optionsContainer.querySelector('input[value="yes"]');
+        if (optionYesRadio && optionYesRadio.checked) {
+          const inputIfYes = optionsContainer.querySelector('input[type="text"]');
+          options.push({
+            value: "yes",
+            text: "Ya",
+            input: inputIfYes.value
+          });
+        } else {
+          options.push({
+            value: "no",
+            text: "Tidak"
+          });
+        }
+      }
     const titleCaseOptions = options.map((option) => toTitleCase(option));
     const questionData = {
       question: question,
