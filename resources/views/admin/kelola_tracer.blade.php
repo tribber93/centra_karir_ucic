@@ -109,104 +109,97 @@
 
 
                                             </label>
-                                            {{-- <span class="btn btn-success"
-                                                onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')">Aksi</span> --}}
-                                            <div class="form-group r ow form-input" data-target="tracerCheckbox">
-                                                <input type="text" name="{{ $data['id'] }}"
-                                                    class="additional-input3 form-control" id="{{ $data['id'] }}"
-                                                    onchange="handleInputChange(this)">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @elseif ($data['opsi'] === '["SANGAT BAIK","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
-                                    <tr>
-                                        <label class="md-check" id="statusQuestion-{{ $data['id'] }}">
-                                            <input type="checkbox" class="has-value"
-                                                onclick="updateStatusCheckbox({{ $data['id'] }})"
-                                                {{ $data['status'] === 'publish' ? 'checked' : '' }}>
-                                            <i class="indigo"></i>
-                                            <span></span>
-                                        </label>
-
-                                        <td onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')"
-                                            class="col-12 text-lowercase">
-
-                                            <label class="md-check" id="statusQuestion-{{ $data['id'] }}">
-                                                <input type="checkbox" class="has-value"
-                                                    onclick="updateStatusCheckbox({{ $data['id'] }})"
-                                                    {{ $data['status'] === 'publish' ? 'checked' : '' }}>
-                                                <i class="indigo"></i>
-                                                <span></span>
-                                            </label>
-
-                                            {{ Str::ucfirst($data['pertanyaan']) }}
-
-
-                                        </td>
-                                        @foreach (json_decode($data['opsi']) as $opsi)
-                                            <td class="" style="padding-right: 40px">
-
-                                                <label class="md-check">
-
-                                                    <input type="radio" name="{{ $data['id'] }}"
-                                                        value="{{ $opsi }}" class=""
-                                                        onclick="handleRadioClick(this)">
-                                                    <i class="blue"></i>
-                                                </label>
-                                            </td>
-                                        @endforeach
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td class="row" colspan="6">
-                                            <label class="md-check" id="statusQuestion-{{ $data['id'] }}">
-                                                <input type="checkbox" class="has-value"
-                                                    onclick="updateStatusCheckbox({{ $data['id'] }})"
-                                                    {{ $data['status'] === 'publish' ? 'checked' : '' }}>
-                                                <i class="indigo"></i>
-                                                <span></span>
-                                            </label>
-                                            <div class="option form-input " data-target="tracerCheckbox">
-
-
-                                                <h6 onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')"
-                                                    class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
-                                                <span id="statusText-{{ $data['id'] }}"
-                                                    style="font-size: 10px; color:{{ $data['status'] === 'publish' ? 'green' : 'red' }}">
-                                                    {{ $data['status'] === 'publish' ? '(Publish)' : '(Disabled)' }}
-                                                </span>
-                                                {{-- <br> --}}
-
-                                                @foreach (json_decode($data['opsi']) as $opsi)
-                                                    <div class="form-group row pl-3">
-                                                        <label class="md-check text-lowercase">
-                                                            <input type="radio" name="{{ $data['id'] }}"
-                                                                value="{{ $opsi }}"
-                                                                onclick="handleRadioClick(this)">
-
-                                                            <i class="blue"></i>
-                                                            {{ $opsi }}
-
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                                <input type="text" class="form-control"
-                                                    name="{{ $data['id'] }}-text" class="form-control"
-                                                    style="display: none;" id="{{ $data['id'] }}-text"
-                                                    value="Tulis jika lainnya">
-
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                                            {{-- <span class="btn btn-success" onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')">Aksi</span> --}}
+                                            {{-- <div class="form-group r ow form-input" data-target="tracerCheckbox"> --}}
+                                            {{-- <input type="text" name="{{ $data['id'] }}" --}}
+                                            {{-- class="additional-input3 form-control" id="{{ $data['id'] }}" --}}
+                                            {{-- onchange="handleInputChange(this)"> --}}
                 </div>
-            </div>
+                </td>
+                </tr>
+            @elseif ($data['opsi'] === '["SANGAT BAIK","BESAR","CUKUP BESAR","KURANG","TIDAK SAMA SEKALI"]')
+                <tr>
+                    <label class="md-check" id="statusQuestion-{{ $data['id'] }}">
+                        <input type="checkbox" class="has-value" onclick="updateStatusCheckbox({{ $data['id'] }})"
+                            {{ $data['status'] === 'publish' ? 'checked' : '' }}>
+                        <i class="indigo"></i>
+                        <span></span>
+                    </label>
 
+                    <td onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')"
+                        class="col-12 text-lowercase">
+
+                        <label class="md-check" id="statusQuestion-{{ $data['id'] }}">
+                            <input type="checkbox" class="has-value" onclick="updateStatusCheckbox({{ $data['id'] }})"
+                                {{ $data['status'] === 'publish' ? 'checked' : '' }}>
+                            <i class="indigo"></i>
+                            <span></span>
+                        </label>
+
+                        {{ Str::ucfirst($data['pertanyaan']) }}
+
+
+                    </td>
+                    @foreach (json_decode($data['opsi']) as $opsi)
+                        <td class="" style="padding-right: 40px">
+
+                            <label class="md-check">
+
+                                <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}"
+                                    class="" onclick="handleRadioClick(this)">
+                                <i class="blue"></i>
+                            </label>
+                        </td>
+                    @endforeach
+                </tr>
+            @else
+                <tr>
+                    <td class="row" colspan="6">
+                        <label class="md-check" id="statusQuestion-{{ $data['id'] }}">
+                            <input type="checkbox" class="has-value" onclick="updateStatusCheckbox({{ $data['id'] }})"
+                                {{ $data['status'] === 'publish' ? 'checked' : '' }}>
+                            <i class="indigo"></i>
+                            <span></span>
+                        </label>
+                        <div class="option form-input " data-target="tracerCheckbox">
+
+
+                            <h6 onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')"
+                                class="font-weight-bold">{{ $data['pertanyaan'] }}</h6>
+                            <span id="statusText-{{ $data['id'] }}"
+                                style="font-size: 10px; color:{{ $data['status'] === 'publish' ? 'green' : 'red' }}">
+                                {{ $data['status'] === 'publish' ? '(Publish)' : '(Disabled)' }}
+                            </span>
+                            {{-- <br> --}}
+
+                            @foreach (json_decode($data['opsi']) as $opsi)
+                                <div class="form-group row pl-3">
+                                    <label class="md-check text-lowercase">
+                                        <input type="radio" name="{{ $data['id'] }}" value="{{ $opsi }}"
+                                            onclick="handleRadioClick(this)">
+
+                                        <i class="blue"></i>
+                                        {{ $opsi }}
+
+                                    </label>
+                                </div>
+                            @endforeach
+                            <input type="text" class="form-control" name="{{ $data['id'] }}-text"
+                                class="form-control" style="display: none;" id="{{ $data['id'] }}-text"
+                                value="Tulis jika lainnya">
+
+
+                        </div>
+                    </td>
+                </tr>
+                @endif
+                @endforeach
+                </tbody>
+                </table>
+            </div>
         </div>
+
+    </div>
     </div>
 
     <div class="ml-3">

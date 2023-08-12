@@ -88,6 +88,7 @@ function addOption(questionNumber) {
         deleteOptionBtn.type = 'button';
         deleteOptionBtn.classList.add('btn', 'btn-danger', 'ml-2');
         deleteOptionBtn.textContent = 'Hapus';
+        deleteOptionBtn.setAttribute('data-option', optionCount); // Tambahkan atribut data-option
         deleteOptionBtn.onclick = () => deleteOption(questionNumber, optionCount);
         optionsContainer.appendChild(newOption);
         optionsContainer.appendChild(deleteOptionBtn);
@@ -117,7 +118,16 @@ function updateOptions(questionNumber) {
         optionsContainer.appendChild(deleteOptionBtn);
     }
 }
+function toTitleCase(str) {
+    const words = str.split(' ');
 
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }
+
+    return words.join(' ');
+  }
 function saveQuestions() {
   questionsData = [];
 
@@ -135,15 +145,11 @@ function saveQuestions() {
     optionElements.forEach((optionElement) => {
       options.push(optionElement.value);
     });
-    function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-      }
+    const titleCaseOptions = options.map((option) => toTitleCase(option));
     const questionData = {
       question: question,
       optionType: optionType,
-      options: toTitleCase(options),
+      options: titleCaseOptions,
     };
 
     questionsData.push(questionData);
@@ -182,13 +188,14 @@ console.log(questionsData);
     });
   console.log('Data Pertanyaan:', questionsData);
 }
+
 function deleteOption(questionNumber, optionCount) {
-  const optionsContainer = document.getElementById(`optionsContainer${questionNumber}`);
-  const option = optionsContainer.querySelector(`input[name="question${questionNumber}Option${optionCount}"]`);
-  const deleteOptionBtn = optionsContainer.querySelector('button.btn-danger');
-  optionsContainer.removeChild(option);
-  optionsContainer.removeChild(deleteOptionBtn);
-}
+    const optionsContainer = document.getElementById(`optionsContainer${questionNumber}`);
+    const option = optionsContainer.querySelector(`input[name="question${questionNumber}Option${optionCount}"]`);
+    const deleteOptionBtn = optionsContainer.querySelector(`button[data-option="${optionCount}"]`); // Menggunakan atribut data-option
+    optionsContainer.removeChild(option);
+    optionsContainer.removeChild(deleteOptionBtn);
+  }
 
 function deleteQuestion(questionNumber) {
   const questionForm = document.getElementById('questionForm');
