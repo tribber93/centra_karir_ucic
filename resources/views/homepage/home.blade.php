@@ -23,7 +23,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-5 col-9">
-                    <a href="/informasi">
+                    <a href="/lowongan">
                         <div class="card">
                             <div class="row d-flex align-items-center p-2">
                                 <div class="col-3 ">

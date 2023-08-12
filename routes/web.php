@@ -116,7 +116,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
 });
 // Route::auth();
 
-Route::get('/informasi', [HomeController::class, 'portal'])->name('semua_informasi');
+Route::get('/{jenis_informasi}', [HomeController::class, 'portal'])->name('semua_informasi');
 
 Route::get('/input_user', function () {
     User::create([

@@ -9,12 +9,13 @@
     {{-- Konten --}}
     <section id="berita" class="overflow-hidden">
         <div class="container-fluid judul2 mb-5 px-5">
-            <h1><span style="color: #0352a1">|</span> Portal Informasi</h1>
+            <h1><span style="color: #0352a1">|</span> Portal {{ url()->current() == url('/berita') ? 'Berita' : 'Lowongan' }}
+            </h1>
         </div>
         <div class="row justify-content-around">
             <div class="col-12 col-md-7">
                 <div class="row d-flex justify-content-start">
-                    @foreach ($semua_informasi as $info)
+                    @foreach ($informasi as $info)
                         <div class="col-md-6 col-12">
                             <!-- Single Blog -->
                             <div class="post-container">
@@ -93,26 +94,45 @@
                     </div>
                     <div class="col-10 col-md-12 mb-5">
                         <div class="card">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-center bg-light">
-                                    <h4 class="font-weight-bold">Lowongan</h4>
-                                </li>
-                                <li class="list-group-item mt-3">
-                                    <h5 class="card-title">Junior Web-Developer</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">12 Juli 2023</h6>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="card-link">Selengkapnya...</a>
-                                </li>
-                                <li class="list-group-item mt-3">
-                                    <h5 class="card-title">Junior Web-Developer</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">12 Juli 2023</h6>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="card-link">Selengkapnya...</a>
-                                </li>
+                            @if (url()->current() == url('/lowongan'))
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center bg-light">
+                                        <h4 class="font-weight-bold">Berita</h4>
+                                    </li>
 
-                            </ul>
+                                    </li>
+                                    @foreach ($berita as $item)
+                                        <li class="list-group-item mt-3">
+                                            <h5 class="card-title">{{ $item->judul }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                {{ $item->created_at->diffForHumans() }}</h6>
+                                            <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                            <a href="/detail-informasi/{{ $item->id }} "
+                                                class="card-link">Selengkapnya...</a>
+                                        </li>
+                                    @endforeach
+
+
+                                </ul>
+                            @endif
+                            @if (url()->current() == url('/berita'))
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center bg-light">
+                                        <h4 class="font-weight-bold">Lowongan</h4>
+                                    </li>
+                                    @foreach ($lowongan as $item)
+                                        <li class="list-group-item mt-3">
+                                            <h5 class="card-title">{{ Str::limit($item->judul, 100) }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                {{ $item->created_at->diffForHumans() }}</h6>
+                                            <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                            <a href="/detail-informasi/{{ $item->id }} "
+                                                class="card-link">Selengkapnya...</a>
+                                        </li>
+                                    @endforeach
+
+                                </ul>
+                            @endif
                         </div>
                     </div>
 

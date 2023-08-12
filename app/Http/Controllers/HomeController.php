@@ -26,24 +26,20 @@ class  HomeController extends Controller
     {
         // //data alumni
         $kata_alumni = Alumni::where('status_testimoni', 1)->get()->take(5);
-        //data berita
-        $informasi = Informasi::latest()->take(3)->get();
+        $informasi = Informasi::all();
+        $berita = Informasi::where('jenis_informasi', 'berita')->latest()->take(3)->get();
         $partner = Partner::all();
-        // foreach ($informasi as $info) {
-        //     dd($info->konten);
-        // }
 
 
-        // data partner
-        // data alamat Kampuss
-        // dd($kata_alumni);
-        return view('homepage.home', compact('informasi', 'kata_alumni', 'partner'));
+        return view('homepage.home', compact('berita', 'kata_alumni', 'partner'));
     }
-    public function portal()
+    public function portal(String $jenis_informasi)
     {
-        $semua_informasi = Informasi::latest()->get();
+        $informasi = Informasi::latest()->where('jenis_informasi', $jenis_informasi)->get();
+        $lowongan = Informasi::where('jenis_informasi', 'lowongan')->take(5)->get();
+        $berita = Informasi::where('jenis_informasi', 'berita')->take(5)->get();
 
-        return view('informasi.portal', compact('semua_informasi'));
+        return view('informasi.portal', compact('informasi', 'lowongan', 'berita'));
     }
 
 
