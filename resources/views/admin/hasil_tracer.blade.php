@@ -66,8 +66,9 @@
                         <tr>
                             <th style="height: 100px; vertical-align: middle;">No. </th>
                             <th style="height: 100px; vertical-align: middle;">Alumni</th>
-                            @foreach ($pertanyaan as $b)
-                                <th style="height: 100px; vertical-align: middle;">{{ strtolower($b->pertanyaan) }}</th>
+                            @foreach ($tracer[0]->jawaban as $b)
+                                <th width="700px" style=" vertical-align: middle;">
+                                    {{ strtolower($b['pertanyaan']) }}</th>
                             @endforeach
                             <th style="height: 100px; vertical-align: middle;">Tanggal Tracer</th>
                         </tr>
