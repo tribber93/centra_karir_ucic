@@ -35,7 +35,8 @@ class  HomeController extends Controller
     }
     public function portal(String $jenis_informasi)
     {
-        $informasi = Informasi::latest()->where('jenis_informasi', $jenis_informasi)->get();
+        $informasi = Informasi::latest()->where('jenis_informasi', $jenis_informasi)->paginate(4);
+        // dd($informasi);
         $lowongan = Informasi::where('jenis_informasi', 'lowongan')->take(5)->get();
         $berita = Informasi::where('jenis_informasi', 'berita')->take(5)->get();
 
