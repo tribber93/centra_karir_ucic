@@ -89,7 +89,11 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $testimoni->links() }}
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                <ul class="pagination my-5">
+                    {{ $testimoni->links() }}
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

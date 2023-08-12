@@ -100,6 +100,11 @@
                     </tbody>
                 </table>
             </div>
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                <ul class="pagination my-5">
+                    {{$tracer->links()}}
+                </ul>
+            </nav>
 
         </div>
     </div>

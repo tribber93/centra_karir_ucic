@@ -53,10 +53,8 @@ class AdminController extends Controller
     }
     public function getDetailAlumni($id)
     {
-        //
         $testimoni = Alumni::find($id);
 
-        // Mengembalikan data dalam format JSON
         return response()->json($testimoni);
     }
 
@@ -74,7 +72,7 @@ class AdminController extends Controller
     }
     public function backupData()
     {
-        $tracer = Histori::with('alumni')->get();
+        $tracer = Histori::with('alumni')->paginate(2);
         $pertanyaan = Questions::where('status', 'publish')->get();
 
         // dd($tracer);
@@ -158,24 +156,18 @@ class AdminController extends Controller
         foreach ($questionsData as $questionData) {
             $pertanyaan =ucwords( $questionData['question']);
 
-            // Check if the 'options' key exists in the $questionData array
             if (array_key_exists('options', $questionData)) {
                 $optionsList = $questionData['options'];
             } else {
-                // If 'options' key is not present or undefined, set it as an empty array
                 $optionsList = [];
             }
 
-            // Handle the case where the optionsList is an empty array
             if (empty($optionsList)) {
-                // Convert an empty array to the string "[]"
                 $optionsString = "[]";
             } else {
-                // Convert the array to a JSON-encoded string
                 $optionsString = json_encode($optionsList);
             }
 
-            // Simpan data ke database untuk setiap pertanyaan
             $tracer = new Questions();
             $tracer->pertanyaan = $pertanyaan;
             $tracer->opsi = ucwords($optionsString);
@@ -204,16 +196,11 @@ class AdminController extends Controller
     public function deleteTracerQuestion($id)
     {
         try {
-            // Find the question by ID
             $question = Questions::findOrFail($id);
-
-            // Delete the question
             $question->delete();
 
-            // Return a success response
             return response()->json(['message' => 'Question deleted successfully'], 200);
         } catch (\Exception $e) {
-            // If an error occurs during deletion, return an error response
             return response()->json(['message' => 'Failed to delete question'], 500);
         }
     }
@@ -246,75 +233,15 @@ class AdminController extends Controller
     public function showTracer()
     {
         //
-        $tracer = HasilTracer::with('alumni')->get();
+        $tracer = HasilTracer::with('alumni')->paginate(5);
         $pertanyaan = Questions::where('status', 'publish')->get();
-
-        // foreach ($tracer as $data) {
-        //     // Lakukan foreach pada setiap pertanyaan
-        //     foreach ($pertanyaan as $pertanyaanItem) {
-        //         // Cari jawaban yang sesuai dengan pertanyaan saat ini
-        //         $jawaban = collect($data->jawaban)->where('pertanyaan', $pertanyaanItem->pertanyaan)->first();
-
-        //         // Jika ada jawaban yang sesuai, tampilkan
-        //         if ($jawaban) {
-        //             echo "ID Alumni: " . $data->alumni->id . "<br>";
-        //             echo "Nama Alumni: " . $data->alumni->nama . "<br>";
-        //             echo "Pertanyaan: " . $pertanyaanItem->pertanyaan . "<br>";
-        //             echo "Jawaban: " . $jawaban['value'] . "<br><br>";
-        //         } else {
-        //             // Jika tidak ada jawaban yang sesuai, tampilkan pesan
-        //             echo "ID Alumni: " . $data->alumni->id . "<br>";
-        //             echo "Nama Alumni: " . $data->alumni->nama . "<br>";
-        //             echo "Pertanyaan: " . $pertanyaanItem->pertanyaan . "<br>";
-        //             echo "Jawaban: Tidak ada jawaban <br><br>";
-        //         }
-        //     }
-        // }
         return view("admin.hasil_tracer", compact('tracer', 'pertanyaan'));
-
-
-
-        // foreach ($tracer as $hasilTracer) {
-        //     // Access the 'alumni' relation on the current $hasilTracer model
-        //     $alumni = $hasilTracer->alumni;
-        // $dataPertanyaan=   HasilTracer::get();
-
-        //         $kolom = [];
-
-        // Iterasi data pertanyaan
-        // foreach ($tracer as $data) {
-        //     // Ambil nama pertanyaan
-        //     $pertanyaan = $data['pertanyaan'];
-
-        //     // Tambahkan kolom baru ke dalam array
-        //     $kolom[] = [
-        //         'data' => $pertanyaan, // Nama kolom sesuai pertanyaan
-        //         'title' => $pertanyaan, // Judul kolom di tabel
-        //     ];
-        // }
-
-        //         // Gunakan $kolom dalam pembuatan tabel, misalnya menggunakan plugin DataTables
-        //         // Contoh menggunakan DataTables
-        //         // return datatables()->of($data)
-        //         //     ->addColumn($kolom) // Tambahkan kolom dinamis berdasarkan pertanyaan
-        // //         //     ->toJson();
-        // $hasilTracer = HasilTracer::find(72);
-        // dd($hasilTracer->getOriginal());
-        //     // Now you can access the attributes of the 'alumni' model
-        //     // For example, if 'alumni' has a 'name' attribute, you can access it like this:
-        //     $alumniName = $alumni->nama_alumni;
-        //     dd($alumniName);
-        // }
-        // dd(count($tracer));
-
 
     }
     public function getCount(Request $request)
     {
 
-        // sleep(2);
         if ($request->input('data') == "ok") {
-            # code...
             $currentDate = Carbon::now();
             $threeMonthsAgo = $currentDate->subMonths(3);
             // $tracer = HasilTracer::get();
@@ -322,8 +249,6 @@ class AdminController extends Controller
             $tracer = HasilTracer::whereDate('created_at', '<=', $threeMonthsAgo)->get();
             $backupCount = 0;
             foreach ($tracer as $i) {
-
-
                 $backupCount++;
             }
             return response()->json(['status' => 'OK', 'data' => ['count' => $backupCount]]);
@@ -332,9 +257,7 @@ class AdminController extends Controller
     public function backup(Request $request)
     {
 
-        // sleep(2);
         if ($request->input('data') == "ok") {
-            # code...
             $currentDate = Carbon::now();
             $threeMonthsAgo = $currentDate->subMonths(3);
             // $tracer = HasilTracer::get();
@@ -358,18 +281,12 @@ class AdminController extends Controller
     }
     public function getQuestionById(Request $request)
     {
-        // Get the ID of the question from the request
         $questionId = $request->input('id');
-
-        // Fetch the question data from the database by ID
         $question = Questions::find($questionId);
 
         if (!$question) {
-            // If the question is not found, return an error response
             return response()->json(['status' => 'error', 'message' => 'Question not found'], 404);
         }
-
-        // Convert the question data to an array and return it in the response
         return response()->json(['status' => 'success', 'data' => $question->toArray()]);
     }
 
@@ -395,6 +312,7 @@ class AdminController extends Controller
     {
         $partner = Partner::find($id);
         $partner->nama_partner = $request->editNamaPartner;
+
         if ($request->editLogoPartner != null) {
             $file_nm = $request->editLogoPartner->getClientOriginalName();
             $image = $request->editLogoPartner->move('partner', $file_nm);
@@ -411,6 +329,14 @@ class AdminController extends Controller
         $partner->delete();
 
         return redirect()->back()->with('success', 'partner berhasil dihapus');
+    }
+    public function export()
+    {
+        return Excel::download(new TracerExport, 'tracer.xlsx');
+    }
+    public function exportTracerHistori()
+    {
+        return Excel::download(new TracerExportHistori, 'tracerHistori.xlsx');
     }
 
     /**
@@ -436,12 +362,5 @@ class AdminController extends Controller
     {
         //
     }
-    public function export()
-    {
-        return Excel::download(new TracerExport, 'tracer.xlsx');
-    }
-    public function exportTracerHistori()
-    {
-        return Excel::download(new TracerExportHistori, 'tracerHistori.xlsx');
-    }
+
 }

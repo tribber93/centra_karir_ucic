@@ -84,7 +84,6 @@ class InformasiController extends Controller
         $informasi->jenis_informasi = $request->jenis_informasi;
         $informasi->kategori = $request->kategori;
         $informasi->konten = $request->konten;
-        // $informasi->gambar='';
         if ($request->gambarInformasi == null) {
             $informasi->gambar = $informasi->gambar;
         } else {

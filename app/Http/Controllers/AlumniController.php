@@ -38,11 +38,7 @@ class AlumniController extends Controller
         // tracing
         $tracer = Questions::where('status', 'publish')
             ->get();
-        // $tracer = $trace->sortBy(function ($item) {
-        //     return $item->nama_perusahaan ? 0 : 1;
-        // });
-        // $jsonPertanyaan = json_encode($tracer);
-        // $dataArray = json_decode($jsonPertanyaan, true);
+
         // dd($tracer);
 
         // status tracer 0 dan 1 ye:)
@@ -54,15 +50,11 @@ class AlumniController extends Controller
 
     public function forum()
     {
-        //
         return view('alumni.forum_diskusi');
     }
     public function simpan_tracer(Request $request)
     {
-        // Lakukan validasi data jika diperlukan
-        // $request->validate([...]);
 
-        // Ambil data dari request
         $formData = $request->all();
         $alumni = Alumni::where('user_id', Auth::user()->id)->first();
         // $no_telp = Alumni::where('user_id', Auth::user()->id)->get('no_telpon');
@@ -82,22 +74,13 @@ class AlumniController extends Controller
             # code...
         }
 
-        // Simpan data ke tabel yang diinginkan
-        // Misalnya, jika Anda menggunakan Eloquent ORM pada Laravel:
-        // YourModel::create($formData);
-
         $alumni->save();
 
-        // Jika berhasil disimpan, kembalikan respons ke klien (misalnya, status berhasil)
         return response()->json(['status' => 'success'],);
     }
     public function simpan(Request $request)
     {
-        // Lakukan validasi data jika diperlukan
-        // $request->validate([...]);
 
-        // Ambil data dari request
-        // $formData = $request->all();
         $alumni = Alumni::where('user_id', Auth::user()->id)->first();
 
         $hasilTracer = new HasilTracer;
@@ -112,22 +95,17 @@ class AlumniController extends Controller
     }
     public function getPertanyaan()
     {
-        //
-
 
         return view('alumni.forum_diskusi');
     }
     public function getPertanyaanById(Request $request)
     {
-        //
+
 
 
         $id = $request->query('id');
-
-        // Fetch 'pertanyaan' from the 'quiesioner' table based on the 'id'
         $quiesionerData = Questions::where('id', $id)->first();
 
-        // Return the 'pertanyaan' data as JSON response
         return response()->json(['pertanyaan' => $quiesionerData->pertanyaan]);
     }
 

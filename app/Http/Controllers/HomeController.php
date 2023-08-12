@@ -13,10 +13,7 @@ use Illuminate\Http\Request;
 
 class  HomeController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+
     public function admin()
     {
 
@@ -36,7 +33,6 @@ class  HomeController extends Controller
     public function portal(String $jenis_informasi)
     {
         $informasi = Informasi::latest()->where('jenis_informasi', $jenis_informasi)->paginate(4);
-        // dd($informasi);
         $lowongan = Informasi::where('jenis_informasi', 'lowongan')->take(5)->get();
         $berita = Informasi::where('jenis_informasi', 'berita')->take(5)->get();
 
@@ -79,7 +75,6 @@ class  HomeController extends Controller
             $jawaban = $hasilTracer->jawaban;
 
             echo "Pertanyaan: {$question->pertanyaan} ==> : { $jawaban} \n";
-            // ... and other properties of the Questions model
         }
     }
     public function tracer()

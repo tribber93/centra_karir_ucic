@@ -129,7 +129,6 @@ class DiskusiController extends Controller
         // dd($request->all());
         return response()->json(['status' => 'success', 'message' => 'Data berhasil disimpan ke tabel.']);
 
-        // return view('diskusi.detail_diskusi', compact('diskusi'));
     }
     public function editKomentar(Request $request, $id)
     {
@@ -149,8 +148,8 @@ class DiskusiController extends Controller
     {
 
         $dk  =  DiskusiKomentar::find($id);
-
         $dk->delete();
+
         return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus broo.']);
     }
     public function updateStatusTestimoni(Request $request, $id)
@@ -159,9 +158,7 @@ class DiskusiController extends Controller
         $dk  =  Alumni::find($id);
         // dd($id);
         $status = $request->input('status');
-
         $dk->status_testimoni = $status;
-
 
         $dk->save();
         return response()->json(['status' => 'success', 'message' => 'Data berhasil masuk broo.']);
