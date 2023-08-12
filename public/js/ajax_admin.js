@@ -88,6 +88,7 @@ function addOption(questionNumber) {
         deleteOptionBtn.type = 'button';
         deleteOptionBtn.classList.add('btn', 'btn-danger', 'ml-2');
         deleteOptionBtn.textContent = 'Hapus';
+        deleteOptionBtn.setAttribute('data-option', optionCount); // Tambahkan atribut data-option
         deleteOptionBtn.onclick = () => deleteOption(questionNumber, optionCount);
         optionsContainer.appendChild(newOption);
         optionsContainer.appendChild(deleteOptionBtn);
@@ -187,13 +188,14 @@ console.log(questionsData);
     });
   console.log('Data Pertanyaan:', questionsData);
 }
+
 function deleteOption(questionNumber, optionCount) {
-  const optionsContainer = document.getElementById(`optionsContainer${questionNumber}`);
-  const option = optionsContainer.querySelector(`input[name="question${questionNumber}Option${optionCount}"]`);
-  const deleteOptionBtn = optionsContainer.querySelector('button.btn-danger');
-  optionsContainer.removeChild(option);
-  optionsContainer.removeChild(deleteOptionBtn);
-}
+    const optionsContainer = document.getElementById(`optionsContainer${questionNumber}`);
+    const option = optionsContainer.querySelector(`input[name="question${questionNumber}Option${optionCount}"]`);
+    const deleteOptionBtn = optionsContainer.querySelector(`button[data-option="${optionCount}"]`); // Menggunakan atribut data-option
+    optionsContainer.removeChild(option);
+    optionsContainer.removeChild(deleteOptionBtn);
+  }
 
 function deleteQuestion(questionNumber) {
   const questionForm = document.getElementById('questionForm');
