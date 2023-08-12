@@ -109,11 +109,11 @@
 
 
                                             </label>
-                                            <span class="btn btn-success" onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')">Aksi</span>
-                                            <div class="form-group r ow form-input" data-target="tracerCheckbox">
+                                            {{-- <span class="btn btn-success" onclick="editQuestion({{ $data['id'] }}, '{{ $data['pertanyaan'] }}', '{{ $data['opsi'] ?? '' }}', '{{ $data['status'] }}')">Aksi</span> --}}
+                                            {{-- <div class="form-group r ow form-input" data-target="tracerCheckbox"> --}}
                                                 {{-- <input type="text" name="{{ $data['id'] }}" --}}
-                                                    class="additional-input3 form-control" id="{{ $data['id'] }}"
-                                                    onchange="handleInputChange(this)">
+                                                    {{-- class="additional-input3 form-control" id="{{ $data['id'] }}" --}}
+                                                    {{-- onchange="handleInputChange(this)"> --}}
                                             </div>
                                         </td>
                                     </tr>

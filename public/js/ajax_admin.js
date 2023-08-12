@@ -117,7 +117,16 @@ function updateOptions(questionNumber) {
         optionsContainer.appendChild(deleteOptionBtn);
     }
 }
+function toTitleCase(str) {
+    const words = str.split(' ');
 
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }
+
+    return words.join(' ');
+  }
 function saveQuestions() {
   questionsData = [];
 
@@ -135,15 +144,11 @@ function saveQuestions() {
     optionElements.forEach((optionElement) => {
       options.push(optionElement.value);
     });
-    function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-      }
+    const titleCaseOptions = options.map((option) => toTitleCase(option));
     const questionData = {
       question: question,
       optionType: optionType,
-      options: toTitleCase(options),
+      options: titleCaseOptions,
     };
 
     questionsData.push(questionData);
