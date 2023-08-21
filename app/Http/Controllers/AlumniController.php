@@ -101,12 +101,18 @@ class AlumniController extends Controller
     public function getPertanyaanById(Request $request)
     {
 
+        if( $request->query('id') == "tracerCheckbox"){
+        return response()->json(['pertanyaan' => 'tracerCheckbox']);
+
+        }else{
+            $id = $request->query('id');
+            $quiesionerData = Questions::where('id', $id)->first();
 
 
-        $id = $request->query('id');
-        $quiesionerData = Questions::where('id', $id)->first();
+            return response()->json(['pertanyaan' => $quiesionerData->pertanyaan]);
+        }
 
-        return response()->json(['pertanyaan' => $quiesionerData->pertanyaan]);
+
     }
 
     public function profil()

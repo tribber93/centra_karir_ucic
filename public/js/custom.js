@@ -256,6 +256,7 @@
 //       }
 
 // });
+
 function getServerPertanyaan(id) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -308,13 +309,18 @@ async function handleInputChange(input) {
     const value = input.value;
     let pertanyaan = "";
     console.log(id);
-    if (id === "posisi" || id === "mulaiBekerja" || id === "namaPerusahaan") {
-        const errorSpan = document.getElementById(`error-${id}`);
-        console.log(`ini ${pertanyaan}`);
-        pertanyaan = id;
-        errorSpan.style.display = "none";
-    } else {
+    // if (id === "posisi" || id === "mulaiBekerja" || id === "namaPerusahaan") {
+    //     const errorSpan = document.getElementById(`error-${id}`);
+    //     console.log(`ini ${pertanyaan}`);
+    //     pertanyaan = id;
+    //     errorSpan.style.display = "none";
+    // }
+    // else {
         // Jika nilai input tidak kosong, sembunyikan pesan error (jika ada)
+        if(id=="tracerCheckbox") {
+            pertanyaan = id.value;
+        }
+        else{
         const pertanyaan1 = await getServerPertanyaan(id);
 
         const errorSpan = document.getElementById(`error-${id}`);
@@ -322,23 +328,24 @@ async function handleInputChange(input) {
         pertanyaan = pertanyaan1;
 
         errorSpan.style.display = "none";
-    }
-    if (id === "tracerCheckbox") {
-        const isChecked = input.checked;
-        if (!isChecked) {
-            // Jika checkbox tidak dicek, tampilkan pesan error
-            const errorSpan = document.getElementById(`error-${id}`);
-            // pertanyaan = id;
-
-            errorSpan.style.display = "block";
-        } else {
-            // Jika checkbox dicek, sembunyikan pesan error (jika ada)
-            pertanyaan = value;
-            const errorSpan = document.getElementById(`error-${id}`);
-
-            // errorSpan.style.display = 'none';
         }
-    }
+    // }
+    // if (id === "tracerCheckbox") {
+    //     const isChecked = input.checked;
+    //     if (!isChecked) {
+    //         // Jika checkbox tidak dicek, tampilkan pesan error
+    //         const errorSpan = document.getElementById(`error-${id}`);
+    //         pertanyaan = id;
+
+    //         errorSpan.style.display = "block";
+    //     } else {
+    //         // Jika checkbox dicek, sembunyikan pesan error (jika ada)
+    //         pertanyaan = value;
+    //         const errorSpan = document.getElementById(`error-${id}`);
+
+    //         // errorSpan.style.display = 'none';
+    //     }
+    // }
     console.log(
         "Kamu memilih id:",
         id,
@@ -360,7 +367,7 @@ async function handleRadioClick(radio) {
         console.log(pertanyaan);
 
         if (textInput) {
-            if (value === "lainnya") {
+            if (value === "Lainnya") {
                 textInput.style.display = "block";
                 value = textInput.value;
                 console.log("as");

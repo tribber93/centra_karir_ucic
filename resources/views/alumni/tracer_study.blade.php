@@ -55,9 +55,15 @@
 
                   <div class="form-group row align-items-center">
                     <label class="col-2 form-control-label" for="tracerCheckbox">Sudah Bekerja?</label>
-                    <div class="col-10">
-                        <input type="checkbox" id="tracerCheckbox" onchange="handleInputChange(this)">
+                    @if($alumni->status_tracer == 0)
+                    <div class="col-10 form-input">
+                        <input type="checkbox" id="tracerCheckbox" value="Sudah"  onchange="handleInputChange(this)">
                     </div>
+                    @else
+                    <div class="col-10  form-input">
+                        <input type="checkbox" id="tracerCheckbox" value="Sudah" checked onchange="handleInputChange(this)">
+                    </div>
+                    @endif
                 </div>
 
                 {{-- <div class="form-group row form-input" data-target="tracerCheckbox">
