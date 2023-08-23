@@ -23,6 +23,8 @@
                 <div class="col-sm-10">
                     <select class="form-control" name="jenis_informasi">
                         <option value="lowongan">Lowongan</option>
+                        <option value="event">Event Kampus</option>
+
                         <option value="berita" @if ($informasi->jenis_informasi == 'berita') selected @endif>Berita</option>
                     </select>
                 </div>

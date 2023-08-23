@@ -1,11 +1,9 @@
 @extends('layouts.master')
 @section('judul', 'Detail')
 @section('konten')
-    {{-- Navbar --}}
-    <!-- Header Area -->
+    <!-- navbar Area -->
     @include('homepage.navbar')
-    <!--/ End Header Area -->
-    {{-- end Navbar --}}
+
 
     {{-- Konten --}}
     <section id="berita" class="overflow-hidden">
@@ -33,23 +31,7 @@
             {{-- right side --}}
             <div class="col-12 col-md-3 mb-5">
                 <div class="row justify-content-center">
-                    <div class="col-10 col-md-12 mb-5">
-                        <div class="card">
-                            <div class="card-header text-center">
 
-                                <h4 class="text-bold">Kategori</h4>
-                            </div>
-                            <div class="card-body">
-                                @foreach ($kategori as $item)
-                                    <ul>
-                                        <li><a href="#">{{ $item->kategori }}</a></li>
-
-                                    </ul>
-                                @endforeach
-
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-10 col-md-12 mb-5">
                         <div class="card">
                             @if ($informasi->jenis_informasi == 'lowongan')
@@ -59,12 +41,12 @@
                                     </li>
 
                                     </li>
-                                    @foreach ($berita as $item)
+                                    @foreach ($jenis as $item)
                                         <li class="list-group-item mt-3">
                                             <h5 class="card-title">{{ $item->judul }}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">
                                                 {{ $item->created_at->diffForHumans() }}</h6>
-                                            <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                            <p class="card-text">{!! substr($item->konten, 0, 200) !!}</p>
                                             <a href="/detail-informasi/{{ $item->id }} "
                                                 class="card-link">Selengkapnya...</a>
                                         </li>
@@ -78,12 +60,12 @@
                                     <li class="list-group-item text-center bg-light">
                                         <h4 class="font-weight-bold">Lowongan</h4>
                                     </li>
-                                    @foreach ($lowongan as $item)
+                                    @foreach ($jenis as $item)
                                         <li class="list-group-item mt-3">
                                             <h5 class="card-title">{{ $item->judul }}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">
                                                 {{ $item->created_at->diffForHumans() }}</h6>
-                                            <p class="card-text">{!! Str::limit($item->konten, 100) !!}</p>
+                                            <p class="card-text">{!! substr($item->konten, 0, 200) !!}</p>
                                             <a href="/detail-informasi/{{ $item->id }} "
                                                 class="card-link">Selengkapnya...</a>
                                         </li>
@@ -91,18 +73,37 @@
 
                                 </ul>
                             @endif
+                            @if ($informasi->jenis_informasi == 'event')
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-center bg-light">
+                                    <h4 class="font-weight-bold">Berita</h4>
+                                </li>
+
+                                </li>
+                                @foreach ($jenis as $item)
+                                    <li class="list-group-item mt-3">
+                                        <h5 class="card-title">{{ $item->judul }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            {{ $item->created_at->diffForHumans() }}</h6>
+                                        <p class="card-text">{!! substr($item->konten, 0, 200) !!}</p>
+                                        <a href="/detail-informasi/{{ $item->id }}"
+                                            class="card-link">Selengkapnya...</a>
+                                    </li>
+                                @endforeach
+
+
+                            </ul>
+                        @endif
                         </div>
                     </div>
 
                 </div>
 
             </div>
-            {{-- end right side --}}
-            {{-- pagination --}}
+
             <div>
                 @include('components.footer')
             </div>
-            {{-- end pagination --}}
         </div>
     </section>
     {{-- End Konten --}}

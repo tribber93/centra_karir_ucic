@@ -19,9 +19,11 @@
                             <nav class="navigation ">
                                 <ul class="nav">
                                     <li><a href="/">Home</a></li>
+                                    <li><a href="/event">Event</a></li>
+
                                     <li><a href="{{ url('/berita') }}">Berita</a></li>
                                     <li><a href="{{ url('/lowongan') }}">Lowongan</a></li>
-                                    <li><a href="/#testimonials">Testimonials</a></li>
+                                    {{-- <li><a hre f="/#testimonials">Testimonials</a></li> --}}
                                     <li><a href="/#footer">Kontak Kami</a></li>
                                     {{-- <li><a href="/login" class="button d-md-none">Login</a></li> --}}
                                 </ul>

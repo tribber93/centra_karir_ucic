@@ -20,6 +20,7 @@
                 <label class="col-sm-2 form-control-label">Jenis Informasi</label>
                 <div class="col-sm-10">
                     <select class="form-control" name="jenis_informasi">
+                        <option value="event">Event Kampus</option>
                         <option value="lowongan">Lowongan</option>
                         <option value="berita">Berita</option>
                     </select>

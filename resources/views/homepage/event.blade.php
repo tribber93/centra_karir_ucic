@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-6 col-md-12">
                 <div class="section-title">
-                    <h2>Berita</h2>
+                    <h2>Event Kampus</h2>
                 </div>
             </div>
             <div class="col-6 col-md-12 mt-2 mt-md-0 mb-5">
-                <a href="/berita">
+                <a href="/event">
                     <button class="cta pe-lg-0 pe-5">
                         <span class="hover-underline-animation"> Lainnya </span>
                         <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@
         </div>
 
         <div class="row d-flex justify-content-center flex-row">
-            @foreach ($berita as $data)
+            @foreach ($event as $data)
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- Single Blog -->
                     <div class="post-container">

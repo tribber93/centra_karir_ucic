@@ -8,15 +8,16 @@
         <div class="container-fluid">
             <div class="row align-items-center justify-content-center gap-4">
                 <div class="col-lg-3 col-md-5 col-9">
-                    <a href="https://tracerstudy.kemdikbud.go.id/kuesioner">
+                    {{-- <a href="https://tracerstudy.kemdikbud.go.id/kuesioner"> --}}
+                    <a href="{{url('/event')}}">
                         <div class="card">
                             <div class="row d-flex align-items-center p-2">
-                                <div class="col-3 ">
+                                <div class="col-3">
                                     <img src="assets/icons/clipboard.png" alt="" width="75" height="75">
                                 </div>
                                 <div class="col-9">
-                                    <h5 class="card-title"><strong>Tracer Study</strong></h5>
-                                    <p class="card-text">Isi tracer study di situs Kemendikbud</p>
+                                    <h5 class="card-title"><strong>Event</strong></h5>
+                                    <p class="card-text">Event Kampus kampus kampus kampus</p>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +61,7 @@
 
 
     @include('homepage.informasi')
+    @include('homepage.event')
     @include('homepage.testimoni')
     @include('homepage.sponsor')
     <!--Footer start-->

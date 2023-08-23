@@ -36,15 +36,15 @@
                             <span class="nav-text">Kelola Alumni</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="/admin/kelola_tracer">
                             <span class="nav-icon">
                                 <i class="fa fa-graduation-cap"></i>
                             </span>
                             <span class="nav-text">Kelola Tracer</span>
                         </a>
-                    </li>
-                    <li>
+                    </li> --}}
+                    {{-- <li>
                         <a href="{{ url('admin/kelola_informasi') }}">
                             <a href="{{ url('admin/hasil_tracer') }}">
                                 <span class="nav-icon">
@@ -52,7 +52,7 @@
                                 </span>
                                 <span class="nav-text">Hasil Tracer</span>
                             </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ url('admin/kelola_informasi') }}">
                             <span class="nav-icon">
@@ -69,22 +69,22 @@
                             <span class="nav-text">Forum Diskusi</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ url('admin/testimoni_alumni') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-envelope"></i>
                             </span>
                             <span class="nav-text">Testimoni Alumni</span>
                         </a>
-                    </li>
-                    <li>
+                    </li> --}}
+                    {{-- <li>
                         <a href="{{ url('admin/partner') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-envelope"></i>
                             </span>
                             <span class="nav-text">Kelola Partner</span>
-                    </li>
-                    <li>
+                    </li> --}}
+                    {{-- <li>
                         <a href="{{ url('/admin/backup-data') }}">
                             <span class="nav-icon">
                                 <i class="fa fa-download"></i>
@@ -92,7 +92,7 @@
                             <span class="nav-text">Backup data</span>
                         </a>
 
-                    </li>
+                    </li> --}}
                 </ul>
             </nav>
         </div>

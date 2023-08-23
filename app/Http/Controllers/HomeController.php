@@ -27,16 +27,27 @@ class  HomeController extends Controller
         $berita = Informasi::where('jenis_informasi', 'berita')->latest()->take(3)->get();
         $partner = Partner::all();
 
-
-        return view('homepage.home', compact('berita', 'kata_alumni', 'partner'));
+        $event =  Informasi::where('jenis_informasi', 'event')->latest()->take(3)->get();
+        return view('homepage.home', compact('berita', 'kata_alumni', 'partner', 'event'));
     }
     public function portal(String $jenis_informasi)
     {
         $informasi = Informasi::latest()->where('jenis_informasi', $jenis_informasi)->paginate(4);
         $lowongan = Informasi::where('jenis_informasi', 'lowongan')->take(5)->get();
         $berita = Informasi::where('jenis_informasi', 'berita')->take(5)->get();
+        // info event
+        $info_event = Informasi::latest()->where('jenis_informasi', $jenis_informasi)->get();
 
-        return view('informasi.portal', compact('informasi', 'lowongan', 'berita'));
+        if ($jenis_informasi == 'event') {
+            $judul = 'Event kampus';
+        } else {
+            # code...
+        $judul = 'Portal '. strtolower($jenis_informasi);
+
+        }
+
+
+        return view('informasi.portal', compact('informasi', 'lowongan', 'berita', 'judul', 'info_event'));
     }
 
 
@@ -156,10 +167,9 @@ class  HomeController extends Controller
     {
         $informasi = Informasi::find($id);
         $kategori = Informasi::all();
-        $lowongan = Informasi::where('jenis_informasi', 'lowongan')->get();
-        $berita = Informasi::where('jenis_informasi', 'berita')->get();
+        $jenis = Informasi::where('jenis_informasi', $informasi->jenis_informasi)->get();
         // dd($lowongan);
-        return view('informasi.detail', compact('informasi', 'kategori', 'lowongan', 'berita'));
+        return view('informasi.detail', compact('informasi', 'kategori', 'jenis'));
     }
 
     /**
